@@ -1,0 +1,27 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "liboqs-python"
+requires-python = ">=3.8"
+version = "0.10.0"
+description = "Python bindings for liboqs, providing post-quantum public key cryptography algorithms"
+authors = [
+    { name = "Open Quantum Safe project", email = "contact@openquantumsafe.org" },
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+dependencies = [
+    "nose2",
+]
+
+[project.urls]
+homepage = "https://github.com/open-quantum-safe/liboqs-python"
+repository = "https://github.com/open-quantum-safe/liboqs-python.git"
+
+[tool.setuptools]
+py-modules = []
