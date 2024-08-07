@@ -1,3 +1,6 @@
 [submodule "BlueTeam/BlueTeam/KO"]
 	path = BlueTeam/BlueTeam/KO
 	url = https://github.com/qompassai/KO
+[submodule "BlueTeam/Qompass/BlueTeam/Qompass/KO"]
+	path = BlueTeam/Qompass/BlueTeam/Qompass/KO
+	url = https://github.com/qompassai/KO
