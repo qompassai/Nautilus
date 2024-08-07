@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+if [ $2 == "y" ]; then
+        vec=''
+else
+        vec='-fno-tree-vectorize'
+fi
+
+
+aarch64-linux-gnu-gcc -g -O"$1" $vec -march=armv8-a -mtune=cortex-a53 -Wall -I. -Isubroutines -DKAT -DKATNUM=${KAT} "-DCRYPTO_NAMESPACE(x)=x" "-D_CRYPTO_NAMESPACE(x)=_##x" -o kat nist/kat_kem.c nist/rng.c benes.c bm.c controlbits.c decrypt.c encrypt.c gf.c operations.c pk_gen.c root.c sk_gen.c synd.c transpose.c util.c custom_util.c -L${PWD}/libs/lib_arm/ -lkeccak -lcrypto -ldl -pthread 
