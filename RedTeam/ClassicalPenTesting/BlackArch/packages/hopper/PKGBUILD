@@ -1,0 +1,34 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=hopper
+pkgver=5.16.0
+pkgrel=1
+pkgdesc='Reverse engineering tool that lets you disassemble, decompile and debug your applications.'
+groups=('blackarch' 'blackarch-reversing' 'blackarch-disassembler'
+        'blackarch-decompiler' 'blackarch-binary')
+arch=('x86_64')
+url='https://www.hopperapp.com/download.html?'
+license=('custom:unknown')
+depends=('hicolor-icon-theme' 'libbsd' 'python2' 'qt5-base')
+source=("https://d2ap6ypl1xbe4k.cloudfront.net/Hopper-v4-$pkgver-Linux-demo.pkg.tar.xz"
+        'LICENSE')
+sha512sums=('a701606e18d839014a0e800f6c480bd6c7abf9a2fc236d4482be2c3fb0cc1ef3b76e40240671d1837516ea9372dc24ed4400a36891c0dc39ee2e70b36a75eaa1'
+            '8f98f63fc100f23ddf8b0e9aef9b062552d39ed48174133eea52ac7fb7d66df0da1479e6b249bae748f34fc61ee49c6cf770b03714af7c6e4b6cabf2db71b1fe')
+
+package() {
+  install -dm 755 "$pkgdir/usr/bin"
+
+  cp -a opt usr "$pkgdir/"
+
+  mv "$pkgdir/usr/share/doc/hopperv4" "$pkgdir/opt/hopper-v4/doc"
+
+  # Remove launcher from Accessories
+  sed -i '10s|Utility;||' "$pkgdir/usr/share/applications/hopper-v4.desktop"
+
+  install -Dm 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+  ln -s /opt/hopper-v4/bin/Hopper "$pkgdir/usr/bin/$pkgname"
+  ln -s /opt/hopper-v4/doc "$pkgdir/usr/share/doc/$pkgname"
+}
+

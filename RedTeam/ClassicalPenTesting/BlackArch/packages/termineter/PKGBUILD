@@ -1,0 +1,38 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=termineter
+pkgver=203.9311d6d
+pkgrel=3
+groups=('blackarch' 'blackarch-fuzzer')
+pkgdesc='Smart meter testing framework.'
+url="https://code.google.com/p/termineter/"
+arch=('any')
+license=('BSD')
+depends=('python' 'python-tabulate' 'python-termcolor' 'python-crcelk'
+         'python-pyasn1' 'python-pluginbase' 'python-pyserial'
+         'python-smoke-zephyr')
+makedepends=('git' 'python-setuptools' 'python-pip' 'python-wheel')
+source=("git+https://github.com/securestate/$pkgname.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+  cd $pkgname
+
+  python setup.py build
+}
+
+package() {
+  cd $pkgname
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+
+  install -Dm 644 -t "$pkgdir/usr/share/licenses/$pkgname/" *.md
+}
+

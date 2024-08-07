@@ -1,0 +1,51 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=tachyon-scanner
+pkgver=467.0145e92
+pkgrel=1
+pkgdesc='Fast Multi-Threaded Web Discovery Tool.'
+groups=('blackarch' 'blackarch-scanner')
+arch=('any')
+url='https://github.com/delvelabs/tachyon'
+license=('custom:unknown')
+depends=('python' 'python-urllib3' 'python-easyinject' 'python-click'
+         'python-hammertime-http')
+makedepends=('git' 'python-setuptools' 'python-pip')
+source=("$pkgname::git+https://github.com/delvelabs/tachyon.git"
+        'setup.py.patch'
+        'requirements.txt.patch')
+sha512sums=('SKIP'
+            '0b7fdb7ef5d31ecccdce7f820e5c4463c712b60a057541f73303e701edcaeb13460a7f503f751a8d911755718c5966683b445d31a6c635cd79ad51b4800b2c79'
+            '23d33e761bce2961b44c9f5cf594839e9d024c02924e4913239ecc3f61371d2564c573b29657f9744eb4c9cf488936eeea14f1373cb690df782758f1b5c140c5')
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd $pkgname
+
+  patch -p0 < ../requirements.txt.patch
+  patch -p0 < ../setup.py.patch
+}
+
+build() {
+  cd $pkgname
+
+  python setup.py build
+}
+
+package() {
+  cd $pkgname
+
+  python setup.py install --root="$pkgdir" --prefix=/usr --skip-build
+
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" README.md CHANGELOG \
+    THANKS
+
+  mv "$pkgdir/usr/bin/tachyon" "$pkgdir/usr/bin/tachyon-scanner"
+}
+

@@ -1,0 +1,46 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-trackerjacker
+_pkgname=trackerjacker
+pkgver=2.0.5
+pkgrel=1
+pkgdesc='Finds and tracks wifi devices through raw 802.11 monitoring.'
+groups=('blackarch' 'blackarch-wireless')
+arch=('any')
+url='https://github.com/calebmadrigal/trackerjacker'
+license=('MIT')
+depends=('python' 'python-scapy' 'python-pyaml' 'python-ruamel-yaml')
+makedepends=('python-pip' 'python-build' 'python-wheel')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/trackerjacker-$pkgver.tar.gz")
+sha512sums=('f6177c44740f59fb603ab9e89a51b43ba53961766ef29a24db40162ea2aeb050dd35e75b0eac97a533f5b662b2ca9b6cc9c466da5b1a23153343a1a6cbbfa802')
+
+prepare() {
+  cd "trackerjacker-$pkgver"
+
+  sed 's|scapy.*|scapy|g' -i requirements.txt # fix for scapy version
+}
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python -m build --wheel --outdir="$startdir/dist"
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  pip install \
+    --verbose \
+    --disable-pip-version-check \
+    --no-warn-script-location \
+    --ignore-installed \
+    --no-compile \
+    --no-deps \
+    --root="$pkgdir" \
+    --prefix=/usr \
+    --no-index \
+    --find-links="file://$startdir/dist" \
+    $_pkgname
+}
+

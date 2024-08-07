@@ -1,0 +1,29 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-google-cloud-core
+_pkgname=google-cloud-core
+pkgver=2.4.1
+pkgrel=1
+pkgdesc='Google Cloud API client core library.'
+arch=('any')
+url='https://pypi.org/project/google-cloud-core/#files'
+license=('Apache')
+depends=('python')
+makedepends=('python-setuptools')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('7e8d3816398a17a4e9112b52a3de60382a5f50a04f2c693a7e30eb60833cc4e35280c8978d93a04dc613c84d51fadf2ce965886f087639734576e1ebd359a76a')
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py build
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py install --prefix=/usr --root="$pkgdir" --optimize=1 \
+    --skip-build
+}
+

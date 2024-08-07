@@ -1,0 +1,32 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=bvi
+pkgver=1.4.2
+pkgrel=1
+groups=('blackarch' 'blackarch-binary' 'blackarch-misc')
+pkgdesc='A display-oriented editor for binary files operate like "vi" editor.'
+url='http://bvi.sourceforge.net/'
+arch=('armv6h' 'armv7h' 'aarch64' 'x86_64')
+depends=('ncurses5-compat-libs')
+license=('GPL')
+source=("http://downloads.sourceforge.net/sourceforge/$pkgname/$pkgname-$pkgver.src.tar.gz")
+sha512sums=('e2b23b75e5984e222060d3ad99381e1c54f45c28796b0dfe781072c406191272ffff2849218f90c29a398b245af604aa8f0f5448791bc5f3a2ef0f8395ca92c3')
+
+build (){
+  cd "$pkgname-$pkgver"
+
+  ./configure "--prefix=/usr" "--mandir=/usr/share/man"
+
+  make
+}
+
+package (){
+  cd "$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" CHANGES CREDITS
+  install -Dm 644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
+

@@ -1,0 +1,31 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-socid-extractor
+_pkgname=socid-extractor
+pkgver=0.0.26
+_pyver=3.12
+pkgrel=1
+pkgdesc="Extract accounts' identifiers from personal pages on various platforms."
+arch=('any')
+url='https://pypi.org/project/socid-extractor/#files'
+license=('GPL3')
+depends=('python' 'python-beautifulsoup4' 'python-dateutil' 'python-requests')
+makedepends=('python-setuptools')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('01a44ede66e5bff48799c1c5dc83dadb5796be7e9017fe99b84b46b8d9bce9d29175c02121b53623f7b45e959787656180c003de68c010e61a061b57f9c7650e')
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py build
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+
+  rm -rf "$pkgdir/usr/lib/python$_pyver/site-packages/tests/"
+}
+

@@ -1,0 +1,46 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgbase=python-ailment
+pkgname=('python2-ailment' 'python-ailment')
+_pkgname=ailment
+pkgver=9.2.110
+pkgrel=1
+pkgdesc='The angr Imtermediate Language.'
+arch=('any')
+url='https://pypi.org/project/ailment/#files'
+license=('BSD')
+makedepends=('python2-setuptools' 'python-setuptools')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('644f59d34827c53c02ff6d3a4c7df7f7ee7b851c8d7b9b46df1a0a10b34a4a5349d79c256e8957e0a0a5ead17fe0e9845ca5124c49d6d153fc495bdde1d9d477')
+
+prepare() {
+  cp -a "$_pkgname-$pkgver"{,-2}
+}
+
+build() {
+  cd "$_pkgname-$pkgver-2"
+
+  python2 setup.py build
+
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python setup.py build
+}
+
+package_python2-ailment() {
+  depends=('python2')
+
+  cd "$_pkgname-$pkgver-2"
+
+  python2 setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+}
+
+package_python-ailment() {
+  depends=('python')
+
+  cd "$_pkgname-$pkgver"
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+}
+

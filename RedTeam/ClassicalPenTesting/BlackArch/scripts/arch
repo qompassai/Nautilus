@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+	any)
+		echo "arch=('any')"
+		;;
+	all)
+		echo "arch=('x86_64' 'aarch64')"
+		;;
+esac

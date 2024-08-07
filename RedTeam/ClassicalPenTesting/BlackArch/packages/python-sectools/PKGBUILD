@@ -1,0 +1,29 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-sectools
+_pkgname=${pkgname#python-}
+pkgver=1.4.3
+pkgrel=1
+pkgdesc='Offensive security python toolbox.'
+arch=('any')
+url='https://pypi.org/project/sectools/'
+license=('GPL3')
+depends=('python' 'python-ldap3')
+makedepends=('python-setuptools')
+options=(!emptydirs)
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('2b961b1cafaab48900ca8dfd7a710d3d5fb7a842af822f8b89c0d355915d01a2d3ab8ebb00d07833a67495ca2b145f3e9859bfb453b6705c7836c778427e628e')
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py build
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+}
+

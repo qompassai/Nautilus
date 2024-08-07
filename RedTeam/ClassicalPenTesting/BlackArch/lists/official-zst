@@ -1,0 +1,22 @@
+bind-tools blackarch-networking blackarch-recon
+dcfldd blackarch-forensic
+exploitdb blackarch-exploitation
+findomain blackarch-recon
+gnuradio blackarch-wireless
+gqrx blackarch-wireless
+hcxdumptool blackarch-wireless blackarch-sniffer
+hcxtools blackarch-wireless
+jadx blackarch-decompiler blackarch-reversing
+kismet blackarch-wireless blackarch-sniffer
+lldb blackarch-debugger
+metasploit blackarch-exploitation blackarch-fuzzer blackarch-scanner blackarch-recon blackarch-networking
+scrapy blackarch-webapp blackarch-recon blackarch-scanner
+shellcheck blackarch-code-audit
+sqlmap blackarch-webapp blackarch-exploitation blackarch-fuzzer
+sshtunnel blackarch-tunnel blackarch-networking
+veracrypt blackarch-crypto blackarch-defensive
+wavemon blackarch-wireless
+wireshark-cli blackarch-sniffer blackarch-networking
+wireshark-qt blackarch-sniffer blackarch-networking
+wpscan blackarch-webapp blackarch-fuzzer blackarch-scanner
+zaproxy blackarch-webapp blackarch-proxy blackarch-fuzzer

@@ -1,0 +1,42 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-spacy
+_pkgname=spacy
+pkgver=3.7.5
+pkgrel=1
+pkgdesc='Industrial-strength Natural Language Processing (NLP) in Python.'
+arch=('x86_64' 'aarch64')
+url='https://pypi.org/project/spacy/#files'
+license=('MIT')
+depends=('python-catalogue' 'python-cymem' 'python-jinja' 'python-murmurhash'
+         'python-numpy' 'python-pathlib' 'python-plac' 'python-preshed'
+         'python-regex' 'python-requests' 'python-srsly' 'python-thinc'
+         'python-tqdm' 'python-typer' 'python-ujson' 'python-wasabi')
+makedepends=('python-pip' 'python-build' 'python-wheel' 'cython')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('c3c6161e699f3101c3e38a7e697d3f059151074501700e80cc66aeb2670d6d16a381d246e5bd135ed69a26db3d56af6525dd2809d909022d01af6c9799615e7a')
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python -m build --wheel --outdir="$startdir/dist"
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  pip install \
+    --verbose \
+    --disable-pip-version-check \
+    --no-warn-script-location \
+    --ignore-installed \
+    --no-compile \
+    --no-deps \
+    --root="$pkgdir" \
+    --prefix=/usr \
+    --no-index \
+    --find-links="file://$startdir/dist" \
+    $_pkgname
+}
+

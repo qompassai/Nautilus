@@ -1,0 +1,32 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=jsql-injection
+pkgver=0.101
+pkgrel=1
+pkgdesc='A Java application for automatic SQL database injection.'
+groups=('blackarch' 'blackarch-webapp' 'blackarch-exploitation'
+        'blackarch-fuzzer')
+arch=('any')
+url='https://github.com/ron190/jsql-injection'
+license=('GPL2')
+depends=('java-environment')
+makedepends=('git')
+noextract=("$pkgname-v$pkgver.jar")
+source=("https://github.com/ron190/jsql-injection/releases/download/v$pkgver/$pkgname-v$pkgver.jar")
+sha512sums=('d2804e9b316b56773b3c36124b0c06fece41cfc355536f555aea5dedf5db51d44adc2aa5f55c1bf7e2c201d9c64db462dbd6325b43298d3ace7e9d734b84338c')
+
+package() {
+  install -dm 755 "$pkgdir/usr/bin"
+
+  install -Dm 644 "$pkgname-v$pkgver.jar" \
+    "$pkgdir/usr/share/$pkgname/$pkgname-v$pkgver.jar"
+
+  cat > "$pkgdir/usr/bin/$pkgname"<< EOF
+#!/bin/sh
+exec java -jar /usr/share/$pkgname/$pkgname-v$pkgver.jar "\$@"
+EOF
+
+  chmod +x "$pkgdir/usr/bin/$pkgname"
+}
+

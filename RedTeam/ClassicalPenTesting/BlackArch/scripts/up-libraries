@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+
+import sys
+
+__version__ = '0.2'
+
+__home__ = 'blackarch.org'
+
+to_release = ''
+
+
+# get current version
+def get_current_version(name):
+    with open('../packages/{name}/PKGBUILD'.format(name=name), 'r', encoding='utf-8') as file:
+        for line in file:
+            if 'pkgver' in line:
+                return str(line[7:].strip())  # pkgver=...
+
+
+# update pkgbuild
+def update_pkgbuild(name, url, current_version, available_version):
+    global to_release
+
+    with open('../packages/{name}/PKGBUILD'.format(name=name), 'r', encoding='utf-8') as file:
+            temp = file.read()
+
+    if 'https://github.com' not in temp and 'git+https://' not in temp:
+        old_url = url  # backup
+
+        url = url.replace('$pkgname', name).replace('$pkgver', available_version)
+        url = url.replace('${pkgname}', name).replace('${pkgver}', available_version)
+
+        url = re.sub('.*::', '', url)  # fix for foo::<url>.bar
+
+        req = requests.get(url)  # got file
+        sha512 = hashlib.sha512(req.content).hexdigest()  # calculate sha512
+
+        url = old_url  # restore
+
+        temp = re.sub(current_version, available_version, temp)  # version bump
+
+        temp = re.sub('pkgrel=.*', 'pkgrel=1', temp)  # pkgrel=1
+
+        temp = re.sub('sha512sums=.*', ("sha512sums=('" + sha512 + "')"), temp)  # sha512 update
+
+        name_to_replace = '-'.join(name.split('-')[1:])
+
+        url = url.replace(name_to_replace,'$_pkgname')
+
+        url = url.replace(available_version, '$pkgver')
+
+        if 'python' not in name:
+            temp = re.sub('source=.*', ('source=("' + url + '")'), temp)  # source update
+
+        with open('../packages/{name}/PKGBUILD'.format(name=name), 'w', encoding='utf-8') as file:
+            file.write(temp)
+
+        to_release += (name + '\n')
+        print('Successfully updated {name} from {current_version} to {available_version}'.format(name=name,
+                                                                                             current_version=current_version,
+                                                                                             available_version=available_version))
+    else:
+        print('Please, do manual update {name}'.format(name=name))
+
+
+# update python packages version
+def python_packages_version_check(name):
+    if 'python2' not in name:
+        pypi_name = name[7:]  # python-...
+
+        req = requests.get('https://pypi.python.org/pypi/{name}/json'.format(name=pypi_name))  # pypi json api ^-^
+
+        if req.ok:
+            current_version = get_current_version(name)
+
+            data = json.loads(req.text)
+
+            try:
+                available_version = str(max([distutils.version.LooseVersion(release) for release in data['releases'] if
+                                             not packaging.version.parse(release).is_prerelease]))  # got new version
+                if available_version != current_version:
+                    url = str(data.get('releases')[available_version][-1]['url'])
+
+                    if url[-3:] == 'zip' or url[-6:] == 'tar.gz': # not tar.bz2; whl
+                        update_pkgbuild(name, url, current_version, available_version)
+                    else:
+                        print('Please, do manual update {name}'.format(name=name))
+
+            except Exception as e:
+                print('Please, do manual update {name}'.format(name=name))
+
+
+# update ruby packages version
+def ruby_packages_version_check(name):
+    ruby_name = name[5:]
+
+    req = requests.get('https://rubygems.org/api/v1/gems/{name}.json'.format(name=ruby_name))  # ruby json api ^-^
+
+    if req.ok:
+        current_version = get_current_version(name)
+
+        available_version = str(json.loads(req.text).get('version'))
+
+        if available_version != current_version:
+            url = str(json.loads(req.text).get('gem_uri'))
+            update_pkgbuild(name, url, current_version, available_version)
+
+
+def main(function, needed):
+    to_check = []
+    exclusions = []
+
+    python_exclusions = [
+        'python-pyexiftool', 'python2-pyexiftool', 'python2-cement',
+        'python2-nmap', 'python2-pynfc', 'python-cement', 'python2-slugify',
+        'python-tinyec', 'python2-z3', 'python-libevtx-python', 'pkg',
+        'python2-libevtx-python', 'python2.7', 'python2-qdarkstyle',
+        'python-efilter', 'python-libnum', 'python-slackclient',
+        'python-telethon', 'python-twilio', 'python-python-pushover',
+        'python2-utils', 'python2-geoip', 'python2-smmap', 'python2-gitdb',
+        'python-requests-html', 'python2-openpyxl', 'python-pycrtsh',
+        'python-pyric', 'python-mmbot', 'python2-scikit-image', 'python-exiv2',
+        'python2-pytsk3', 'python2-pywavelets', 'python2-pyxml',
+        'python-spyonweb', 'python-pythreatgrid2', 'python-exscript',
+        'python-readchar', 'python-xgoogle', 'python-rpyc', 'python-pypermacc',
+        'python-pyv8', 'python-pype32', 'python-stix', 'python-slowaes',
+        'python-pdfminer3k', 'python-pypugjs', 'python-bacpypes',
+        'python-taxii2-client', 'python2-taxii2-client', 'python2-pyshark',
+        'python-can', 'python2-pdfminer', 'python2-blinker', 'python2-daemon',
+        'python2-itsdangerous', 'python2-subprocess32', 'python2-werkzeug',
+        'python2-py3270', 'python-coveralls', 'python-singlefile',
+        'python-arsenic', 'python-cx_oracle', 'python-selenium',
+        'python-badges', 'python-terminaltables', 'python-jproperties',
+        'python-gitignore-parser', 'python-dukpy', 'python-lsassy',
+        'python-luhn', 'python-pyradamsa', 'python-ahocorasick', 'python-pin',
+    ]
+    ruby_exclusions = []
+
+    if needed == 'python':
+        exclusions = python_exclusions
+    elif needed == 'ruby':
+        exclusions = ruby_exclusions
+
+    for root, dirs, files in os.walk('../packages/'):
+        for dir in dirs:
+            if needed in dir and dir not in exclusions:
+                to_check.append(dir)
+
+    with ThreadPoolExecutor(5) as executor:
+        for _ in executor.map(function, to_check):
+            pass
+
+
+if __name__ == '__main__':
+    try:
+        import distutils.version
+        import json
+        import hashlib
+        import os
+        import packaging.version
+        import re
+        import requests
+        from concurrent.futures import ThreadPoolExecutor
+    except ModuleNotFoundError as e:
+        print('Failure importing module: ' + str(e))
+        sys.exit(1)
+
+    main(python_packages_version_check, 'python')  # start version updating python packages
+
+    main(ruby_packages_version_check, 'ruby')  # start version updating ruby packages
+
+    with open('../lists/to-release', 'a', encoding='utf-8') as file:
+        file.write(to_release)
+
+    print('Done!')
+

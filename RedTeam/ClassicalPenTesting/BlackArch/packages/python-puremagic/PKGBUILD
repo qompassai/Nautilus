@@ -1,0 +1,30 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-puremagic
+_pkgname=puremagic
+pkgver=1.26
+pkgrel=1
+pkgdesc="Pure python module that will identify a file based off it’s magic numbers."
+arch=('any')
+url='https://pypi.org/project/puremagic/'
+license=('MIT')
+depends=('python')
+makedepends=('python-setuptools' 'python-pip' 'python-wheel')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('37ae94c114a5026b7b9715acad730d1a451540eaee054e0e81ace5355a5583ed2a4ca401b5898f2cce32b3682774952991a9d65d22c78af0aad57cb81236ebd9')
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py build
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+
+  install -Dm 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+

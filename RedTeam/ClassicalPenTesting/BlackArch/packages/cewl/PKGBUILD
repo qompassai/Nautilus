@@ -1,0 +1,61 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=cewl
+pkgver=188.869f68f
+pkgrel=1
+groups=('blackarch' 'blackarch-automation' 'blackarch-cracker')
+pkgdesc='A custom word list generator.'
+arch=('any')
+url='http://www.digininja.org/projects/cewl.php'
+license=('CCPL')
+depends=('ruby' 'ruby-bundler' 'libxslt')
+makedepends=('git')
+source=("$pkgname::git+https://github.com/digininja/CeWL.git")
+sha512sums=('SKIP')
+install="$pkgname.install"
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd $pkgname
+
+  sed -i "s|require './cewl_lib'|require '/usr/share/cewl/cewl_lib'|g" cewl.rb
+}
+
+package() {
+  cd $pkgname
+
+  install -dm 755 "$pkgdir/usr/bin"
+  install -dm 755 "$pkgdir/usr/share/$pkgname"
+
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" README.md
+
+  rm README.md
+
+  cp -a * "$pkgdir/usr/share/$pkgname/"
+
+  cat > "$pkgdir/usr/bin/$pkgname" << EOF
+#!/bin/sh
+cd /usr/share/$pkgname
+exec bundle exec $pkgname.rb "\$@"
+EOF
+
+  chmod +x "$pkgdir/usr/bin/$pkgname"
+
+  cat > "$pkgdir/usr/bin/cewl-fab" << EOF
+#!/bin/sh
+cd /usr/share/$pkgname
+exec bundle exec fab.rb "\$@"
+EOF
+
+  chmod +x "$pkgdir/usr/bin/cewl-fab"
+
+  rm "$pkgdir/usr/share/$pkgname/Gemfile.lock" &&
+    touch "$pkgdir/usr/share/$pkgname/Gemfile.lock"
+}
+

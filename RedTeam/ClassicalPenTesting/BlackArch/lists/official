@@ -1,0 +1,185 @@
+afl++ blackarch-fuzzer
+afpfs-ng blackarch-networking blackarch-misc
+aircrack-ng blackarch-wireless
+argon2 blackarch-crypto blackarch-defensive
+arp-scan blackarch-networking blackarch-scanner blackarch-fingerprint
+atftp blackarch-networking
+bandit blackarch-code-audit
+batctl blackarch-wireless
+bettercap blackarch-sniffer blackarch-networking
+bind blackarch-networking blackarch-recon
+binwalk blackarch-disassembler blackarch-firmware blackarch-reversing blackarch-binary
+bless blackarch-misc
+bully blackarch-wireless blackarch-cracker
+cadaver blackarch-networking
+capstone blackarch-reversing blackarch-disassembler
+cfr blackarch-decompiler
+checksec blackarch-automation blackarch-scanner
+chntpw blackarch-forensic blackarch-cracker
+clash blackarch-tunnel blackarch-proxy
+corkscrew blackarch-tunnel blackarch-proxy blackarch-networking
+cowpatty blackarch-wireless blackarch-cracker
+cppcheck blackarch-code-audit
+crosstool-ng blackarch-misc
+darkstat blackarch-sniffer blackarch-networking
+ddrescue blackarch-forensic
+distorm blackarch-disassembler blackarch-reversing
+dive blackarch-scanner
+dscanner blackarch-code-audit
+dsniff blackarch-sniffer blackarch-networking
+elfkickers blackarch-binary
+elfutils blackarch-binary
+etherape blackarch-networking blackarch-sniffer
+ettercap blackarch-sniffer blackarch-networking
+evilginx blackarch-social
+exploitdb blackarch-exploitation
+fcrackzip blackarch-cracker
+findomain blackarch-recon
+flawfinder blackarch-code-audit
+foremost blackarch-forensic
+fping blackarch-networking blackarch-recon blackarch-scanner
+freeipmi blackarch-networking
+freeradius blackarch-wireless
+gdb blackarch-debugger
+gdb-common blackarch-debugger
+geoip blackarch-networking blackarch-recon
+ghidra blackarch-reversing blackarch-disassembler blackarch-debugger
+gitleaks blackarch-recon
+gnuradio blackarch-wireless
+gsocket blackarch-networking
+hackrf blackarch-radio
+hashcat blackarch-cracker
+hashcat-utils blackarch-misc
+hcxdumptool blackarch-wireless blackarch-sniffer
+hcxkeys blackarch-crypto
+hcxtools blackarch-wireless
+hexyl blackarch-misc
+hping blackarch-networking
+httping blackarch-networking blackarch-recon
+httptunnel blackarch-tunnel
+httrack blackarch-misc
+hydra blackarch-cracker
+i2pd blackarch-networking
+iaito blackarch-reversing blackarch-decompiler blackarch-disassembler blackarch-debugger
+iodine blackarch-tunnel
+ipmitool blackarch-networking
+iputils blackarch-networking
+jad blackarch-reversing
+jadx blackarch-decompiler blackarch-reversing
+jhead blackarch-defensive
+john blackarch-cracker
+kcptun blackarch-tunnel
+kismet blackarch-wireless blackarch-sniffer
+libpst blackarch-misc
+lldb blackarch-debugger
+lorcon blackarch-wireless
+ltrace blackarch-binary
+lynis blackarch-scanner
+macchanger blackarch-networking blackarch-misc
+masscan blackarch-scanner
+mat2 blackarch-defensive blackarch-misc
+mdk4 blackarch-wireless blackarch-fuzzer blackarch-exploitation
+medusa blackarch-cracker
+metasploit blackarch-exploitation blackarch-fuzzer blackarch-scanner blackarch-recon blackarch-networking
+mfoc blackarch-cracker blackarch-wireless
+mitmproxy blackarch-proxy blackarch-exploitation
+mtr blackarch-networking
+multimon-ng blackarch-radio
+nbtscan blackarch-scanner
+ncrack blackarch-cracker
+netsniff-ng blackarch-sniffer
+ngrep blackarch-networking
+nikto blackarch-scanner blackarch-webapp blackarch-fuzzer
+nmap blackarch-scanner
+onionshare blackarch-defensive blackarch-misc
+open-iscsi blackarch-misc
+ophcrack blackarch-cracker
+p0f blackarch-fingerprint blackarch-sniffer
+packer blackarch-binary
+packeth blackarch-networking
+pdfcrack blackarch-cracker
+peda blackarch-debugger blackarch-exploitation
+perl-image-exiftool blackarch-forensic blackarch-defensive
+pixiewps blackarch-wireless blackarch-cracker
+proxmark3 blackarch-radio blackarch-recon blackarch-scanner
+proxychains-ng blackarch-proxy
+proxytunnel blackarch-tunnel blackarch-proxy
+ptunnel blackarch-tunnel blackarch-networking
+pwndbg blackarch-debugger
+python2-yara blackarch-malware
+python-capstone blackarch-reversing blackarch-disassembler
+python-jsbeautifier blackarch-reversing blackarch-webapp
+python-pwntools blackarch-disassembler blackarch-reversing blackarch-binary
+python-shodan blackarch-recon blackarch-scanner blackarch-automation
+r2ghidra blackarch-reversing blackarch-decompiler blackarch-disassembler blackarch-debugger
+radamsa blackarch-fuzzer
+radare2 blackarch-reversing blackarch-decompiler blackarch-disassembler blackarch-debugger
+rarcrack blackarch-cracker
+rathole blackarch-proxy blackarch-tunnel blackarch-networking
+reaver blackarch-wireless blackarch-cracker
+rfdump blackarch-wireless
+rkhunter blackarch-forensic blackarch-defensive
+ropgadget blackarch-exploitation
+ropper blackarch-exploitation blackarch-binary
+routersploit blackarch-exploitation
+rustscan blackarch-scanner
+rz-cutter blackarch-reversing blackarch-decompiler blackarch-disassembler blackarch-debugger
+rz-ghidra blackarch-reversing blackarch-decompiler blackarch-disassembler blackarch-debugger
+scanmem blackarch-reversing
+scapy blackarch-networking
+scrapy blackarch-webapp blackarch-recon blackarch-scanner
+shellcheck blackarch-code-audit
+siege blackarch-dos
+sleuthkit blackarch-forensic
+slowhttptest blackarch-dos
+smali blackarch-disassembler blackarch-hardware
+sniffglue blackarch-sniffer
+socat blackarch-networking
+spiped blackarch-networking blackarch-crypto
+splint blackarch-code-audit
+sqlmap blackarch-webapp blackarch-exploitation blackarch-fuzzer
+ssdeep blackarch-crypto
+ssh-audit blackarch-scanner
+sshtunnel blackarch-tunnel blackarch-networking
+sshuttle blackarch-proxy blackarch-networking
+sslh blackarch-networking
+sslscan blackarch-scanner blackarch-crypto
+strace blackarch-binary
+stunnel blackarch-networking blackarch-tunnel
+subbrute blackarch-scanner
+swaks blackarch-networking
+swftools blackarch-binary blackarch-reversing blackarch-webapp
+sysdig blackarch-scanner
+tcpdump blackarch-networking blackarch-sniffer
+tcpflow blackarch-networking blackarch-sniffer
+tcpreplay blackarch-networking
+tcptrace blackarch-networking
+testdisk blackarch-forensic
+testssl.sh blackarch-crypto blackarch-scanner
+thc-ipv6 blackarch-networking blackarch-recon blackarch-dos blackarch-spoof blackarch-scanner
+tinc blackarch-networking
+tinyproxy blackarch-proxy
+tor blackarch-proxy blackarch-tunnel blackarch-networking
+torsocks blackarch-proxy
+traceroute blackarch-recon
+trivy blackarch-scanner
+udp2raw blackarch-tunnel blackarch-networking
+unhide blackarch-forensic
+upx blackarch-binary blackarch-misc
+urh blackarch-radio
+valabind blackarch-misc
+valgrind blackarch-binary blackarch-code-audit
+veracrypt blackarch-crypto blackarch-defensive
+volatility3 blackarch-forensic
+vulscan blackarch-scanner blackarch-fuzzer
+wavemon blackarch-wireless
+wifite blackarch-wireless blackarch-cracker
+wireshark-cli blackarch-sniffer blackarch-networking
+wireshark-qt blackarch-sniffer blackarch-networking
+wpscan blackarch-webapp blackarch-fuzzer blackarch-scanner
+xortool blackarch-crypto
+yara blackarch-malware
+zaproxy blackarch-webapp blackarch-fuzzer blackarch-proxy
+zmap blackarch-scanner
+zssh blackarch-networking blackarch-misc
+zzuf blackarch-fuzzer

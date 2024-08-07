@@ -1,0 +1,21 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-yagooglesearch
+_pkgname=yagooglesearch
+pkgver=1.10.0
+pkgrel=1
+pkgdesc='A Python library for executing intelligent, realistic-looking, and tunable Google searches.'
+arch=('any')
+url='https://pypi.org/project/yagooglesearch/#files'
+license=('MIT')
+depends=('python' 'python-beautifulsoup4' 'python-requests')
+makedepends=('python-build' 'python-pip' 'python-wheel' 'python-installer')
+source=("https://files.pythonhosted.org/packages/f0/98/d3e9912cd74337df639ef5513c312ce185b7b3a90618f75528ac7f287735/yagooglesearch-1.10.0-py3-none-any.whl")
+sha512sums=('7cb9fee47a588b4906ef95908959963b5beea8a17bc40d58309cd3e514ecfd66b172e79702621476db1093fab3625e11db1133a6fd499a6681003b70f514e412')
+noextract=("$_pkgname-$pkgver-py3-none-any.whl")
+
+package() {
+  python -m installer --destdir="$pkgdir" *.whl
+}
+

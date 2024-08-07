@@ -1,0 +1,47 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=suricata
+pkgver=6.0.20
+pkgrel=1
+pkgdesc='An Open Source Next Generation Intrusion Detection and Prevention Engine.'
+arch=('x86_64' 'aarch64')
+url='https://suricata.io/download/'
+groups=('blackarch' 'blackarch-defensive' 'blackarch-ids')
+license=('GPL2')
+depends=('zlib' 'nss' 'jansson' 'libcap-ng' 'libnetfilter_queue' 'libnfnetlink'
+         'libnet' 'libpcap' 'libyaml' 'pcre' 'python-magic' 'file' 'lua'
+         'luajit' 'geoip' 'libnetfilter_log' 'libmaxminddb')
+makedepends=('cargo')
+optdepends=('snort: suricata can use rulesets provided by snort')
+backup=('etc/suricata/suricata.yaml')
+source=("http://openinfosecfoundation.org/download/$pkgname-$pkgver.tar.gz")
+sha512sums=('4d47b7a2004963c1caade0e361fde4a650808a174f00c150ef82f649083de7880c391fe1eb23925ca520b6db830c2fdca9aa526b161361e1a391673b55becf15')
+
+build() {
+  cd "$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    HAVE_PYTHON_CONFIG=/usr/bin/python3 --enable-gccprotect \
+    --enable-nfqueue --enable-nflog --enable-luajit --enable-geoip \
+    --disable-coccinelle --enable-old-barnyard2 --with-pic \
+    --enable-python
+
+  make
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+
+  install -dm 755 "$pkgdir/var/log/$pkgname"
+  install -dm 755 "$pkgdir/etc/$pkgname/rules"
+
+  make DESTDIR="$pkgdir" install
+
+  install -Dm 644 "$pkgname.yaml" "$pkgdir/etc/$pkgname/$pkgname.yaml"
+  install -Dm 644 etc/classification.config \
+    "$pkgdir/etc/$pkgname/classification.config"
+  install -Dm 644 etc/reference.config "$pkgdir/etc/$pkgname/reference.config"
+  install -Dm 644 rules/*.rules "$pkgdir/etc/$pkgname/rules/"
+}
+

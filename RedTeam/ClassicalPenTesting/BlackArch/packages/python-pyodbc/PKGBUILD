@@ -1,0 +1,43 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=python-pyodbc
+_pkgname=pyodbc
+pkgver=5.1.0
+pkgrel=1
+pkgdesc='DB API Module for ODBC'
+arch=('x86_64' 'aarch64')
+url='https://pypi.org/project/pyodbc/'
+license=('MIT')
+depends=('python' 'unixodbc')
+makedepends=('python-build' 'python-pip')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha512sums=('78817864d30048eed0c670a30e1cc66bc72edd6c21d069a5cc5831ed180b25a5b30d2bf2313628431943defbae66c2df96e90781ef17bb8929622b9f49cfcaab')
+
+prepare() {
+  echo "Version: $pkgver.0" > "$_pkgname-$pkgver/PKG-INFO"
+}
+
+build() {
+  cd "$_pkgname-$pkgver"
+
+  python -m build --wheel --outdir="$startdir/dist"
+}
+
+package() {
+  cd "$_pkgname-$pkgver"
+
+  pip install \
+    --verbose \
+    --disable-pip-version-check \
+    --no-warn-script-location \
+    --ignore-installed \
+    --no-compile \
+    --no-deps \
+    --root="$pkgdir" \
+    --prefix=/usr \
+    --no-index \
+    --find-links="file://$startdir/dist" \
+    $_pkgname
+}
+

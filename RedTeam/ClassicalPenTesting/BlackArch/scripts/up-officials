@@ -1,0 +1,118 @@
+#!/bin/sh
+
+BASE=${BASH_SOURCE[0]%/*}
+X86LOG='/tmp/to-release'
+ARMLOG="$BASE/../lists/to-release-arm"
+
+CORE='elfutils iputils traceroute argon2'
+EXTRA='afl++ afpfs-ng aircrack-ng arp-scan atftp bandit batctl bettercap bind
+binwalk bless bully cadaver capstone cfr checksec chntpw clash corkscrew
+cowpatty cppcheck crosstool-ng darkstat ddrescue distorm dive dscanner dsniff
+elfkickers etherape ettercap evilginx exiv2 exploitdb fcrackzip findomain
+flawfinder foremost fping freeipmi freeradius gdb gdb-common geoip ghidra
+gitleaks gnuradio gsocket hackrf hashcat hashcat-utils hcxdumptool hcxkeys
+hcxtools hexyl hping httping httptunnel httrack hydra i2pd iaito iodine ipmitool
+jad jadx jhead john kcptun kismet libpst lldb lorcon ltrace lynis macchanger
+masscan mat2 mdk4 medusa metasploit mfoc miredo mitmproxy mtr multimon-ng
+nbtscan ncrack netsniff-ng ngrep nikto nmap onionshare open-iscsi ophcrack p0f
+packer packeth pathod pdfcrack peda perl-image-exiftool pixiewps proxmark3
+proxychains-ng proxytunnel ptunnel pwndbg python-capstone python-jsbeautifier
+python-pwntools python-shodan python-yara r2ghidra radamsa radare2 rarcrack
+rathole reaver rfdump rkhunter ropgadget ropper routersploit rustscan rz-cutter
+rz-ghidra scanmem scapy scrapy shellcheck siege sleuthkit slowhttptest smali
+sniffglue socat spiped splint sqlmap ssdeep ssh-audit sshtunnel sshuttle sslh
+sslscan strace stunnel subbrute swaks sysdig tcpdump tcpflow tcpreplay testdisk
+testssl.sh thc-ipv6 tinc tinyproxy tor torsocks trivy udp2raw unhide upx urh
+valabind valgrind veracrypt volatility3 vulscan wavemon wifite wireshark-cli
+wireshark-gtk wireshark-qt wpscan xortool yara zaproxy zmap zssh zzuf'
+
+echo "[+] syncing packages"
+yay -Syy > /dev/null 2>&1
+
+rm -f $X86LOG
+touch $X86LOG
+touch $ARMLOG
+
+echo "[+] comparing packages: core"
+for pkg in $CORE
+do
+  official="$(pacman -Ss $pkg 2> /dev/null | grep "^core/$pkg " | cut -d ' ' -f 2)"
+  blackarch="$(pacman -Ss $pkg 2> /dev/null | grep "^blackarch/$pkg " |
+    cut -d ' ' -f 2)"
+  if [ "$official" != "$blackarch" ]
+  then
+    echo "    > update available: $pkg"
+    echo $pkg >> $X86LOG
+  fi
+done
+
+echo "[+] comparing packages: extra"
+for pkg in $EXTRA
+do
+  official="$(pacman -Ss $pkg 2> /dev/null | grep "^extra/$pkg " | cut -d ' ' -f 2)"
+  blackarch="$(pacman -Ss $pkg 2> /dev/null| grep "^blackarch/$pkg " |
+    cut -d ' ' -f 2)"
+  if [ "$official" != "$blackarch" ]
+  then
+    echo "    > update available: $pkg"
+    echo $pkg >> $X86LOG
+  fi
+done
+
+sort -u $X86LOG -o $X86LOG
+
+# x86_64
+if [ -f $X86LOG ]
+then
+  pkgs="$(cat $X86LOG)"
+fi
+if [ -n "$pkgs" ]
+then
+  echo "[+] updating packages: x86_64"
+  for pkg in $pkgs
+  do
+    echo "    > $pkg"
+  done
+  echo
+  ${BASE}/baofficial $pkgs
+
+  # arm
+  echo "[+] checking for arm packages"
+  for apkg in $pkgs
+  do
+    arch="$(pacman -Si $apkg | grep 'Architecture ' | head -1 | cut -d ':' -f 2 |
+      sed 's/^ //')"
+    if [ "$arch" = "x86_64" ]
+    then
+      echo $apkg >> $ARMLOG
+    fi
+  done
+  sort -u $ARMLOG -o $ARMLOG
+  if [ -f $ARMLOG ]
+  then
+    apkgs="$(cat $ARMLOG)"
+  else
+    echo "[+] done"
+    exit
+  fi
+  if [ -n "$apkgs" ]
+  then
+    echo "[+] updating packages: arm"
+    for apkg in $apkgs
+    do
+      echo "    > $apkg"
+    done
+    echo
+    # default: off, as we need to wait until arm arch linux synced the mirrors
+    # otherwise we would push the same versions over and over again
+    #${BASE}/baofficial-arm $pkgs && ${BASE}/baclean
+  fi
+fi
+
+${BASE}/baclean
+ssh blackarch.org -l root 'date +%s > /var/www/blackarch/blackarch/lastupdate'
+#ssh blackarch.org -l root 'cd /var/www/blackarch/ && ./fixperms.sh'
+
+echo "[+] done"
+
+# EOF

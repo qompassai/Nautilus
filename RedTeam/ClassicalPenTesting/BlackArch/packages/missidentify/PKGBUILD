@@ -1,0 +1,37 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=missidentify
+pkgver=1.0
+pkgrel=5
+groups=('blackarch' 'blackarch-recon' 'blackarch-windows')
+pkgdesc='A program to find Win32 applications.'
+url='http://missidentify.sourceforge.net/'
+license=('GPL2')
+arch=('x86_64' 'aarch64')
+grouups=('blackarch' 'blackarch-intel')
+source=("http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz")
+sha512sums=('708e724e5587d9f7348ca574e16e2847ad3db313a31364b3327d5e815c4b32ab91f09fea7853dc150c90063b800bf2607196e93b570a400bc794d74a9348065d')
+
+build() {
+  cd "$pkgname-$pkgver"
+
+  if [[ "$CARCH" == "i686" || "$CARCH" == "x86_64" ]];
+  then
+    ./configure --prefix=/usr
+  else
+    ./configure --prefix=/usr --build=arm
+  fi
+
+  make
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+
+  install -Dm 755 $pkgname "$pkgdir/usr/bin/$pkgname"
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname" README AUTHORS NEWS \
+    ChangeLog INSTALL
+  install -Dm 644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
+

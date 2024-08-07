@@ -1,0 +1,222 @@
+#!/bin/bash
+# Acts sort of like pacman.
+# This script may called from any location but the script itself must
+#  live in '$projectroot/scripts'.
+
+export LC_ALL=C
+
+usage() {
+	cat >&2 <<-USAGE
+	blackman [-h|--help] action
+	USAGE
+}
+
+error() {
+	echo >&2 "blackman: $@ (use -h for help)"
+}
+
+basedir=$(realpath "$(dirname "$0")")
+cd "$basedir/.."
+
+targets=()
+pacman_args=()
+action=none
+print_only=false
+no_deps=false
+needed=false
+
+for arg ; do
+	if [[ "$arg" == -* ]] ; then
+		case "$arg" in
+			-h|--help) usage; exit ;;
+			-S) action=sync ;;
+			-Sd) action=sync; no_deps=true ;;
+			-Sp) action=sync; print_only=true ;;
+			-Sdp|-Spd) action=sync; print_only=true; no_deps=true ;;
+			-Ss) action=search ;;
+			-Sg) action=groups ;;
+			-Sgg) action=groupings ;;
+			-Si) action=info ;;
+			-Sl) action=list ;;
+			-Syu|-Su) action=upgrade ;;
+			--asdeps|--asdep|--noconfirm) pacman_args+=("$arg") ;;
+			--needed) pacman_args+=("$arg"); needed=true ;;
+			*) error "unsupported: $arg"; exit 1 ;;
+		esac
+	else
+		targets+=($arg)
+	fi
+done
+
+if [[ $action == none ]] ; then
+	error 'no action specified'
+	exit 1
+fi
+
+do_sync() { (
+	local pack=$1
+	shift
+
+	cd packages/$pack || cd aur/$pack
+
+	if $needed && pacman -Qi $pack &> /dev/null ; then
+		echo >&2 "warning: $pack is already installed -- skipping"
+		return 1
+	fi
+
+	makepkg "${pacman_args[@]}" "$@" -fs
+	# TODO: improve this sort.
+	local file=$(find . -maxdepth 1 -name '*.pkg.tar.xz' | sort -n | head -n1)
+	# xargs doesn't work here.
+	sudo pacman "${pacman_args[@]}" "$@" -U "$file"
+) }
+
+is_installed() {
+	pacman -Qi "$1" &> /dev/null
+}
+
+case $action in
+	sync)
+		# Check for targets.
+		if [[ ${#targets[@]} == 0 ]] ; then
+			error 'no targets specified'
+			exit 3
+		fi
+
+		# Make sure the packages exist.
+		for pack in "${targets[@]}" ; do
+			if [[ ! -d packages/$pack && ! -d aur/$pack ]] ; then
+				error "could not find '$pack'"
+				exit 2
+			fi
+		done
+
+		for pack in "${targets[@]}" ; do (
+			if ! $no_deps ; then
+				while read dep <&3 ; do
+					if ! is_installed $dep ; then
+						if $print_only ; then
+							echo $dep
+						else
+							do_sync $dep --asdeps 
+						fi
+					fi
+				done 3< <("$basedir/get-blackarch-deps" "$pack" |
+							 cut -d' ' -f2)
+			fi
+
+			if $print_only ; then
+				echo "$pack"
+			else
+				if $no_deps ; then
+					do_sync "$pack" -d -d
+				else
+					do_sync "$pack"
+				fi
+			fi
+		) done
+		;;
+	search)
+		# TODO: narrow down searches for each word instead
+		for pattern in "${targets[@]:-^}" ; do
+			for pack in packages/*/ aur/*/ ; do (
+				source $pack/PKGBUILD
+				if [[ "$pkgname $pkgdesc" =~ $pattern ]] ; then
+					printf 'blackarch/%s %s-%s' "$pkgname" "$pkgver" "$pkgrel"
+					[[ -n "${groups[*]}" ]] && printf ' (%s)' "${groups[*]}"
+					is_installed "$pkgname" && printf ' [installed]'
+					printf '\n'
+					printf '    %s\n' "$pkgdesc"
+				fi
+			) ; done
+		done
+		;;
+	groups)
+		for pack in packages/*/ aur/*/ ; do (
+			source $pack/PKGBUILD
+			printf '%s\n' "${groups[@]}"
+		) ; done | sort -u | sed '1d'
+		;;
+	groupings)
+		for pack in packages/*/ aur/*/ ; do (
+			source $pack/PKGBUILD
+			if [[ -n "${groups[@]}" ]] ; then
+				printf "%s $pkgname\n" "${groups[@]}"
+			fi
+		) ; done | sort
+		# Many locales cause sort to ignore punctuation, including hyphens.
+		;;
+	info)
+		[[ -z "${targets[@]}" ]] && targets=($(basename -a packages/*/ aur/*/))
+		for pack in "${targets[@]}" ; do (
+			if [[ -d aur/$pack ]] ; then
+				repo=aur
+				dir=aur/$pack
+			elif [[ -d packages/$pack ]] ; then
+				repo=blackarch
+				dir=packages/$pack
+			else
+				echo >&2 "$pack no found"
+				continue
+			fi
+
+			source $dir/PKGBUILD
+
+			size=$(du -hs $dir/*.pkg.tar.xz 2> /dev/null | head -n1 | cut -d$'\t' -f1)
+
+			[[ ${#md5sums[@]} != 0 ]] && validation+='MD5 Sum'
+			[[ ${#sha256sums[@]} != 0 ]] && validation+='SHA256 Sum'
+			[[ ${#sha1sums[@]} != 0 ]] && validation+='SHA1 Sum'
+			[[ ${#sha384sums[@]} != 0 ]] && validation+='SHA384 Sum'
+			[[ ${#sha512sums[@]} != 0 ]] && validation+='SHA512 Sum'
+
+			cat <<-INFO
+			Repository     : ${repo:-Error}
+			Name           : ${pkgname:-Error}
+			Version        : ${pkgver:-0.0.0}-${pkgrel:-1}
+			Description    : ${pkgdesc:-None}
+			Architecture   : ${arch[@]:-None}
+			URL            : ${url:-None}
+			Licenses       : ${license[@]:-None}
+			Groups         : ${groups[@]:-None}
+			Provides       : ${provides[@]:-None}
+			Depends On     : ${depends[@]:-None}
+			INFO
+			printf 'Optional Deps  : '
+			if [[ -n "${optdepends[*]}" ]] ; then
+				printf '%s\n' "${optdepends[1]}"
+				# TODO: Find a better way to do this.
+				printf '                 %s\n' "${optdepends[@]}" | sed '1d'
+			else
+				printf 'None\n'
+			fi
+			cat <<-INFO
+			Conflicts With : ${conflicts[@]:-None}
+			Replaces       : ${replaces[@]:-None}
+			Download Size  : ${size:-Unknown}
+			Validated By   : ${validation:-None}
+
+			INFO
+		) ; done
+		;;
+	list)
+		for pack in packages/*/ aur/*/ ; do (
+			source "$pack/PKGBUILD"
+			printf 'blackarch %s %s-%s\n' "$pkgname" "$pkgver" "$pkgrel"
+		) ; done
+		;;
+	upgrade)
+		for pack in packages/*/ aur/*/ ; do (
+			source "$pack/PKGBUILD"
+			if is_installed $pkgname ; then
+				do_sync "$pkgname"
+			fi
+		) done
+		;;
+	*)
+		error 'action error'
+		exit 3
+		;;
+esac
+# Too many subshells.
+# vim: set ft=zsh:

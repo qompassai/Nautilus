@@ -1,0 +1,37 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=drupwn
+pkgver=59.8186732
+pkgrel=5
+epoch=1
+pkgdesc='Drupal enumeration & exploitation tool.'
+groups=('blackarch' 'blackarch-webapp' 'blackarch-exploitation'
+        'blackarch-scanner')
+arch=('any')
+url='https://github.com/immunIT/drupwn'
+license=('GPL3')
+depends=('python' 'python-argparse' 'python-requests' 'python-prompt_toolkit'
+         'python-veryprettytable' 'python-pysocks')
+makedepends=('git' 'python-setuptools')
+source=("git+https://github.com/immunIT/$pkgname.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+  cd $pkgname
+
+  python setup.py build
+}
+
+package() {
+  cd $pkgname
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+}
+

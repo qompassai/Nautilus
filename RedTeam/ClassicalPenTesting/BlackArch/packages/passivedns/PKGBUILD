@@ -1,0 +1,51 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=passivedns
+pkgver=297.be48a8e
+pkgrel=1
+groups=('blackarch' 'blackarch-sniffer')
+pkgdesc='A network sniffer that logs all DNS server replies for use in a passive DNS setup.'
+arch=('x86_64' 'aarch64')
+url='https://github.com/gamelinux/passivedns'
+depends=('gcc' 'libpcap' 'ldns')
+makedepends=('git')
+source=("git+https://github.com/gamelinux/$pkgname.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd $pkgname
+
+  aclocal
+  autoconf -f -i
+  autoreconf -f -i
+  automake --add-missing
+}
+
+build() {
+  cd $pkgname
+
+  ./configure --prefix=/usr
+
+  make
+}
+
+package() {
+  cd $pkgname
+
+  install -dm 755 "$pkgdir/usr/bin/"
+  install -dm 755 "$pkgdir/usr/share/$pkgname"
+  install -dm 755 "$pkgdir/usr/share/doc/$pkgname"
+
+  cp -a --no-preserve=ownership "src/$pkgname" "$pkgdir/usr/share/$pkgname/"
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" README
+
+  ln -s "/usr/share/$pkgname/$pkgname" "$pkgdir/usr/bin/"
+}
+

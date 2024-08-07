@@ -1,0 +1,32 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=webacoo
+pkgver=0.2.3
+pkgrel=12
+groups=('blackarch' 'blackarch-backdoor' 'blackarch-webapp')
+pkgdesc='Web Backdoor Cookie Script-Kit.'
+url='https://bechtsoudis.com/webacoo/'
+arch=('any')
+license=('GPL3')
+depends=('perl' 'perl-io-socket-socks')
+makedepends=('git')
+source=("$pkgname::git+https://github.com/anestisb/WeBaCoo.git")
+sha512sums=('SKIP')
+
+package() {
+  cd $pkgname
+
+  install -dm 755 "$pkgdir/usr/bin"
+  install -dm 755 "$pkgdir/usr/share/$pkgname"
+
+  cp -a * "$pkgdir/usr/share/$pkgname/"
+
+  cat > "$pkgdir/usr/bin/$pkgname" << EOF
+#!/bin/sh
+exec perl /usr/share/$pkgname/$pkgname.pl "\$@"
+EOF
+
+  chmod +x "$pkgdir/usr/bin/$pkgname"
+}
+

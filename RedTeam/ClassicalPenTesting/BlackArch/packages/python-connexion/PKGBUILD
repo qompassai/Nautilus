@@ -1,0 +1,36 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+#
+# Old Maintainer: Filipe Laíns (FFY00) <lains@archlinux.org>
+
+pkgname=python-connexion
+_pkgname=connexion
+pkgver=3.0.6
+pkgrel=1
+pkgdesc='Swagger/OpenAPI First framework for Python on top of Flask with automatic endpoint validation & OAuth2 support.'
+arch=('any')
+url='https://github.com/zalando/connexion'
+license=('Apache')
+depends=('python-clickclick' 'python-jsonschema' 'python-pyaml'
+         'python-requests' 'python-inflection' 'python-openapi-spec-validator'
+         'python-flask' 'python-packaging' 'python-werkzeug'
+         'python-importlib-metadata')
+optdepends=('python-aiohttp: AIOHTTP backend'
+            'python-ujson: Faster JSON parsing'
+            'python-swagger-ui-bundle: Swagger UI (web UI for the API) support')
+makedepends=('python-setuptools' 'flake8')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/$pkgver.tar.gz")
+sha512sums=('77fea339f866c5258f923d876c5c7d88ee97fddcafec51e94ce6fb76331a2dd4c8fa7bffbb06dfab158a7c927441cac65e589a6a15be4542fcd18e54a2120e2d')
+
+build() {
+  cd $_pkgname-$pkgver
+
+  python setup.py build
+}
+
+package() {
+  cd $_pkgname-$pkgver
+
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
+}
+

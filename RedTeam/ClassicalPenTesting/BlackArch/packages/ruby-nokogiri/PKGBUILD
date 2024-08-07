@@ -1,0 +1,30 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=ruby-nokogiri
+_pkgname=nokogiri
+pkgver=1.16.6
+pkgrel=1
+pkgdesc='An HTML, XML, SAX, and Reader parser.'
+arch=('any')
+license=('MIT')
+depends=('ruby-mini_portile2')
+makedepends=('ruby-rdoc')
+options=('!distcc')
+url='http://nokogiri.org'
+source=("https://rubygems.org/gems/$_pkgname-$pkgver.gem")
+sha512sums=('9e03163efbc55a9649b8026a1490dfb67276eb3334162fd7ade0f4195016d704e91419bbac1ba45fa89fb0d6591e549255babfff11de44b40a60278b9338b48c')
+noextract=("$_pkgname-$pkgver.gem")
+
+package() {
+  _gemdir=$(ruby -e 'puts Gem.default_dir')
+
+  if [[ $CARCH == arm* ]] ; then
+    gem install --no-user-install --ignore-dependencies --no-rdoc --no-ri \
+      -i "$pkgdir$_gemdir" "$_pkgname-$pkgver.gem"
+  else
+    gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" \
+      "$_pkgname-$pkgver.gem"
+  fi
+}
+

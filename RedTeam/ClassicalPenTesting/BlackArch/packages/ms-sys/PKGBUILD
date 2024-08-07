@@ -1,0 +1,37 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=ms-sys
+pkgver=2.8.0
+pkgrel=1
+pkgdesc='A tool to write Win9x- master boot records (mbr) under linux - RTM!'
+arch=('x86_64' 'aarch64')
+url='http://ms-sys.sourceforge.net/'
+license=('GPL2')
+groups=('blackarch' 'blackarch-backdoor' 'blackarch-binary' 'blackarch-forensic')
+source=("http://downloads.sourceforge.net/sourceforge/ms-sys/$pkgname-$pkgver.tar.gz")
+sha512sums=('f8f43bea86bbaf2ea511f1f4b8d5dac34ead9b1e3453aa1e26e41d1b1e9f010e4c92c4a14417f01b7fd3fe22b446471b7d57b8ddd4a2330a64d6f566e66d871c')
+
+prepare() {
+  cd "$pkgname-$pkgver"
+
+  install -dm 755 "$pkgdir/usr/{bin,share/man/man1}"
+
+  sed -i "s|MANDIR =.*|MANDIR = /usr/share/man|g" Makefile
+}
+
+build() {
+  cd "$pkgname-$pkgver"
+
+  make PREFIX="/usr"
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+
+  make PREFIX="/usr" DESTDIR="$pkgdir" install
+
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" README FAQ
+  install -Dm 644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
+
