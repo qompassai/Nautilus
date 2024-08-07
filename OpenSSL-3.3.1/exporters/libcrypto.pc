@@ -1,0 +1,11 @@
+libdir=/usr/local/lib64
+includedir=/usr/local/include
+enginesdir=/usr/local/lib64/engines-3
+modulesdir=/usr/local/lib64/ossl-modules
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 3.3.1
+Libs: -L${libdir} -lcrypto
+Libs.private: -ldl -pthread -lm
+Cflags: -I${includedir}
