@@ -1,0 +1,596 @@
+[[tgjs]]
+=== Test Groups JSON Schema
+
+The testGroups element at the top level in the test vector JSON object is an array of test	groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped	together. The Test Group JSON object contains meta data that applies to all test vectors within	the group. The following table describes the {spec-algorithm} JSON elements of the Test Group JSON object
+
+.Test Group Properties
+|===
+| JSON Values | Description | JSON Type
+
+| tgId | Test group identifier | integer
+| testType | Describes the operation the client should perform on the tests data | string
+| tests | Array of individual test cases | See <<testCase>>
+| kdfConfiguration | Describes the KDA configuration values used for single expansion groups. | See <<kdfconfig>>
+| multiExpansion | Whether multi expansion tests should be run (true or false)? | boolean
+| kdfMultiExpansionConfiguration | Describes the KDA configuration values used for multi expansion groups. | See <<kdfmulticonfig>>
+| zLength | The length of the shared secret, Z, in bits. | integer
+| usesHybridSharedSecret | Will a hybrid shared secret be used (true or false)? | boolean
+| auxSharedSecretLen | The length of the auxiliary shared secret, T, in bits. Only applicable for <<SP800-56Cr2>> and when a hybrid shared secret is used. | integer
+|===
+
+The 'tgId', 'testType' and 'tests' objects *MUST* appear in every test group element communicated from the server to the client as a part of a prompt. Other properties are dependent on which 'testType' the group is addressing.
+
+[#kdfconfig]
+==== kdfConfiguration JSON Schema
+
+Describes the KDA configuration for use under the test group.
+
+.KdfConfiguration JSON Object
+|===
+| JSON Value | Description | JSON Type
+
+| kdfType| The type of KDA to use for the group. | value - twostep
+| satMethod|  The strategy used for salting. | value - default (all 00s), random
+| fixedInfoPattern| The pattern used for constructing the fixedInfo. | value - See <<fixedinfopatcon>>.
+| fixedInfoEncoding| The pattern used for constructing the fixedInfo. | value - See <<fixedinfopatcon>>.
+| macMode| The MAC function used in the KDA.| value 
+| counterLocation| The counter location. | value
+| counterLen| The counter length. | value
+| ivLen| The iv length. | value
+| l | the bit length of keying material to derive from the KDA | value
+|===
+
+[#kdfmulticonfig]
+==== kdfMultiExpansionConfiguration JSON Schema
+
+Describes the KDA Multi Expansion configuration for use under the test group.
+
+.KdfConfiguration JSON Object
+|===
+| JSON Value | Description | JSON Type
+
+| kdfType| The type of KDA to use for the group. | value - TwoStep
+| saltMethod | The strategy used for salting. | value - default (all 00s), random
+| saltLen | The bit length of the salt. | integer
+| hmacAlg | The MAC function used in the KDA. | value 
+| l | the bit length of keying material to derive from the KDA | value
+|===
+
+[[testCase]]
+=== Test Case JSON Schema
+
+Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each KAS/KTS ECC test vector.
+
+.Test Case JSON Object
+|===
+| JSON Value | Description | JSON Type
+
+| tcId | Numeric identifier for the test case, unique across the entire vector set. | integer
+|dkm | Derived keying material value for VAL tests. | hex
+| kdfParameter | Object representing inputs into the KDA for single expansion tests. | See <<kdfParameter>>.
+| fixedInfoPartyU | Fixed information specific to party U for single expansion tests. | See <<fixedInfo>>.
+| fixedInfoPartyV | Fixed information specific to party V for single expansion tests. | See <<fixedInfo>>.
+| kdfMultiExpansionParameter | Object representing inputs into the KDA for multi expansion tests. | See <<kdfMultiExpansionParameter>>.
+
+|===
+
+[[kdfParameter]]
+==== kdfParameter JSON Schema
+
+KDA specific options used for the test case.
+
+.KDF Parameter JSON Object
+|===
+| JSON Value | Description | JSON Type
+
+| kdfType | The type of KDA utilized. | value
+| salt | The salt used for the test case. | value
+| iv | The iv used for the test case. | value
+| algorithmId | The random "algorithID" used for the test case when applicable to the fixedInfo pattern. | value
+| context | The random "context" used for the test case when applicable to the fixedInfo pattern. | value
+| label | The random "label" used for the test case when applicable to the fixedInfo pattern. | value
+| z | shared secret z value to be used for the test case. | value
+| t | auxiliary shared secret t.  For <<SP800-56Cr2>> only. | value
+| l | the bit length of keying material to derive from the KDA | value
+|===
+
+[[fixedInfo]]
+==== FixedInfo PartyU/V JSON Schema
+
+Fixed information that is included for party U/V for fixed info construction
+
+.Fixed Info JSON Object
+|===
+| JSON Value | Description | JSON Type
+
+| partyId | The party identifier | value
+| ephemeralData | Ephemeral data (randomly) included as a part of the parties fixed info construction | value
+|===
+
+[[kdfMultiExpansionParameter]]
+==== kdfMultiExpansionParameter JSON Schema
+
+KDA specific options used for the test case.
+
+.KDF Multi Expansion Parameter JSON Object
+|===
+| JSON Value | Description | JSON Type
+| salt | The salt used for the test case. | value
+| z | shared secret z value to be used for the test case. | value
+| t | auxiliary shared secret t.  For <<SP800-56Cr2>> only. | value
+| iterationParameters | the per iteration parameters for multi expansion | See <<iterationParameters>>.
+|===
+
+[[iterationParameters]]
+===== KDF Multi Expansion IterationParameters JSON Schema
+
+The per multi expansion iteration specific parameters used within a test case.
+
+.KDF Multi Expansion IterationParameters JSON Object
+|===
+| JSON Value | Description | JSON Type
+| l | The length of keying material to derive for the current iteration. | value
+| fixedInfo | The fixed information for the current iteration. Note that <<SP800-56Cr2>> does not go into detail regarding how this per iteration fixed info should be constructed, but it obviously needs to be different each iteration.| value
+|===
+
+[[app-vs-ex]]
+=== Example Test Vectors JSON
+
+The following is a example JSON object for KAS-FFC test vectors sent from the ACVP server to the crypto module.
+
+.Vector Set JSON Example SP800-56Cr1
+[source,json]
+---- 
+{
+  "vsId": 0,
+  "algorithm": "KDA",
+  "mode": "TwoStep",
+  "revision": "Sp800-56Cr1",
+  "testGroups": [
+    {
+      "tgId": 1,
+      "testType": "AFT",
+      "kdfConfiguration": {
+        "kdfType": "twoStep",
+        "l": 512,
+        "saltLen": 1024,
+        "saltMethod": "random",
+        "fixedInfoPattern": "uPartyInfo||vPartyInfo||l",
+        "fixedInfoEncoding": "concatenation",
+        "kdfMode": "feedback",
+        "macMode": "HMAC-SHA2-512",
+        "counterLocation": "after fixed data",
+        "counterLen": 32,
+        "ivLen": 512
+      },
+      "zLength": 224,
+      "tests": [
+        {
+          "tcId": 1,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "01E17704420ADF5E3BABFA1302169E1122AABFC69B9C0FB798271A6EB69E4A81E2B66518CDAB4615B2EFB48D3C6DEFCAACB267DC2CB4F867FA44AF891F914EEF393780F1E14BC38987EC7B940409FB48B039FF048E84B963A846649034CE012E84B89738B59F04ACB7F661E517A1AE5ED5E45721BFD2A8D06F3691E5F77B80E8",
+            "z": "F0F0CCE8C584183E5A9A4E3F72118F7AEA1AA52F8340F7F97C514540",
+            "l": 512,
+            "iv": "E3A0B0A265F224038DB267BB7BA6B5F40A242D753F3A655F15591814F45A9A2D3F94E40F8E58639F86CEB44F7ABB889C55EB53177E85D4C8B03EFBC891ABD241"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "154C2274FC10A7DB2FFF56C4AF73F426"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "062C938BC127A44615542680127413C7",
+            "ephemeralData": "D7B17E991ECDA5DD7BB921786ECC1CE59D3D9796E19023256B323B5D"
+          }
+        },
+        {
+          "tcId": 2,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "1D491C4921151927FB376F0D7CFDD198761DF7C464493015B8E67E43F5C7F6921FC028DC87CDCBA23BDD4B9A6ED3214954822A6F039F794526A317EDB8540547D2DEE19E46251BA08DFA64DD8F56B8D0D33697FB0EC870015F6F01A26D589C9FBBDAF127A3F57FEC7D383773A0D8B52846854554F3C122C3068494C61299D8C4",
+            "z": "37D63739A7CB7C50FD871FD3EF0C1F03F74AE2440A2532CDD68260AB",
+            "l": 512,
+            "iv": "7762E6BF97BB4E6D74F23E2DF2736AA2AEF8CE15F34133C00B13A38644AB2CE6F86FC4682ACDCBBE2212442A0AEE57AEAB76790269591A3BCA118D6379717FB8"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "4BAE694570E0224BB547C9D1D94C7CE8"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "5B969CDA952E26645F9FC3CB414E71FB",
+            "ephemeralData": "18A36D79ACB81DF688C63EB37FCEE7B8173FB1A457D739267196C821"
+          }
+        },
+        {
+          "tcId": 3,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "F152D89599CA2F3442414F622C3B28C73909DA4ABE2FBBF11484F603C44C2855EC4EC93F0E592024A4A72EF35F20E80C5EDC49955D8694BA92E7EFB9EFD3DB7135AF83144886A3829F38D153EA4DD8033EE5D79FBD5E056F6311C6B2DBBF5C75FA1841382326F2367C06F462F6F7CC5899CA794C49D58976E7A63B3BBD1F8893",
+            "z": "D29D57D82D870868AAFD44C6DE25335A674A97E37A76AA6EC2D0568D",
+            "l": 512,
+            "iv": "78EA8687F385001122643B91758281D64B4309E056C825CDAF3C9CD3AF793D68187EEA2BD49009E70689228D174720174959E8FF386E0C63165B17FD6C079A45"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "F991070A2BDC80388AC84F3A46284816"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "0C17E9A3CF85104088422DA7DBDEC8FC"
+          }
+        }
+      ]
+    },
+    {
+      "tgId": 33,
+      "testType": "VAL",
+      "kdfConfiguration": {
+        "kdfType": "twoStep",
+        "l": 512,
+        "saltLen": 1024,
+        "saltMethod": "random",
+        "fixedInfoPattern": "uPartyInfo||vPartyInfo||l",
+        "fixedInfoEncoding": "concatenation",
+        "kdfMode": "feedback",
+        "macMode": "HMAC-SHA2-512",
+        "counterLocation": "after fixed data",
+        "counterLen": 32,
+        "ivLen": 512
+      },
+      "zLength": 256,
+      "tests": [
+        {
+          "tcId": 206,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "227C2578D2B5F8ECFD034DD43C60146BFA568DC70A482AE8FDBD7AA138B24B9F2A5F0566D124FF434E250F256C038449183189C8BCC67727E3F79DD1F846110C29B9D8C1AA2C9D831E498D82700DDF9B8F73E74ABF75590321AF926EA81D8CDCA87F334B9E14BC007C483E15CA99D7756545EF8523B98C5D0576D5662C19CC5C",
+            "z": "CDC603A4A6E5FDA8830236C1C6377A7E3F8786AC12B5F205CF455C27A04DC180",
+            "l": 512,
+            "iv": "DB0ACEAC2034CA45F57D2AC04F29FE71D23608CACF76919C7224D9702BF226ADC285EBC4A84CB547525623A4526529A8B6871AC6FB8305C6CF77F8D67C1C9B18"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "BE486A74CE495AB914AA96BB094F9B87"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "2B012A9E7629F7C9BF4919449731A1F5",
+            "ephemeralData": "482F1A9E809FF14A058142369562AF6426B53D0E33EC670C22D0E8837E37118B"
+          },
+          "dkm": "9ED06EEEFFC01C0C594EB54775A7A05405F3F7DC6159686790F1E60C07CE2840F2B671F6F16E32FE52E587C24A3EC5E0ABFB4031457C34972D6DB3CD4E24257B"
+        },
+        {
+          "tcId": 207,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "61AFC626DC9F962040BFD74C9B37E06171AA633D3F8AB3B5860417935DE9744C7FBE60E0D2506F2896EA5B99D4558C768CFFE5AEFD2E8DC18F98764BC72C0A9B58ACA128AE6C615758606CCC4C434EFC50DEC06884CDF821E70F4C33A7C78902B7A7DC2252DD554C686A7BF64F74D1DCCC1E13502FC24335CEF30504B8CAC1D4",
+            "z": "414840092D47D2F3BC58388653745F904B9A5C35C3B35E82AB31E67C4DA0A1EF",
+            "l": 512,
+            "iv": "60E7FB6453843B7BAC39B0564717DA3D746FD8B87D13D8E7BF7570B28E702903EE5F2778FD3DA8B575332228FF70DEC4C559ABD0E61ECE885FF8A2FC39B0AECE"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "C59DE998A6DEC3C7723AC7F5880EB2F1",
+            "ephemeralData": "2706BAF2394BD64D8E71E633A75C5F2B5446679CB676B78F975650493B9B1AA8"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "5C2BBBC31065F1B761A7B1C00744F74E",
+            "ephemeralData": "AB91CB608042EFFAB77A943F23A4684FB0D5A51D0572ED0CA9C14B1D41896D51"
+          },
+          "dkm": "3706FD4B6450BB15120302B94E16FE695C73488DE711CCE08EC42CDB183660F711EBC6F5B354649578D8C8BA68BEDD778231802C8171A5EDBA0604B8EFC90765"
+        },
+        {
+          "tcId": 208,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "A8F37D9FF52F34C48C83E8985CDCE150C6DCEB24201F96E59AD15D8A3F61F29F0D3688E623A7BBA5BDC9578178A15B7FB31CEE59CAEF3C30D9A047B0D4F18EE3046139B85C956DB436B5145C507085E282327CCD45F70046EEE47B905CF15AD126A7F1FE83DDB130EA3351CA362A155530A3A22FC3B48AF65FBC950EC557E787",
+            "z": "E711827E4CD5EE79B3BC3EC6B7BA5E80D762E306F04B5EA869F9568DC0472B0A",
+            "l": 512,
+            "iv": "ADF3D162B6F6736C2CFDEFABBD15769B1C54985491D2BBB9733975C0411A76A267FBDC2D567AD56FB775D9AB04D2E1DFB998A837EA9306892128DC8C662BE205"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "89260CA34C15AC7C448E9450298725C7",
+            "ephemeralData": "C86C106F281A3A76CFEC87395CE128644C25EBAD819F46946ECCE63C1704361F"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "C0CFC2EF4DBCBABA3E8BD00C4C5F3A4B",
+            "ephemeralData": "6AB3DF9FCB7EA1A29D9440D98B7236D6D983FFA3CC01A0354997D82D44E43F00"
+          },
+          "dkm": "BF0E3773C61D51EF30742BEF784E29F7B60C85192DF381FCD597166A8DA7EF2BC7DB6A3AD6415A26DEAC9D98D42073E09E87455F0B0FDA0130A5F0AB0EF25EB7"
+        }
+      ]
+    }
+  ]
+}
+----
+
+.Vector Set JSON Example SP800-56Cr2
+[source,json]
+---- 
+{
+  "vsId": 0,
+  "algorithm": "KDA",
+  "mode": "TwoStep",
+  "revision": "Sp800-56Cr2",
+  "isSample": true,
+  "testGroups": [
+    {
+      "tgId": 1,
+      "testType": "AFT",
+      "kdfConfiguration": {
+        "kdfType": "twoStep",
+        "l": 512,
+        "saltLen": 1024,
+        "saltMethod": "random",
+        "fixedInfoPattern": "uPartyInfo||vPartyInfo||l",
+        "fixedInfoEncoding": "concatenation",
+        "kdfMode": "feedback",
+        "macMode": "HMAC-SHA2-512",
+        "counterLocation": "after fixed data",
+        "counterLen": 32,
+        "ivLen": 512
+      },
+      "zLength": 240,
+      "usesHybridSharedSecret": true,
+      "auxSharedSecretLen": 112,
+      "multiExpansion": false,
+      "tests": [
+        {
+          "tcId": 1,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "C58783B4351C6F81A329EC7DD438F06BE4965750826DF31BD734A06A2E045F71B4A68828C5392597EC2C050C7346BDDBB25FE6062E818F4EAF49ED5BB45BAEA9365FC49213A2CBCB9C86D212BCA364C59054C6DCAE95D178389CCA9104C21EBE3EC2B0D80B4D2F783C949C00FAC8EB7ADAF21ED219EC6BE638CFDF431A075F39",
+            "z": "837D64EC83321D6EC458A727D35524F02786528E1F51A0A4180FEFACBF4B",
+            "t": "090D0537BBC91B65D5C2C0465CB5",
+            "l": 512,
+            "iv": "8AB64C847F71379616754F295FA6DCD4D80B11940E4BFDA93A03EF9B839AA76C9823FE84FBAC61358536D250385A558F3F9BA99718576F893A4731E1A7BCCDE8"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "8BBD8E5087320E24B12A4C466E8F23C0",
+            "ephemeralData": "843B8E38380359301E7DF30E5D65B653706B0939BF1B64C60B326ACD223F"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "A7F08D2B0AC9178E9E3FE2F7903E5ED6",
+            "ephemeralData": "F2732AF7CEC7777078DACBDBE8962937D3F96674F121AD97AE31EAD0DE9E"
+          }
+        },
+        {
+          "tcId": 2,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "17370EC787D758DC66FB00706F8EF6514186A55DDB749AAE6FE595736FE41E248306E5858DBCB204A301C0D4D79BBA9CA524CBF907EDC2FCBC9B843ADBFBDE26D0D70B2A2A9B750C80AC4B9D715649F31F716F4D0BEFFB8F30102103C932B0EE9F312B218EDA0D1471D6E9037CF30DDD9E4D6D8CE97E57FCF89A0438B0E7E369",
+            "z": "F2F4039AFA9CBBCD5B014509DB63624DCEFDCFC99F20809D5207EED68984",
+            "t": "322BDBDBBFAE2BEA4DBF213EAF79",
+            "l": 512,
+            "iv": "7849152268B7BE5724C0A8D24C5B7812B61AC1D6449987C49C5AABC2F21F5C639FA75DBD1B927E23241297568E3C7B2C5F45264B3A292CD50731B4E6DAE26ABB"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "0C521BBB2976030C460455718927F0DE"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "2F2569492D3777000EDB911A252D8B99",
+            "ephemeralData": "C219CCDD707B4C5FC30CFE4F4207A1D9CE9196AB3AA232EE9F9211D3ABDC"
+          }
+        }
+      ]
+    },
+    {
+      "tgId": 2,
+      "testType": "AFT",
+      "zLength": 240,
+      "usesHybridSharedSecret": true,
+      "auxSharedSecretLen": 112,
+      "multiExpansion": true,
+      "kdfMultiExpansionConfiguration": {
+        "kdfType": "twoStep",
+        "l": 512,
+        "saltLen": 1024,
+        "saltMethod": "random",
+        "kdfMode": "feedback",
+        "macMode": "HMAC-SHA2-512",
+        "counterLocation": "after fixed data",
+        "counterLen": 32,
+        "ivLen": 512
+      },
+      "tests": [
+        {
+          "tcId": 6,
+          "kdfMultiExpansionParameter": {
+            "kdfType": "twoStep",
+            "kdfMode": "feedback",
+            "macMode": "HMAC-SHA2-512",
+            "counterLocation": "after fixed data",
+            "counterLen": 32,
+            "salt": "6C8401A6A6A09F1C89CF0FCD94BAB0DC555EFAEA2308E32FC793766E6BD968B810FE1179655911E5498C13EF1AFA2A9303B48D9B2735B17EFD6600B786E8A99CBE2AC7BF4EB390E3F92120D487E195C74BFD57157527E2D8BD602DF63C0B0769619AD0B0C175905AC903C20A0E6FDF2B5D3DC38D520B378EDB8934DF0E5AE7BC",
+            "iv": "A845C6F96499C6E24915BB78A3F2B440B37EC3239AFE9E1B94A12B8AC4709B5E2D20EDD6CE4E4F99A8436957C98803B3EB5E690B0CEB32961C9448B4326F25B3",
+            "z": "5C0D84406A53A6B90E1665895558559A3C92C4E22685A3B47DFB228D9BD1",
+            "t": "D2EA090993AD23385D92C24139DD",
+            "iterationParameters": [
+              {
+                "l": 512,
+                "fixedInfo": "B078C870621E66AE618AC1EAB1386A7F"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "3F3B5023C73397A500DCA4C6841B04EA"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "2B2E44660CF3040E8BA920ADB5BE61F2"
+              }
+            ]
+          }
+        },
+        {
+          "tcId": 7,
+          "kdfMultiExpansionParameter": {
+            "kdfType": "twoStep",
+            "kdfMode": "feedback",
+            "macMode": "HMAC-SHA2-512",
+            "counterLocation": "after fixed data",
+            "counterLen": 32,
+            "salt": "C6C5798F0A8D3792AE7037FAF3085C47CF7245FCE0660CFAB7D8C78AD6034C45E41C8771C90822032FC2C483A8B6523CEA372AF5B4E2CB4D3742982C91665572F3E0B04544467EF968FADEABB3443C500458F12C7540269562CCB848028AFD0D6E77C8E5065795DB639F36DA772D19EF8A9AB78E74C3E9BCC6B69DDA22E2999F",
+            "iv": "AC3A0C1BD0CC61138546B0F75659CF05B050F889FC7993FDE7A9C9D6FE31A0468128CD3A524455DC0DE9297F158139B0BE32E25D77AEFE7A755F6026A96FFDAE",
+            "z": "5A995DC672E7D0FF93C85B26CC58F0CBD8FC74EAAB599689D1736A4D9405",
+            "t": "04639AA40438CFBE87CBE8DD26D5",
+            "iterationParameters": [
+              {
+                "l": 512,
+                "fixedInfo": "FF34C7C32DBFCAB436E061D80C2EB873"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "A6DA2A9B29D2644844FCACF1137C4253"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "D456D9CD34C7EBBCE766EF5FFDEC4CFF"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "tgId": 65,
+      "testType": "VAL",
+      "kdfConfiguration": {
+        "kdfType": "twoStep",
+        "l": 512,
+        "saltLen": 1024,
+        "saltMethod": "random",
+        "fixedInfoPattern": "uPartyInfo||vPartyInfo||l",
+        "fixedInfoEncoding": "concatenation",
+        "kdfMode": "feedback",
+        "macMode": "HMAC-SHA2-512",
+        "counterLocation": "after fixed data",
+        "counterLen": 32,
+        "ivLen": 512
+      },
+      "zLength": 232,
+      "usesHybridSharedSecret": true,
+      "auxSharedSecretLen": 144,
+      "multiExpansion": false,
+      "tests": [
+        {
+          "tcId": 411,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "6EF94F801BFEE61DD2B464EF175C333AA60780B770734A09D4260E3ACE142D15A0415B0DDBFBFEE0FB66CCD7AE3A71CE23365F4D95486FC9072A7B1ADFE2839E8B1229892A5671065515FFDF3D51345040ED1C52B2B927CACA85644C0153F5FB460928E28AB1BC40891206BC123A4F6C777D6DD4DDC9A8B4F5B43AE697FA185B",
+            "z": "42301A3E95310A29E571B18AC752F1285D6291CDFB0D5F33B3523CEA11",
+            "t": "A60D8DE12F173F6E7327EAD4788BEDB41C50",
+            "l": 512,
+            "iv": "40AE95B609A5CFF5046F1EAF2A259EA2277A27BF89CC9C49D25AE80010420550BA540A1054B14179B0B129FFDAA055F65F43F5588DA4654BBFE9674B1F80A72D"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "CA2E1874BD0AE0E75B3DE32B4253DECD"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "88A429FACD3242169F671CAFD174DCB0",
+            "ephemeralData": "8D0BA014A2EBC11DD599B130854C1056FF6AE0F49030B0D0F10EEF524D"
+          },
+          "dkm": "DEEEAFD041674947C1FE3D794346E412C3A5AE6F7D6F300875C316342F3FC6B0DDB5F4016E2968FF443A70A79AE5CA5E8063313E908B2AF566E1284D5820F718"
+        },
+        {
+          "tcId": 412,
+          "kdfParameter": {
+            "kdfType": "twoStep",
+            "salt": "FE39D0278B7C1501563CB4BB960F55A72BAB0709D1E241556A16F461270763B39BFEB0D376274A57F0E53D79606DBC47B1F49A137EFE1EAF0C464ED6D306E693B615295357079BC5BF8508F0914E9BB9EDC8680E9A19C9C45107DA12EC0ADDF9D5CEC8FC27A9101A03352D48C370B6E7583BE0B1FFBC627E1250FD67219FFBEC",
+            "z": "727021F7854B84169D4C1D39B421552776E477F464A3144163772F85C0",
+            "t": "4279450CC64917ED8884D523F7D4E10233B3",
+            "l": 512,
+            "iv": "1BDA03A6E389CB84B95DBC012BEC2B2EECFB05A9B8F0BC06DA97FB3CA5B0E30885428A784C26B026FEDF67A17DCFFC9F50E6145A370B03A6524FCD93AFCA6320"
+          },
+          "fixedInfoPartyU": {
+            "partyId": "30A31F6CF2E301A97E8EE66C2F67765C"
+          },
+          "fixedInfoPartyV": {
+            "partyId": "0C06785053342FB1304B312FA20274C1"
+          },
+          "dkm": "F05325B0EE208E1975EFEDDCEBA86763AD14337156F7574C740FEC8BEBAE67ABC4615FFBEB6EF46465BC82A820984C1F2D0373649BDDD68233BB93196AE28808"
+        }
+      ]
+    },
+    {
+      "tgId": 66,
+      "testType": "VAL",
+      "zLength": 232,
+      "usesHybridSharedSecret": true,
+      "auxSharedSecretLen": 144,
+      "multiExpansion": true,
+      "kdfMultiExpansionConfiguration": {
+        "kdfType": "twoStep",
+        "l": 512,
+        "saltLen": 1024,
+        "saltMethod": "random",
+        "kdfMode": "feedback",
+        "macMode": "HMAC-SHA2-512",
+        "counterLocation": "after fixed data",
+        "counterLen": 32,
+        "ivLen": 512
+      },
+      "tests": [
+        {
+          "tcId": 416,
+          "kdfMultiExpansionParameter": {
+            "kdfType": "twoStep",
+            "kdfMode": "feedback",
+            "macMode": "HMAC-SHA2-512",
+            "counterLocation": "after fixed data",
+            "counterLen": 32,
+            "salt": "857922073668DECC47627AC83F249976D55329D03449A430D8245E1CCEA2CB36622E755C8591E32F411822B84F543CEB00287E753098E6FBD5A8991A9820E46A1BCA1C7B10999F54C859691A447AD8713EF63CB30CE6017EA986F524E5AC88AB32673227C57AE23DDC8B5C31179081CBCC7FC621CB17D14DF2E1F6F2D77BDF25",
+            "iv": "2997A65781403D9BC933B6134BA6616DE96E4D5B4C2797B41CF8A92F9A7CC42A0DD0EDF63D025A69BB9AEE51C30EBC900671E3D9141F7B178DE459DCA9F936B8",
+            "z": "A82287BF8A9681596448A0FD000EC57669F2FEB39074F9854794CF18EC",
+            "t": "7DE4D8B484751926E202D63E9525DC4D0179",
+            "iterationParameters": [
+              {
+                "l": 512,
+                "fixedInfo": "79CCA0C5D1132CDE2D78CDB57FFA46A7"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "8A81ABC645A5F0041708CBDD34F360A0"
+              }
+            ]
+          },
+          "dkms": [
+            "868A9AA69829DCE0F540151DC708A7C7E9856A9AB317C67FDE5314AEE5C3DB62091CDFC593D4AAD2C941A765D26ACD6708819B06E28223345AD4B0E0DECAA2B9",
+            "869EC40463921F1665FDBABD154D646BCCD469CD36F7175131FA7B96A8311C68B062785327932964AD4A044CABB04782B0399000B9F762D345B36003E7CFF6C4"
+          ]
+        },
+        {
+          "tcId": 417,
+          "kdfMultiExpansionParameter": {
+            "kdfType": "twoStep",
+            "kdfMode": "feedback",
+            "macMode": "HMAC-SHA2-512",
+            "counterLocation": "after fixed data",
+            "counterLen": 32,
+            "salt": "C3E26AE71C46D92EDDA5BFB29A1498F8F2395490F62966420EF4F6C41D7043C493F1D66D23AC0D08AEE09194A232117F94FF66751F1BD29A4F8E94294E880F6E3A62E4AC932DF759AE73ABC9C3B6D1A31D444C2DDE7D26789D699A1B06BB7B5AAA544B73D52FC3E02C45F346937003EAAA9BE5CAE2BAC385D6BADC570E249FA1",
+            "iv": "45D9E5F1639357A68A010D3F2D4892BB4475775F8E7C8AC817FC07F808156584D726D8AFEBEF929E04E056C1D42BB9D3B41EEA682E60231D89D0E1F6325B87E1",
+            "z": "9AE68C81F52EDD5207EF0DD998746D881346893AAB59CDC0A28528EF25",
+            "t": "A1752B0C9A12E4930E45D93B4A22BDF225D3",
+            "iterationParameters": [
+              {
+                "l": 512,
+                "fixedInfo": "CD0F291D388697FD04248B34647E460E"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "E7F643C5EAC493E94043FF7B9EDF72C5"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "C0A83FA55D3599E41BECEF1333D20F14"
+              },
+              {
+                "l": 512,
+                "fixedInfo": "B93E3AC7A17B3E030E2EE7A203FD3279"
+              }
+            ]
+          },
+          "dkms": [
+            "52C3E181D4BEBECB0042FDFD2635AF472578ED4A0E78C5C6E3DDDB36259B81AD37AC808386BD3651670CF6BBA55162013262B495688C2E6EA26BB43EC6A65A90",
+            "E9A7881EF4F28254134F643CF39BCD469A66B4CB4C4768E51786FBC1531BD33E3BBAD16AE11791E78760A1DED6F543F31CDEB5059251E8D6E0F8F3290C6A867B",
+            "B71F7A1A1DBDBF234D660FA5CCEFC9945BB83DFBB08D5BB8FA6BED49F5E706A8E76B851D041D95D3FBE2D7A1C6AE4F87BC301A38B024F94E394A81D59FDCBE59",
+            "5255F56AB61AE53F98A55AE8183B7315DDD70288F58A090A68BCDC983D0B452B9A241D2E579FC15A13E532CFAB0522DB7D05EE33E2E48E339C4F6578C5EC55CB"
+          ]
+        }
+      ]
+    }        
+  ]
+}
+----

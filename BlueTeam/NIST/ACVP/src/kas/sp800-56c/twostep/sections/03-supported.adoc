@@ -1,0 +1,8 @@
+
+[#supported_algs]
+== Supported KDA TwoStep
+
+The following key derivation algorithms *MAY* be advertised by the ACVP compliant cryptographic module:
+
+* KDA / TwoStep / SP800-56Cr1
+* KDA / TwoStep / SP800-56Cr2

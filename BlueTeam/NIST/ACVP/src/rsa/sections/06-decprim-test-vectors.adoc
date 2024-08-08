@@ -1,0 +1,167 @@
+[[rsa_decprim_tgjs]]
+=== Test Groups for RSA Decryption Primitive 1.0
+
+The testGroups element at the top level in the test vector JSON object is an array of test  groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the {spec-algorithm} JSON elements of the Test Group JSON object
+
+.RSA Decryption Primitive 1.0 Test Group Properties
+|===
+| JSON Values | Description | JSON Type
+
+| tgId | Test group identifier | integer
+| testType | Describes the operation the client should perform on the tests data | string
+| totalTests | The total number of elements in the "resultsArray" | integer
+| totalFailingTests | The number of tests that the client should force to fail in the "resultsArray" | integer
+| tests | Array of individual test cases | array
+|===
+
+The 'tgId', 'testType' and 'tests' objects *MUST* appear in every test group element communicated from the server to the client as a part of a prompt. Other properties are dependent on which 'testType' (see <<testtypes>>) the group is addressing.
+
+=== Test Cases for RSA Decryption Primitive 1.0
+
+Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each RSA / DecryptionPrimitive / 1.0 test vector.
+
+.RSA Decryption Primitive 1.0 Test Case Properties
+|===
+| JSON Values | Description | JSON Type
+
+| tcId | Test case identifier | integer
+| resultsArray | An array of ciphertexts | array
+| ciphertext | An individual ciphertext | hex
+|===
+
+NOTE: A failing ciphertext is one such that the ciphertext is greater than the n the client provides
+
+Here is an abbreviated yet fully constructed example of the prompt
+
+[source, json]
+----
+[
+    { "acvVersion": "{acvp-version}" },
+    {
+        "vsId": 1194,
+        "algorithm": "RSA",
+        "mode": "decryptionPrimitive",
+        "revision": "1.0",
+        "testGroups" : [
+            {
+                "tgId": 1,
+                "testType": "AFT",
+                "totalTests": 2,
+                "totalFailingTests": 1,
+                "tests" : [
+                    {
+                        "tcId" : 1,
+                        "resultsArray": [
+                            {
+                                "cipherText" : "097e82fec72465e..."
+                            },
+                            {
+                                "cipherText" : "ffd5aa3f0c7c787..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
+----
+
+=== Test Groups for RSA Decryption Primitive Sp800-56Br2
+
+The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the {spec-algorithm} JSON elements of the Test Group JSON object
+
+.RSA Decryption Primitive Sp800-56Br2 Test Group Properties
+|===
+| JSON Values | Description | JSON Type
+
+| tgId | Test group identifier | integer
+| modulo | The modulo to use in the current test | integer
+| keyMode | The mode to be used in current test (aft, crt) | string
+| testType | Describes the operation the client should perform on the tests data | string
+| pubExpMode | Supports fixed or random public key exponent e (random default if empty) | string | "fixed" or "random"
+| fixedPubExp | The value of the public key exponent e in hex if pubExpMode is "fixed" | hex |
+| tests | Array of individual test cases | array
+|===
+
+The 'tgId', 'testType' and 'tests' objects *MUST* appear in every test group element communicated from the server to the client as a part of a prompt. Other properties are dependent on which 'testType' (see <<testtypes>>) the group is addressing.
+
+=== Test Cases for RSA Decryption Primitive Sp800-56Br2
+
+Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each RSA / DecryptionPrimitive / Sp800-56Br2 test vector.
+
+.RSA Decryption Primitive Sp800-56Br2 Test Case Properties
+|===
+| JSON Values | Description | JSON Type
+
+| tcId | Test case identifier | integer
+| plainText | An individual plainText| HEX
+| ciphertext | An individual ciphertext | hex
+| n | Used by tests for calculation | hex
+| e | Used by tests for calculation | hex
+| p | Used by tests for calculation | hex
+| q | Used by tests for calculation | hex
+| d | Used by tests for calculation | hex
+| Dmp1 | Used by CRT tests for calculation | hex
+| Dmp1 | Used by CRT tests for calculation | hex
+| Iqmp | Used by CRT tests for calculation | hex
+|===
+
+NOTE: A failing plainText is one such that does not match what the client provides
+
+Here is an abbreviated yet fully constructed example of the prompt
+
+[source, json]
+----
+[
+    { "acvVersion": "{acvp-version}" },
+    {
+        "vsId": 0,
+        "algorithm": "RSA",
+        "mode": "DecryptionPrimitive",
+        "revision": "Sp800-56Br2",
+        "isSample": false,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "modulo": 2048,
+                "testType": "AFT",
+                "keyMode": "standard",
+                "pubExpMode": "random",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "ct": "610EB23035CBF80373F282D9FCD8FCDAA411519BD9C2C889A6CDE09C1C8D4A188DF9781F1AA14...",
+                        "p": "EC7C9A50B4C9DC6D5CBED336D42FCB0F669A5D98EE16F01A2BE8AB5EDACADEAC5827F30E50AA4CC9C6F...",
+                        "q": "E1905BABFCA4135C62F4457FA9BD2ABA93FE1CE9401BF2F5708081752E8C962DE94CDCF9A35748DB4820...",
+                        "d": "0167BACAD1034759CF8B36C19C1B92A50E37703208E9F75291383478A58A65879A6578938B4FBBF80015BA3...",
+                        "n": "A267B19CA3573AA9392B6D75EF5A38D1AC99982B8B2ED79B399BC80842C85ABCACD2A9A0F849AC0FDCD4...",
+                        "e": "2BEE9C8C06B5"
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "modulo": 4096,
+                "testType": "AFT",
+                "keyMode": "crt",
+                "pubExpMode": "random",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "ct": "95B5BCDCCAE9802BFFB562D5CA8CC027C33178952CD02AECCA122D1AAF24CD703930EA511E27BD1393C...",
+                        "dmp1": "D69E5464B2DFD07BBA23B90684BAEC522EE997F3F805077EB00BB76FFD3FF5D053C39384035C75D6CDA6FC0...",
+                        "dmq1": "A5A23DC4E454DEB6CB2466910BB65BAD1EA65FD2E1CAADD3FB83AB0DCE407B25F4257A038EACC5909AD...",
+                        "iqmp": "4B3702BB2BDAD984047633F0B0DD4C6C619791CD7B280D15E1DADB08FDDBFFA546EC926F40A54D38E682B90B...",
+                        "p": "F244D4C2D0C82F3E4C3D20965D418E3AD5D62FCB0F669A5D98EE16F01A2BE8AB5EDACADEAC5827F30E50AA4CC9C6F...",
+                        "q": "D85F808CCCEC37B5B08B2067046BC0E9CA32ABA93FE1CE9401BF2F5708081752E8C962DE94CDCF9A35748DB4820...",
+                        "d": "0E24211348C0DA791CCB9E9F55FEFAD0303208E9F75291383478A58A65879A6578938B4FBBF80015BA3...",
+                        "n": "CCC474B6FE688ACC7AF61D7797DDB240735CF5A38D1AC99982B8B2ED79B399BC80842C85ABCACD2A9A0F849AC0FDCD4...",
+                        "e": "02FC20D82B"
+                    }
+                ]
+            }
+        ]
+    }
+]
+----

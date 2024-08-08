@@ -1,0 +1,20 @@
+packages
+pubspec.lock
+/.project
+*.js
+*.deps
+*.map
+
+# idea
+.idea/
+*.iml
+
+# dartdoc
+doc/
+
+.pub/
+.packages
+
+.settings/
+.dart_tool/
+

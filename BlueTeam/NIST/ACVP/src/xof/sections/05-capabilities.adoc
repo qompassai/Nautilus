@@ -1,0 +1,48 @@
+
+[[xof_caps_reg]]
+=== XOF Algorithm Capabilities Registration
+
+This section describes the constructs for advertising support of XOFs to the ACVP server. ACVP *REQUIRES* cryptographic modules to register their capabilities in a registration. This allows the cryptographic module to advertise support for specific algorithms, notifying the ACVP server which algorithms need test vectors generated for the validation process.
+
+The XOF capabilities *MUST* be advertised as JSON objects within the 'algorithms' value of the ACVP registration message. The 'algorithms' value *MUST* be an array, where each array element is an individual JSON object defined in this section. The 'algorithms' value *MUST* be part of the 'capability_exchange' element of the ACVP JSON registration message.
+
+Each XOF algorithm capability advertised *SHALL* be a self-contained JSON object.
+
+Each algorithm capability advertised is a self-contained JSON object.  The following JSON values are used for XOF algorithm capabilities:
+
+[cols="<,<,<"]
+[[caps_table]]
+.XOF Algorithm Capabilities JSON Values
+|===
+| JSON Value | Description | JSON type
+
+| algorithm | The algorithm and mode to be validated. | string
+| revision | The algorithm testing revision to use. | string
+| xof | Implementation has the ability to act as an XOF or a non-XOF algorithm | array of boolean
+| hexCustomization | An optional feature to the implementation.  When true, "hex" customization strings are supported, otherwise they aren't.  ASCII strings *SHALL* be tested regardless of the value within the `hexCustomization` property. | boolean
+| msgLen | Input length for the XOF | domain
+| outputLen | Output length for the XOF | domain
+| keyLen | Supported key lengths | domain
+| macLen | Supported MAC lengths | domain
+| blockSize | block size (in bytes) to be used with ParallelHash | domain
+|===
+
+The following grid outlines which properties are *REQUIRED*, as well as all the possible values a server *MAY* support for XOF algorithms:
+
+[cols="<,<,<,<,<,<,<,<"]
+[[property_grid]]
+.XOF Capabilities Applicability Grid
+|===
+| algorithm | xof | hexCustomization | msgLen | outputLen | keyLen | macLen | blockSize
+
+| cSHAKE-128 | | true, false | {Min: 0, Max: 65536, Increment: any} | {Min: 16, Max: 65536, Increment: any} | | |
+| cSHAKE-256 | | true, false | {Min: 0, Max: 65536, Increment: any} | {Min: 16, Max: 65536, Increment: any} | | |
+| KMAC-128 | [true, false] | true, false | {Min: 0, Max: 65536, Increment: any} | | {Min: 128, Max: 524288, Increment: 8} | {Min: 32, Max: 65536, Increment: 8} |
+| KMAC-256 | [true, false] | true, false | {Min: 0, Max: 65536, Increment: any} | | {Min: 128, Max: 524288, Increment: 8} | {Min: 32, Max: 65536, Increment: 8} |
+| ParallelHash-128 | [true, false] | true, false | {Min: 0, Max: 65536, Increment: any} | {Min: 16, Max: 65536, Increment: any} | | | {Min: 1, Max: 128, Increment: 1}
+| ParallelHash-256 | [true, false] | true, false | {Min: 0, Max: 65536, Increment: any} | {Min: 16, Max: 65536, Increment: any} | | | {Min: 1, Max: 128, Increment: 1}
+| TupleHash-128 | [true, false] | true, false | {Min: 0, Max: 65536, Increment: any} | {Min: 16, Max: 65536, Increment: any} | | |
+| TupleHash-256 | [true, false] | true, false | {Min: 0, Max: 65536, Increment: any} | {Min: 16, Max: 65536, Increment: any} | | |
+|===
+
+NOTE: For cSHAKE, ParallelHash, and TupleHash, the value for the outputLen property must consist either of a single range object or a single literal value. This restriction is made to simplify the implementation of the Monte Carlo Tests for these algorithms (see <<MC_test>>).

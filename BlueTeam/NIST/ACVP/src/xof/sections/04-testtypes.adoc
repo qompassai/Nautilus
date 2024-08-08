@@ -1,0 +1,176 @@
+
+[#testtypes]
+== Test Types and Test Coverage
+
+This section describes the design of the tests used to validate {spec-algorithm} implementations.
+
+=== Test Types
+
+This section describes the design of the tests used to validate implementations of XOFs. There are three types of tests for these algorithms: Algorithm Functional Tests (AFT), Monte Carlo Tests (MCT) and MAC Verification Tests (MVT). Each has a specific value to be used in the testType field. The testType field definitions are:
+
+* "AFT" - Algorithm Functional Tests. These tests can be processed by the client using a normal 'encrypt' or 'decrypt' operation. AFTs cause the implementation under test to exercise normal operations on a single block, multiple blocks, or (where applicable) partial blocks. In some cases random data is used, in others, static, predetermined tests are provided.
+
+* "MCT" - Monte Carlo Tests. These tests exercise the implementation under test under strenuous circumstances. The implementation under test must process the test vectors according to the correct algorithm and mode in this document. MCTs can help detect potential memory leaks over time, and problems in allocation of resources, addressing variables, error handling and generally improper behavior in response to random inputs. Each MCT processes 100 pseudorandom tests. Not every algorithm and mode combination has an MCT. See <<MC_test>> for implementation details.
+
+* "MVT" - MAC Verification Tests.  XXX
+
+[[MC_test]]
+=== Monte Carlo tests for XOFs
+
+[[cSHAKE-MCT]]
+==== cSHAKE Monte Carlo Test
+
+[source, code]
+----
+INPUT: The initial Msg is the length of the digest size
+
+MCT(Msg, MaxOutLen, MinOutLen, OutLenIncrement)
+{
+  Range = (MaxOutLen – MinOutLen + 1);
+  OutputLen = MaxOutLen;
+  FunctionName = "";
+  Customization = "";
+
+  Output[0] = Msg;
+  for (j = 0; j < 100; j++) 
+  {
+    for (i = 1; i < 1001; i++) 
+    {
+      InnerMsg = Left(Output[i-1] || ZeroBits(128), 128);
+      Output[i] = CSHAKE(InnerMsg, OutputLen, FunctionName, Customization);
+      Rightmost_Output_bits = Right(Output[i], 16);
+      OutputLen = MinOutLen + (floor((Rightmost_Output_bits % Range) / OutLenIncrement) * OutLenIncrement);
+      Customization = BitsToString(InnerMsg || Rightmost_Output_bits);
+    }
+
+    OutputJ[j] = Output[1000];
+    Output[i] = Output[1000];
+  }
+
+  return OutputJ;
+}
+----
+
+NOTE: For the "Rightmost_Output_bits % Range" operation, the Rightmost_Output_bits bit string should be interpretted as a little endian-encoded number. 
+
+[[ParallelHash-MCT]]
+==== ParallelHash Monte Carlo Test
+
+[source, code]
+----
+INPUT: The initial Msg is the length of the digest size
+
+MCT(Msg, MaxOutLen, MinOutLen, OutLenIncrement, MaxBlockSize, MinBlockSize)
+{
+  Range = (MaxOutLen – MinOutLen + 1);
+  OutputLen = MaxOutLen;
+  BlockRange = (MaxBlockSize – MinBlockSize + 1);
+  BlockSize = MinBlockSize;
+  Customization = "";
+
+  Output[0] = Msg;
+  for (j = 0; j < 100; j++) 
+  {
+    for (i = 1; i < 1001; i++) 
+    {
+      InnerMsg = Left(Output[i-1] || ZeroBits(128), 128);
+      Output[i] = ParallelHash(InnerMsg, OutputLen, BlockSize, FunctionName, Customization);
+      Rightmost_Output_bits = Right(Output[i], 16);
+      OutputLen = MinOutLen + (floor((Rightmost_Output_bits % Range) / OutLenIncrement) * OutLenIncrement);
+      BlockSize = MinBlockSize + Right(Rightmost_Output_bits, 8) % BlockRange;
+      Customization = BitsToString(InnerMsg || Rightmost_Output_bits);
+    }
+
+    OutputJ[j] = Output[1000];
+    Output[i] = Output[1000];
+  }
+
+  return OutputJ;
+}
+----
+
+NOTE: For the "Rightmost_Output_bits % Range" operation, the Rightmost_Output_bits bit string should be interpretted as a little endian-encoded number. For "Right(Rightmost_Output_bits, 8) % BlockRange", the bit string resulting from the "Right(Rightmost_Output_bits, 8)" operation should be interpretted as a little endian-encoded number.
+
+[[TupleHash-MCT]]
+==== TupleHash Monte Carlo Test
+
+[source, code]
+----
+INPUT: The initial Single-Tuple of a random length between 0 and 65536 bits.
+
+MCT(Tuple, MaxOutLen, MinOutLen, OutLenIncrement)
+{
+  Range = (MaxOutLen – MinOutLen + 1);
+  OutputLen = MaxOutLen;
+  Customization = "";
+
+  T[0][0] = Tuple;
+  
+  for (j = 0; j < 100; j++) 
+  {
+    for (i = 1; i < 1001; i++) 
+    {
+      workingBits = Left(T[i-1][0] || ZeroBits(288), 288);
+      tupleSize = Left(workingBits, 3) % 4 + 1; // never more than 4 tuples to a round
+      for (k = 0; k < tupleSize; k++) 
+      {
+        T[i][k] = Substring of workingBits from (k * 288 / tupleSize) to ((k+1) * 288 / tupleSize - 1);
+      }
+      Output[i] = TupleHash(T[i], OutputLen, Customization);
+      Rightmost_Output_bits = Right(Output[i], 16);
+      OutputLen = MinOutLen + (floor((Rightmost_Output_bits % Range) / OutLenIncrement) * OutLenIncrement);
+      Customization = BitsToString(T[i][0] || Rightmost_Output_bits);
+    }
+  
+    OutputJ[j] = Output[1000];
+  }
+  
+  return OutputJ;
+}
+----
+
+NOTE: For "Left(workingBits, 3) % 4", the bit string resulting from the "Left(workingBits, 3)" operation should be interpretted as a little endian-encoded number. For the "Rightmost_Output_bits % Range" operation, the Rightmost_Output_bits bit string should be interpretted as a little endian-encoded number.
+
+[xof-mct-functions]
+==== Functions Used in the Monte Carlo Tests for XOFs
+
+[bitsToString]
+===== BitsToString Function
+
+[source, code]
+----
+BitsToString(bits) 
+{
+  string = "";
+  foreach byte in bits 
+  {
+      string = string + ASCII((byte % 26) + 65);
+  }
+}
+----
+
+[left-mct-function]
+===== Left() Function
+The function Left(bitString, numberOfBits) returns the leftmost numberOfBits bits of bitString.
+
+[right-mct-function]
+===== Right() Function
+The function Right(bitString, numberOfBits) returns the rightmost numberOfBits bits of bitString.
+
+[zero-mct-function]
+===== ZeroBits() Function
+The function ZeroBits(numberOfBits) returns an all-zero bit string of length numberOfBits bits.
+
+=== Test Coverage
+
+The tests described in this document have the intention of ensuring an implementation is conformant to <<SP800-185>>.
+
+[[xof-coverage]]
+==== XOF Requirements Covered
+
+In TBD.
+
+[[xof-not-coverage]]
+==== XOF Requirements Not Covered
+
+Some requirements in the outlined specification are not easily tested. Often they are not ideal for black-box testing such as the ACVP. In TBD.

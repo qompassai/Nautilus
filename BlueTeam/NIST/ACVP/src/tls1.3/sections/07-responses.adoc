@@ -1,0 +1,92 @@
+
+[#responses]
+== Responses
+
+After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
+
+.Vector Set Response JSON Object
+|===
+| JSON Property | Description | JSON Type
+
+| acvVersion | The version of the protocol | string
+| vsId | The vector set identifier | integer
+| testGroups | The test group data | array
+|===
+
+An example of this is the following
+
+[align=left,alt=,type=]
+[source, json]
+----
+{
+    "acvVersion": "version",
+    "vsId": 1,
+    "testGroups": [ ... ]
+}
+----
+
+The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
+
+.Vector Set Group Response JSON Object
+|===
+| JSON Property | Description | JSON Type
+
+| tgId | The test group identifier | integer
+| tests | The test case data | array
+|===
+
+An example of this is the following
+
+[align=left,alt=,type=]
+[source, json]
+----
+{
+    "tgId": 1,
+    "tests": [ ... ]
+}
+----
+
+The following table describes the JSON object that represents a test case response for a {spec-algorithm}.
+
+.Test Case Results JSON Object
+|===
+| JSON Property | Description | JSON Type
+
+| tcId | The test case identifier | integer
+
+
+| clientEarlyTrafficSecret | The client early traffic secret. `Derive-Secret(., "c e traffic", ClientHello)` | hex
+| earlyExporterMasterSecret | The early exporter master secret. `Derive-Secret(., "e exp master", ClientHello)` | hex
+
+| clientHandshakeTrafficSecret | The client handshake traffic secret. `Derive-Secret(., "c hs traffic", ClientHello...ServerHello)` | hex
+| serverHandshakeTrafficSecret | The server handshake traffic secret. `Derive-Secret(., "s hs traffic", ClientHello...ServerHello)` | hex
+
+| clientApplicationTrafficSecret | The client application traffic secret. `Derive-Secret(., "c ap traffic", ClientHello...server Finished)` | hex
+| serverApplicationTrafficSecret | The server application traffic secret. `Derive-Secret(., "s ap traffic", ClientHello...server Finished)` | hex
+| exporterMasterSecret | The exporter master secret. `Derive-Secret(., "exp master", ClientHello...server Finished)` | hex
+| resumptionMasterSecret | The resumption master secret. `Derive-Secret(., "res master", ClientHello...client Finished)` | hex
+|===
+
+Here is an abbreviated example of the response
+
+[align=left,alt=,type=]
+[source, json]
+----
+{
+  "vsId": 1,
+  "testGroups": [{
+    "tgId": 1,
+    "tests": [{
+      "tcId": 1,
+      "clientEarlyTrafficSecret": "6C4A2365493D1AF0F654D59A181EDD2510205F6AE3F22B6EE765B8208C99C66C",
+      "earlyExporterMasterSecret": "3C7204D21F2C10CD744915221CD46B8CF914E5E3124C87A822959C4EB58F13B9",
+      "clientHandshakeTrafficSecret": "C017D71DB97422E10BF950C1B530AB754A11D4FCF562DDBB47EE6DBAAD72CBA3",
+      "serverHandshakeTrafficSecret": "42D17CF61E98CA182AF677E13D40EA513627D950156BC8D80E749AB789930DE7",
+      "clientApplicationTrafficSecret": "52E4E879CA4AA2314AE5F2CCF3870BA879AE2644DB96BEC71493ADEAEE8EA121",
+      "serverApplicationTrafficSecret": "D4D3C87A5B5F165E90807BA7954734BA733668E9858CCE3F34B1A3E4965681F8",
+      "exporterMasterSecret": "7880C0A3BC51A1B2FE4013DB481B17B3D0A1DC6C3688EB178BF6FCD3D306AE9A",
+      "resumptionMasterSecret": "753DB3A1743DAA17AE52E2B6AA6E00AA07DA46111A43653325C98D69079E7BF4"
+    }]
+  }]
+}
+----

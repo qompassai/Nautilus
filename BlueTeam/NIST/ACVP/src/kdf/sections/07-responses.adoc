@@ -1,0 +1,140 @@
+
+[#responses]
+== Test Vector Responses
+
+After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
+
+.Vector Set Response Properties
+|===
+| JSON Property | Description | JSON Type
+
+| acvVersion | The version of the protocol | string
+| vsId | The vector set identifier | integer
+| testGroups | The test group data | array
+|===
+
+An example of this is the following
+
+[source, json]
+----
+{
+	"acvVersion": "version",
+	"vsId": 1,
+	"testGroups": [ ... ]
+}
+----
+
+The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
+
+.Vector Set Group Response Properties
+|===
+| JSON Property | Description | JSON Type
+
+| tgId | The test group identifier | integer
+| tests | The test case data | array
+|===
+
+An example of this is the following
+
+[source, json]
+----
+{
+    "tgId": 1,
+    "tests": [ ... ]
+}
+----
+
+The testCase section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
+
+The following table describes the JSON properties that represent a test case response for "KDF" /  / "1.0".
+
+.Test Case Results JSON Properties
+|===
+| JSON Property | Description | JSON Type
+
+| tcId | The test case identifier | integer
+| breakLocation | The bit location in the fixed data where the counter is placed. breakLocation is only applicable 
+and *SHALL* be included for test cases where counterLocation is "middle fixed data". | integer
+| fixedData | The fixed input data used by the IUT | hex
+| keyOut | The outputted keying material or key | hex
+|===
+
+NOTE: the fixedData or fixed input data string that is used by the IUT is needed by the ACVP server to verify that the IUT correctly derived the keying material. The server does not validate the correct construction of the fixed input data string.  For guidance on constructing a valid fixed input data string, please consult <<SP800-108r1>> Sections 5, 7.5 and 7.6.
+
+The following table describes the JSON properties that represent a test case response for "KDF" / "KMAC" / "Sp800-108r1".
+
+.Test Case Results JSON Properties for "KDF" / "KMAC" / "Sp800-108r1"
+|===
+| JSON Property | Description | JSON Type
+
+| tcId | The test case identifier | integer
+| derivedKey | The outputted keying material or key | hex
+|===
+
+=== Example Test Vector Response JSON
+
+The following is an abbreviated example of a JSON object for "KDF" /  / "1.0" test results sent from the crypto module to the ACVP server.
+
+// [align=left,alt=,type=]
+....
+
+[
+    {
+        "acvVersion": <acvp-version>
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "keyOut": "94D58F...",
+                        "fixedData": "FBF14DF02EE6C7DABCA6EF9AF59BB9A2"
+                    }
+                ]
+            }
+        ]
+    }
+]     
+
+....
+
+
+NOTE: Please note that the values used in the example JSON object are not real values. In particular, the value for the fixedData property is not an example of a validly formed fixed input data string.
+
+The following is an example of a JSON object for "KDF" / "KMAC" / "Sp800-108r1" test results sent from the crypto module to the ACVP server.
+
+
+ 
+....
+
+[
+    {
+        "acvVersion": <acvp-version>
+    },
+    {
+        "vsId": 0,
+        "algorithm": "KDF",
+        "mode": "KMAC",
+        "revision": "Sp800-108r1",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "derivedKey": "A639..."
+                    },
+                    {
+                        "tcId": 2,
+                        "derivedKey": "A328..."
+                    }
+                ]
+            }
+        ]
+    }
+]     
+
+....

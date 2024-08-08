@@ -1,0 +1,7 @@
+
+[#supported_algs]
+== Supported KDA OneStepNoCounter
+
+The following key derivation algorithms *MAY* be advertised by the ACVP compliant cryptographic module:
+
+* KDA / OneStepNoCounter / SP800-56Cr2

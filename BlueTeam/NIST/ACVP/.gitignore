@@ -1,0 +1,12 @@
+*.DS_Store
+*.html
+!index.html
+*.txt
+*.xml
+*.nits
+*.err
+*.log
+Gemfile.lock
+*.js
+documents/
+*.abort

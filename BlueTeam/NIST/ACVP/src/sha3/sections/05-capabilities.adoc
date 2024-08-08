@@ -1,0 +1,96 @@
+
+[[hash_caps_reg]]
+=== SHA3 and SHAKE Algorithm Capabilities Registration
+
+Each SHA3 and SHAKE algorithm capability advertised *SHALL* be a self-contained JSON object. The following JSON values are used for hash algorithm capabilities:
+
+[[caps_table]]
+
+[cols="<,<,<"]
+.SHA3 and SHAKE Algorithm Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type
+
+| algorithm| The hash algorithm and mode to be validated.| string
+| revision| The algorithm testing revision to use.| string
+| inBit| Implementation does accept bit-oriented messages| boolean
+| inEmpty| Implementation does accept null (zero-length) messages| boolean
+| outputLen| Output length for SHAKE. The value for the outputLen property must consist either of a single range object or a single literal value. This restriction is made to simplify the implementation of the Monte Carlo Tests (see <<SHAKE-MCT>>).| domain
+| outBit| SHAKE can output bit-oriented messages| boolean
+| messageLength | The message lengths in bits supported by the IUT. Minimum allowed is 0, maximum allowed is 65536. | domain
+| performLargeDataTest | Determines if the server should include the large data test group defined in <<LD_test>>. This property is *OPTIONAL*, and shall include the lengths in GiB being tested. Valid options are {1, 2, 4, 8}. | integer array
+|===
+
+NOTE: The lengths provided in the 'performLargeDataTest' property are in gibibytes. 1GiB is equivalent to 2^30 bytes. 
+
+NOTE: At least one messageLength > 0 must be supported by an IUT in order to accommodate MCT testing.
+
+The following grid outlines which properties are *REQUIRED*, as well as all the possible values a server *MAY* support for SHA3 and SHAKE algorithms:
+
+[[property_grid]]
+
+[cols="<,<,<,<,<,<,<,<"]
+.SHA3 and SHAKE Capabilities Applicability Grid
+|===
+| algorithm| revision | inBit| inEmpty| outputLen| outBit| messageLength | performLargeDataTest
+
+| SHA3-224| 1.0 | true, false| true, false| | | | [1, 2, 4, 8]
+| SHA3-256| 1.0 | true, false| true, false| | | | [1, 2, 4, 8]
+| SHA3-384| 1.0 | true, false| true, false| | | | [1, 2, 4, 8]
+| SHA3-512| 1.0 | true, false| true, false| | | | [1, 2, 4, 8]
+| SHA3-224| 2.0 | | | | | {"Min": 0, "Max": 65536, "Inc": any} | [1, 2, 4, 8]
+| SHA3-256| 2.0 | | | | | {"Min": 0, "Max": 65536, "Inc": any} | [1, 2, 4, 8]
+| SHA3-384| 2.0 | | | | | {"Min": 0, "Max": 65536, "Inc": any} | [1, 2, 4, 8]
+| SHA3-512| 2.0 | | | | | {"Min": 0, "Max": 65536, "Inc": any} | [1, 2, 4, 8]
+| SHAKE-128| 1.0 | true, false| true, false| {"Min": 16, "Max": 65536, "Inc": any}| true, false | |
+| SHAKE-256| 1.0 | true, false| true, false| {"Min": 16, "Max": 65536, "Inc": any}| true, false | |
+|===
+
+The following is a example JSON object advertising support for SHA3-256 for testing revision 1.0.
+
+[source, json]
+----
+{
+    "algorithm": "SHA3-256",
+    "revision": "1.0",
+    "mode": null,
+    "inBit": true,
+    "inEmpty": true,
+    "performLargeDataTest": [1, 2, 4, 8]
+}
+----
+
+The following is an example JSON object advertising support for SHAKE-128.
+
+[source, json]
+----
+{
+    "algorithm": "SHAKE-128",
+    "revision": "1.0",
+    "mode": null,
+    "inBit": true,
+    "inEmpty": true,
+    "outBit": true,
+    "outputLen": [
+        {
+        "min": 16,
+        "max": 1024
+        }
+    ]
+}
+----
+
+The following is a example JSON object advertising support for SHA3-256 for testing revision 2.0.
+
+[source, json]
+----
+{
+    "algorithm": "SHA3-256",
+    "revision": "2.0",
+    "mode": null,
+    "messageLength": [{"min": 0, "max": 65536, "increment": 1}],
+    "performLargeDataTest": [1, 2, 4, 8]
+}
+----
+
+NOTE: Since the increment is 1 in the above, and the minimum value within the message length is zero, this is effectively an "inBit" and "inEmpty" registration from the 1.0 revision testing.  If the implementation supports only byte length messages, you could use an increment of 8.

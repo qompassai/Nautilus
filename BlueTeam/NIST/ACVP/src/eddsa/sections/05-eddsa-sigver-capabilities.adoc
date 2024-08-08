@@ -1,0 +1,46 @@
+
+[[mode_sigVer]]
+==== The sigVer Mode Capabilities
+
+Each EDDSA sigVer mode capability set is advertised as a self-contained JSON object.
+
+[[mode_sigVerFullSet]]
+===== sigVer Full Set of Capabilities
+
+The complete list of EDDSA signature verification capabilities may be advertised by the ACVP compliant crypto module:
+
+[[sigVer_table]]
+.EDDSA sigVer Capabilities JSON Values
+|===
+| JSON Value | Description | JSON type | Valid Values
+
+| curve | The curve names supported for the IUT in sigGen | array | Any non-empty subset of {"ED-25519", "ED-448"}
+| pure | If the IUT supports normal 'pure' sigGen functionality | bool | true/false
+| preHash | If the IUT supports accepting a preHashed message to sign | bool | true/false
+|===
+
+The following is an example
+
+[source, json]
+----
+{
+    "algorithm": "EDDSA",
+    "mode": "sigVer",
+    "revision": "1.0",
+    "prereqVals": [{
+            "algorithm": "SHA",
+            "valValue": "123456"
+        },
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "pure": true,
+    "preHash": true,
+    "curve": [
+        "ED-25519",
+        "ED-448"
+    ]
+}
+----

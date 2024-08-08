@@ -1,0 +1,8 @@
+
+[#supported]
+== Supported KAS-ECCs
+
+The following key derivation functions *MAY* be advertised by the ACVP compliant cryptographic module:
+
+* KAS-ECC / null / Sp800-56Ar3
+* KAS-ECC / CDH-Component / Sp800-56Ar3

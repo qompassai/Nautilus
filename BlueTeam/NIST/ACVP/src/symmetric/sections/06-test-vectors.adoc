@@ -1,0 +1,173 @@
+
+[[tgjs]]
+=== Test Groups
+
+Test vector sets *MUST* contain one or more test groups, each sharing similar properties.  For instance, all test vectors that use the same key size would be grouped together. The testGroups element at the top level of the test vector JSON object *SHALL* be the array of test groups. The Test Group JSON object *MUST* contain meta-data that applies to all test cases within the group.  The following table describes the JSON elements that *MAY* appear from the server in the Test Group JSON object:
+
+[cols="<,<,<"]
+[[vs_tg_table]]
+.Test Group JSON Object
+
+|===
+| JSON Value| Description| JSON type
+
+| tgId| Numeric identifier for the test group, unique across the entire vector set.| integer
+| testType| The test category type (AFT, MCT or counter). See <<testtypes>> for more information about what these tests do, and how to implement them. | string
+| direction| The IUT processing direction: encrypt or decrypt| string
+| ivGen| IV generation method| string
+| ivGenMode| IV generation method| string
+| saltGen| Salt generation method| string
+| keyLen| Length of key in bits to use| integer
+| keyingOption| The TDES keying option to use| integer
+| ivLen| Length of IV in bits to use| integer
+| payloadLen| Length of plaintext or ciphertext in bits to use| integer
+| aadLen| Length of AAD in bits to use| integer
+| tagLen| Length of AEAD tag in bits to use| integer
+| alphabet | Characters representing the alphabet in use for the group. ACVP-AES-FF1 and ACVP-AES-FF3-1 only. | string
+| radix | The number base in use for the group (should match the number of characters from the alphabet. ACVP-AES-FF1 and ACVP-AES-FF3-1 only. | integer
+| tweakMode | Indicates the format of the tweak value input for AES-XTS. A value of 'hex' indicates that the test cases in the test group will contain a 'tweakValue' element with a 32-character hexadecimal string for a value. A value of 'number' indicates that the test cases in the test group will contain a 'sequenceNumber' (Data Unit Sequence Number) element with an integer value between 0 and 255.| string
+| tests| Array of individual test case JSON objects, which are defined in <<tcjs>>| array of testCase objects
+|===
+
+Some properties *MUST* appear in the prompt file from the server for every testGroup object. They are as follows:
+
+* tgId
+* direction
+* testType
+* tests
+
+The other properties *MAY* appear depending on the algorithm selected for the test vector set. The following grid defines the *REQUIRED* properties for each standard block cipher, as well as the valid values a server *MAY* use:
+
+[cols="<,<,<,<"]
+[[property_grid_prompt]]
+.Prompt Test Group Block Cipher Applicability Grid
+
+|===
+| algorithm| revision| keyLen| keyingOption
+
+| ACVP-AES-ECB| "1.0"| 128, 192, 256|
+| ACVP-AES-CBC| "1.0"| 128, 192, 256|
+| ACVP-AES-OFB| "1.0"| 128, 192, 256|
+| ACVP-AES-CFB1| "1.0"| 128, 192, 256|
+| ACVP-AES-CFB8| "1.0"| 128, 192, 256|
+| ACVP-AES-CFB128| "1.0"| 128, 192, 256|
+| ACVP-AES-FF1| "1.0"| 128, 192, 256|
+| ACVP-AES-FF3-1| "1.0"| 128, 192, 256|
+| ACVP-TDES-ECB| "1.0"| | 1, 2
+| ACVP-TDES-CBC| "1.0"| | 1, 2
+| ACVP-TDES-CBCI| "1.0"| | 1, 2
+| ACVP-TDES-CFB1| "1.0"| | 1, 2
+| ACVP-TDES-CFB8| "1.0"| | 1, 2
+| ACVP-TDES-CFB64| "1.0"| | 1, 2
+| ACVP-TDES-CFBP1| "1.0"| | 1, 2
+| ACVP-TDES-CFBP8| "1.0"| | 1, 2
+| ACVP-TDES-CFBP64| "1.0"| | 1, 2
+| ACVP-TDES-OFB| "1.0"| | 1, 2
+| ACVP-TDES-OFBI| "1.0"| | 1, 2
+|===
+
+The following grid defines when each property is *REQUIRED* from a server for each authenticated block cipher:
+
+[cols="<,<,<,<,<,<,<,<,<,<,<"]
+[[property_grid_prompt_auth]]
+.Prompt Test Group Authenticated Block Cipher Applicability Grid
+
+|===
+| algorithm| revision| keyLen| ivGen| ivGenMode| saltGen| ivLen| payloadLen| aadLen| tagLen| saltLen
+
+| ACVP-AES-GCM| "1.0"| 128, 192, 256| "internal", "external"| "8.2.1", "8.2.2"| | within domain| within domain| within domain| within domain|
+| ACVP-AES-GCM-SIV| "1.0"| 128, 256| | | | 96| within domain| within domain| 128|
+| ACVP-AES-XPN| "1.0"| 128, 192, 256| "internal", "external"| "8.2.1", "8.2.2"| "internal", "external"| 96| within domain| within domain| within domain| 96
+| ACVP-AES-CCM| "1.0"| 128, 192, 256| | | | within domain| within domain| within domain| within domain|
+|===
+
+NOTE: The particular values of a domain are *REQUIRED* to be an integer element of the domain present in the registration used. The ACVP server *MAY* select predetermined or random values with particular features (ex. on a block boundary, or not on a block boundary) within the domain the client provided in the registration.
+
+The following grid defines when each property is *REQUIRED* from a server for a key-wrap block cipher:
+
+[cols="<,<,<,<,<"]
+[[property_grid_prompt_kw]]
+.Prompt Test Group Key-Wrap Block Cipher Applicability Grid
+
+|===
+| algorithm| revision| keyLen| kwCipher| payloadLen
+
+| ACVP-AES-KW| "1.0"| 128, 192, 256| "cipher", "inverse"| within domain
+| ACVP-AES-KWP| "1.0"| 128, 192, 256| "cipher", "inverse"| within domain
+| ACVP-TDES-KW| "1.0"| | "cipher", "inverse"| within domain
+|===
+
+NOTE: The particular values of a domain are *REQUIRED* to be an integer element of the domain present in the registration used. The ACVP server *MAY* select predetermined or random values with particular features (ex. on a block boundary, or not on a block boundary) within the domain the client provided in the registration.
+
+The following grid defines when each property is *REQUIRED* from a server for the miscellaneous block ciphers:
+
+[cols="<,<,<,<,<,<,<,<"]
+[[property_grid_prompt_misc]]
+.Prompt Test Group Miscellaneous Block Cipher Applicability Grid
+
+|===
+| algorithm| revision| keyLen| keyingOption| incremental| overflow| tweakMode| payloadLen
+
+| ACVP-AES-CBC-CS1| "1.0"| 128, 192, 256| | | | | 
+| ACVP-AES-CBC-CS2| "1.0"| 128, 192, 256| | | | | 
+| ACVP-AES-CBC-CS3| "1.0"| 128, 192, 256| | | | | 
+| ACVP-AES-CTR| "1.0"| 128, 192, 256| | true, false| true, false| |
+| ACVP-AES-XTS| "1.0"| 128, 256| | | | "hex", "number"| within domain
+| ACVP-AES-XTS| "2.0"| 128, 256| | | | "hex", "number"| 
+| ACVP-TDES-CTR| "1.0"| | 1, 2| true, false| true, false| |
+| ACVP-AES-FF1| "1.0"| 128, 192, 256| | | | | 
+| ACVP-AES-FF3-1| "1.0"| 128, 192, 256| | | | | 
+|===
+
+NOTE: The particular values of a domain are *REQUIRED* to be an integer element of the domain present in the registration used. The ACVP server *MAY* select predetermined or random values with particular features (ex. on a block boundary, or not on a block boundary) within the domain the client provided in the registration.
+
+[[tcjs]]
+=== Test Cases
+
+Each test group *SHALL* contain an array of one or more test cases. Each test case is a JSON object that represents a single case to be processed by the ACVP client. The following table describes the JSON elements for each test case.
+
+[cols="<,<,<"]
+[[vs_tc_table]]
+.Test Case JSON Object
+
+|===
+| JSON Value| Description| JSON type
+
+| tcId| Numeric identifier for the test case, unique across the entire vector set.| integer
+| key| Encryption key to use for AES| string (hex)
+| key1, key2, key3| Encryption keys to use for TDES| string (hex)
+| iv| IV to use| string (hex)
+| tweak| Tweak used to form an IV for AES-FF1 and AES-FF3-1 | string (hex)
+| tweakLen| Length of the tweak for AES-FF1 and AES-FF3-1 | integer
+| tweakValue| Tweak value used to form an IV for AES-XTS when the tweakMode for the group is 'hex'. A 32-character hexadecimal string. | string (hex)
+| sequenceNumber| (Data Unit Sequence Number) Integer used to form an IV for AES-XTS when the tweakMode for the group is 'number'. An integer between 0 and 255.| integer
+| salt| The salt to use in AES-XPN (required for AES-XPN only)| string (hex)
+| pt| Plaintext to use| string (hex)
+| ct| Ciphertext to use| string (hex)
+| payloadLen| The length of the provided Plaintext or Ciphertext in bits. Only the most significant 'payloadLen' bits will be used.| integer
+| dataUnitLen| Length of the data unit in bits for ACVP-AES-XTS| integer
+| aad| AAD to use for AEAD algorithms| string (hex)
+| tag| Tag to use for AEAD algorithms| string (hex)
+|===
+
+NOTE: The applicability of each test case property is dependent on the test group and test vector (algorithm) properties. Each test type within the test group requires specific operations to be performed and thus specific data returned to the server. Consult <<testtypes>> for more information. The tcId property *MUST* appear within every test case sent to and from the server.
+
+The following grid identifies the algorithms whose test case JSON objects will contain the 'payloadLen' property and the valid values a servery *MAY* use.
+
+[cols="<,<,<,<"]
+[[vs_payloadlen_table]]
+.Applicability of the 'payloadLen' Property
+
+|===
+| Algorithm | Revision | Applicability | payloadLen
+
+| ACVP-AES-CBC-CS1 | "1.0" | for all test cases | within domain (see <<property_grid_misc>>)
+| ACVP-AES-CBC-CS2 | "1.0" | for all test cases | within domain (see <<property_grid_misc>>)
+| ACVP-AES-CBC-CS3 | "1.0" | for all test cases | within domain (see <<property_grid_misc>>)
+| ACVP-AES-CFB1 | "1.0" | for all test cases | 1
+| ACVP-AES-CTR | "1.0" | for the test cases of some test groups, but not others | within domain (see <<property_grid_misc>>)
+| ACVP-AES-XTS | "2.0" | for all test cases | within domain (see <<property_grid_xts>>)
+|===
+
+NOTE: <<vs_payloadlen_table>> identifies the algorithms for which the 'payloadLen' property will be present as part of the test case JSON objects. Please also be aware that other algorithms include the 'payloadLen' property as part of the test group JSON object. For more information, see <<property_grid_prompt_auth>>, <<property_grid_prompt_kw>>, and <<property_grid_prompt_misc>>.
+
