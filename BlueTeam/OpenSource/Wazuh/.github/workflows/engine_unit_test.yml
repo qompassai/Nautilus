@@ -1,0 +1,59 @@
+name: Engine Unit Test
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on pull request events but only for the engine base branch and with changes in the src/engine/ directory.
+  pull_request:
+    types: [synchronize, opened, reopened, ready_for_review]
+    paths:
+      - 'src/engine/**'
+      - '.github/workflows/engine_unit_test.yml'
+
+  # Allows to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Ensures only one instance of this workflow is running per PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  BUILD_TYPE: Release
+  ENGINE_DIR: ${{github.workspace}}/src/engine
+
+jobs:
+  build:
+    name: Engine Unit Test
+
+    # Runs only if the PR status is different to Draft
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Cache CMake and ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        key: ${{ github.workflow }}-${{ runner.os }}
+
+    - name: Setup VCPKG
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgDirectory: '${{env.ENGINE_DIR}}/vcpkg'
+        vcpkgGitCommitId: 'a42af01b72c28a8e1d7b48107b33e4f286a55ef6'
+        vcpkgJsonGlob: '${{env.ENGINE_DIR}}/vcpkg.json'
+
+    - name: Configure CMake
+      # Configure the CMake build system with the specified build type
+      run: cmake --preset=default --no-warn-unused-cli -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S ${{env.ENGINE_DIR}}
+
+    - name: Build
+      # Build the specified target using CMake
+      run: cmake --build ${{env.ENGINE_DIR}}/build --config ${{env.BUILD_TYPE}} --target all -j$(nproc)
+
+    - name: Unit Test
+      # Run unit tests using CTest
+      working-directory: ${{env.ENGINE_DIR}}/build
+      run: ctest -C ${{env.BUILD_TYPE}} -T test --output-on-failure -j2

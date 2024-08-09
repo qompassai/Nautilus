@@ -1,0 +1,11 @@
+<!--
+  - 2023/08/21 20:42:46 wazuh-authd: WARNING: Duplicate name 'SOCFortress-Test', rejecting enrollment. Agent '027' key already exists on the manager.
+-->
+<decoder name="wazuh-authd">
+  <prematch>wazuh-authd:</prematch>
+</decoder>
+<decoder name="wazuh-authd-duplicate">
+  <parent>wazuh-authd</parent>
+  <regex>WARNING: Duplicate name '(\S+)', rejecting enrollment\. Agent '(\d+)' key already exists on the manager\.</regex>
+  <order>duplicate_name, agent_id</order>
+</decoder>

@@ -1,0 +1,603 @@
+<group name="rule_exclusion,">
+<!-- Logon/Logoff Machine Accounts -->
+  <rule id="900001" level="1">
+    <if_sid>60106</if_sid>
+    <field name="win.eventdata.targetUserName">\$$</field>
+    <description>Exclude Computer Account logons</description>
+    <options>no_full_log</options>
+  </rule>
+  <rule id="900002" level="1">
+    <if_sid>60137</if_sid>
+    <field name="win.eventdata.targetUserName">\$$</field>
+    <description>Exclude Computer Account logouts</description>
+    <options>no_full_log</options>
+  </rule>
+<!-- Logon FREQ Rule -->
+  <rule id="900003" level="1" frequency="2" timeframe="5">
+   <if_matched_sid>60106</if_matched_sid>
+   <same_field>win.eventdata.targetUserName</same_field>
+   <description>Exclude same username login twice in 1 minute</description>
+  </rule>
+<!-- Exclude Audit Failure Events SeTcbPrivilege -->
+  <rule id="900004" level="1">
+    <if_sid>60107</if_sid>
+    <field name="win.eventdata.privilegeList">^SeTcbPrivilege$</field>
+    <description>Exclude Audit Failure Events SeTcbPrivilege</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Ossec Process -->
+  <rule id="900005" level="1">
+    <if_group>osquery</if_group>
+    <field name="columns.cwd">^/var/ossec$</field>
+    <description>Exclude ossec</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Git for Sigma rule pull -->
+  <rule id="900006" level="1">
+    <if_sid>109103</if_sid>
+    <field name="win.eventdata.sourceImage">Git-2.39.2-64-bit.tmp$</field>
+    <description>Exclude Git</description>
+    <options>no_full_log</options>
+  </rule>
+  <rule id="900007" level="1">
+    <if_group>sysmon_event_17</if_group>
+    <field name="win.eventdata.image">^C:\\\\Program Files\\\\Git</field>    
+    <description>Exclude Git</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900008" level="1">
+    <if_group>sysmon_event_10</if_group>
+    <field name="win.eventdata.sourceImage">^C:\\\\Program Files\\\\Git</field>    
+    <description>Exclude Git</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900009" level="1">
+    <if_group>windows</if_group>
+    <field name="event.TargetImage">^C:\\Program Files\\socfortress</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900010" level="1">
+    <if_group>windows</if_group>
+    <field name="event.CommandLine">^C:\\Program Files\\socfortress|\\ossec-agent\\active-response\\bin\\chainsaw.ps1</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900011" level="1">
+    <if_group>chainsaw</if_group>
+    <field name="event.SourceImage">^C:\\Windows\\Explorer.EXE$</field>    
+    <field name="event.TargetImage">^C:\\Windows\\system32\\taskmgr.exe$|^C:\\Windows\\system32\\MusNotifyIcon.exe$</field> 
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900012" level="1">
+    <if_group>windows</if_group>
+    <field name="win.eventdata.image">vc_redist.x64.exe$|sysinternals\\\\sigcheck64.exe$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900013" level="1">
+    <if_group>chainsaw</if_group>
+    <field name="event.SourceImage">Git-2.39.2-64-bit.tmp$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900014" level="1">
+    <if_group>chainsaw</if_group>
+    <field name="event.SourceImage">^C:\\Program Files\\Git</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900015" level="1">
+    <if_group>chainsaw</if_group>
+    <field name="name">^Sysmon Blocked Executable$|^Windows Defender Threat Detected$|^Win Defender Restored Quarantine File$|^Uninstall Sysinternals Sysmon$|^External Remote SMB Logon from Public IP$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900016" level="1">
+    <if_group>windows</if_group>
+    <field name="win.eventdata.path">\\\\ossec-agent\\\\active-response\\\\bin\\\\chainsaw.ps1$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900017" level="1">
+    <if_group>windows</if_group>
+    <field name="win.eventdata.originalFileName">^mscorlib.dll$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900018" level="1">
+    <if_group>sysmon_event_12</if_group>
+    <field name="win.eventdata.targetObject">^HKLM\\SOFTWARE\\Microsoft\\EnterpriseCertificates\\Root\\Certificates$|^HKU\\\\.DEFAULT\\\\Software\\\\Microsoft\\\\SystemCertificates\\\\Root\\\\Certificates$|^HKLM\\\\SOFTWARE\\\\Microsoft\\\\SystemCertificates\\\\CA\\\\Certificates$|^HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\SystemCertificates\\\\CA\\\\Certificates$|^HKU\\\\.DEFAULT\\\\Software\\\\Policies\\\\Microsoft\\\\SystemCertificates\\\\CA\\\\Certificates$|^HKU\\\\.DEFAULT\\\\Software\\\\Microsoft\\\\SystemCertificates\\\\CA\\\\Certificates$|^HKLM\\\\SOFTWARE\\\\Microsoft\\\\EnterpriseCertificates\\\\Root\\\\Certificates$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900019" level="1">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image">^C:\\\\Program Files\\\\socfortress\\\\chainsaw\\\\chainsaw.exe$|^C:\\\\Program Files\\\\Git</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900020" level="1">
+    <if_group>chainsaw</if_group>
+    <field name="event.CommandLine">Windows\\system32\\silcollector.cmd configure$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900021" level="1">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.currentDirectory">^C:\\\\Program Files\\\\socfortress\\\\chainsaw\\\\sigma</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900022" level="1">
+    <if_group>sysmon_event7</if_group>
+    <field name="win.eventdata.signature">^Microsoft Windows$</field>    
+    <field name="win.eventdata.signatureStatus">^Valid$</field>  
+    <field name="win.eventdata.signed">^true$</field>  
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900023" level="1">
+    <if_group>sysmon_event_11</if_group>
+    <field name="win.eventdata.image">socfortress\\\\chainsaw\\\\chainsaw.exe$</field>    
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900024" level="1">
+    <if_group>sysmon_event_11</if_group>
+    <field name="win.eventdata.image">^C:\\\\Windows\\\\system32\\\\svchost.exe$</field>    
+    <field name="win.eventdata.targetFilename">^C:\\\\Windows\\\\SoftwareDistribution\\\\Download</field> 
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+ <rule id="900025" level="1">
+    <if_group>sysmon_event_11</if_group>
+    <field name="win.eventdata.image">^C:\\\\Windows\\\\SysWOW64\\\WindowsPowerShell\\\\v1.0\\\\Powershell.exe$</field>    
+    <field name="win.eventdata.targetFilename">^C:\\\\Windows\\\\Temp\\\\__PSScriptPolicyTest</field> 
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+  <rule id="900026" level="1">
+    <if_sid>100541</if_sid>
+    <field name="win.eventdata.scriptBlockText">^\$global:?$</field>
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+  </rule>
+  <rule id="900027" level="1">
+    <if_group>sysmon_event_11</if_group>
+    <field name="win.eventdata.image">^C:\\\\Program Files \(x86\)\\\\ossec-agent\\\\wazuh-agent.exe$</field>    
+    <field name="win.eventdata.targetFilename">^C:\\\\Windows\\\\Temp</field> 
+    <description>Exclude Socfortress</description>
+    <options>no_full_log</options>
+ </rule>
+  <!-- Exclude Kickstart -->
+  <rule id="900028" level="1">
+    <if_sid>200281</if_sid>
+    <field name="columns.cmdline" type="pcre2">netstat\s+-an\s+\|\s+grep\s+"\^tcp"\s+\|\s+grep\s+"\[\^0-9\]</field>
+    <description>Exclude Wazuh Netstart for Listening Ports</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude mscorsvw.exe and System.Management.Automation.dll -->
+  <rule id="900029" level="1">
+    <if_group>sysmon_eid7_detections</if_group>
+    <field name="win.eventdata.image">mscorsvw.exe$</field>
+    <field name="win.eventdata.imageLoaded">System.Management.Automation.dll$|System.Management.Automation.ni.dll$</field>
+    <description>Exclude Common DLL Loading</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower Sev for Executable file dropped in folder commonly used by malware. Triggers many FPs due to user's browsers -->
+  <rule id="900030" level="8">
+    <if_sid>92204,92213,92207</if_sid>
+    <description>Executable file dropped in folder commonly used by malware.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Socfortress Ansible Automation -->
+  <rule id="900031" level="1">
+    <if_sid>200259</if_sid>
+    <field name="columns.cmdline" type="pcre2">^\/bin\/sh -c 'chmod u\+x \/home\/socfortress\/.ansible\/tmp</field>
+    <description>Exclude Socfortress Ansible Automation</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Socfortress Git Download -->
+  <rule id="900032" level="1">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">\\\\Git-2.39.2-64-bit.tmp$</field>
+    <description>Exclude Socfortress Git Process for SIGMA rule download</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OneDrive Process Injection -->
+  <rule id="900033" level="3">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">\\\\Microsoft\\\\OneDrive\\\\OneDriveStandaloneUpdater.exe$</field>
+    <description>Lower OneDrive Process Injection Severity</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OneDrive Process Injection SIGMA rules -->
+  <rule id="900034" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.SourceImage" type="pcre2">\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe$</field>
+    <description>Lower OneDrive Process Injection Severity - SIGMA</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower VsCode Process Injection -->
+  <rule id="900035" level="3">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)\\\\AppData\\\\Local\\\\Programs\\\\Microsoft VS Code\\\\Code.exe$</field>
+    <description>Lower VsCode Process Injection alert </description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Figma process -->
+  <rule id="900036" level="1">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Figma\\\\app-\d+\.\d+\.\d+\\\\Figma\.exe$</field>
+    <description>Exclude Figma Process </description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OneDrive process -->
+  <rule id="900037" level="1">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDrive\.exe$</field>
+    <description>Exclude OneDrive Process </description>
+    <options>no_full_log</options>
+    </rule>
+    <!-- Exclude Grammarly process -->
+  <rule id="900038" level="1">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Grammarly\\\\DesktopIntegrations\\\\Grammarly\.Desktop\.exe$</field>
+    <description>Exclude OneDrive Process </description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude SOCFortress Chainsaw -->
+  <rule id="900039" level="1">
+    <if_sid>200053</if_sid>
+    <field name="name" type="pcre2">^Malicious PowerShell Commandlets - PoshModule$</field>
+    <field name="event.ContextInfo" type="pcre2">Script Name = C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\chainsaw\.ps1</field>
+    <description>Exclude SOCFortress Chainsaw - SIGMA</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude MicroSoft Teams -->
+  <rule id="900040" level="1">
+    <if_sid>92910,106117</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)C:\\\\ProgramData\\\\.*\\\\Microsoft\\\\Teams\\\\current\\\\Teams.exe$|</field>
+    <description>Exclude Microsoft Teams</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude MicroSoft Teams C:\\Users\\*\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe -->
+  <rule id="900041" level="1">
+    <if_sid>92910,106117</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Microsoft\\\\Teams\\\\current\\\\Teams.exe$</field>
+    <description>Exclude Microsoft Teams</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude SOCFortress SIGMA Rules Download Detection -->
+  <rule id="900042" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.ContextInfo" type="pcre2">(?i)Powershell\.exe -executionpolicy bypass -File C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\sigma_download\.ps1</field>
+    <description>Exclude SOCFortress SIGMA Rules Download Detection</description>
+    <options>no_full_log</options>
+  </rule>
+ <!-- Exclude Powershell create_remote_thread SIGMA Alert -->
+  <rule id="900043" level="8">
+    <if_sid>200051</if_sid>
+    <field name="logsource.category" type="pcre2">(?i)^create_remote_thread$</field>
+    <field name="event.SourceImage" type="pcre2">(?i)^C:\\Windows\\System32\\WindowsPowerShell\\V1.0\\powershell\.exe$</field>
+    <field name="event.TargetImage" type="pcre2">(?i)^C:\\Windows\\System32\\spoolsv\.exe$</field>
+    <description>Exclude Powershell create_remote_thread SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude SOCFortress SIGMA Chainsaw Execution -->
+  <rule id="900044" level="1">
+    <if_sid>200051</if_sid>
+    <field name="logsource.category" type="pcre2">(?i)^ps_module$</field>
+    <field name="event.ContextInfo" type="pcre2">(?i)Powershell\.exe -executionpolicy bypass -File C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\chainsaw\.ps1</field>
+    <description>Exclude SOCFortress SIGMA Chainsaw Execution</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude SOCFortress EDR create_remote_thread SIGMA Alert -->
+  <rule id="900045" level="1">
+    <if_sid>200051</if_sid>
+    <field name="logsource.category" type="pcre2">(?i)^create_remote_thread$</field>
+    <field name="event.SourceImage" type="pcre2">(?i)SOCFortress_EDR.exe$</field>
+    <field name="event.TargetImage" type="pcre2">(?i)^C:\\Windows\\Explorer\.EXE$</field>
+    <description>Exclude SOCFortress EDR create_remote_thread SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude ShellExperienceHost.exe which is a Windows component responsible for the windowed display feature of universal Windows applications SIGMA Alert -->
+  <rule id="900046" level="1">
+    <if_sid>200051</if_sid>
+    <field name="logsource.service" type="pcre2">(?i)^codeintegrity-operational$</field>
+    <field name="event.ProcessName" type="pcre2">(?i)^C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost\.exe$</field>
+    <description>Exclude ShellExperienceHost EXE codeintegrity-operational SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Microsoft-Windows-PushNotification-Platform/Operational channel from codeintegrity-operational SIGMA Alert -->
+  <rule id="900047" level="1">
+    <if_sid>200051</if_sid>
+    <field name="logsource.service" type="pcre2">(?i)^codeintegrity-operational$</field>
+    <field name="system.Channel" type="pcre2">(?i)^Microsoft-Windows-PushNotification-Platform/Operational$</field>
+    <description>Exclude Microsoft-Windows-PushNotification-Platform/Operational channel from codeintegrity-operationa SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OpenAudit Scanning -->
+  <rule id="900048" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.ParentCommandLine" type="pcre2">(?i)^"C:\\Windows\\System32\\cscript\.exe" \/\/nologo "C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\open_audit\.vbs"$</field>
+    <field name="event.ParentImage" type="pcre2">(?i)^C:\\Windows\\System32\\cscript.exe$</field>
+    <field name="event.CommandLine" type="pcre2">(?i)^schtasks.exe \/query \/v \/fo csv$</field>
+    <description>Exclude OpenAudit Scanning SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Microsoft-Windows-UniversalTelemetryClient channel from Sysmon Blocked File Shredding SIGMA Alert -->
+  <rule id="900049" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Sysmon Blocked File Shredding$</field>
+    <field name="path" type="pcre2">(?i)^C:\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-UniversalTelemetryClient%4Operational\.evtx$</field>
+    <description>Exclude Microsoft-Windows-UniversalTelemetryClient channel from Sysmon Blocked File Shredding SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OpenAudit Scanning -->
+  <rule id="900050" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.ParentImage" type="pcre2">(?i)^C:\\Windows\\SysWOW64\\cscript\.exe$</field>
+    <field name="event.ParentCommandLine" type="pcre2">(?i)^cscript\s+\/\/Nologo\s+"C:\\Program\sFiles\s\(x86\)\\ossec-agent\\active-response\\bin\\open_audit\.vbs"$</field>
+    <field name="event.CommandLine" type="pcre2">(?i)^schtasks.exe \/query \/v \/fo csv$</field>
+    <description>Exclude OpenAudit Scanning SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude AutoRuns SIGMA Alert -->
+  <rule id="900051" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Suspicious Elevated System Shell$</field>
+    <field name="event.CurrentDirectory" type="pcre2">(?i)^C:\\Program Files \(x86\)\\ossec-agent</field>
+    <field name="event.CommandLine" type="pcre2">(?i)^Powershell.exe -executionpolicy bypass -File "C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\autoruns\.ps1"$</field>
+    <description>Exclude AutoRuns SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower Agent Flooded Level. -->
+  <rule id="900052" level="10">
+    <if_sid>204</if_sid>
+    <description>Agent event queue is flooded. Check the agent configuration.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower Agent file limit set for this agent is 100000 Level. -->
+  <rule id="900053" level="7">
+    <if_sid>233</if_sid>
+    <description>The file limit set for this agent is 100000. Now, 100000 files are being monitored and no more files will be monitored. Change this setting in centralized configuration or locally on the agent.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude LogonSessions Scanning -->
+  <rule id="900054" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Remote Thread Creation In Uncommon Target Image$</field>
+    <field name="event.TargetImage" type="pcre2">(?i)^C:\\Windows\\System32\\spoolsv\.exe$|^C:\\windows\\Explorer\.EXE$</field>
+    <field name="event.SourceUser" type="pcre2">(?i)^NT AUTHORITY\\SYSTEM$</field>
+    <field name="event.SourceImage" type="pcre2">(?i)^C:\\Program Files\\socfortress\\sysinternals\\logonsessions64.exe$</field>
+    <description>Exclude OpenAudit Scanning SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chainsaw Running Sigma Alert -->
+  <rule id="900056" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.ContextInfo" type="pcre2">(?i)C:\\Program Files \(x86\)\\ossec-agent\\shared\\chainsaw\.ps1</field>
+    <description>Exclude Chainsaw Running Sigma Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chainsaw Running Sigma Alert -->
+  <rule id="900057" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Powerup Write Hijack DLL$</field>
+    <field name="event.TargetFilename" type="pcre2">(?i)^C:\\Windows\\Temp\\chainsaw_batch\.bat$|^C:\\TEMP\\chainsaw_batch\.bat$</field>
+    <description>Exclude Chainsaw Running Sigma Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chainsaw Running Sigma Alert -->
+  <rule id="900058" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.Image" type="pcre2">(?i)^C:\\Windows\\SysWOW64\\cmd\.exe$</field>
+    <field name="event.CurrentDirectory" type="pcre2">(?i)^C:\\Program Files \(x86\)\\ossec-agent</field>
+    <field name="event.ParentCommandLine" type="pcre2">(?i)^Powershell.exe -executionpolicy bypass -File "C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\chainsaw\.ps1" -Minutes 5$|^Powershell.exe -executionpolicy bypass -File "C:\\Program Files \(x86\)\\ossec-agent\\shared\\chainsaw\.ps1" -Minutes 5$</field>
+    <description>Exclude Chainsaw Running Sigma Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chainsaw Running Sigma Alert -->
+  <rule id="900059" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^SMB Create Remote File Admin Share$</field>
+    <field name="event.RelativeTargetName" type="pcre2">(?i)^Program Files\\SOCFortress\\chainsaw\\sigma\\sigma-master\\rules\\windows</field>
+    <description>Exclude Chainsaw Running Sigma Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude LogonSessions Running Sigma Alert -->
+  <rule id="900060" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Process Explorer Driver Creation By Non-Sysinternals Binary$</field>
+    <field name="event.Image" type="pcre2">(?i)^C:\\Program Files\\socfortress\\sysinternals\\logonsessions64\.exe$</field>
+    <description>Exclude LogonSessions Running Sigma Aler</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chainsaw from Sysmon Event 1 -->
+  <rule id="900061" level="1">
+    <if_sid>92032</if_sid>
+    <field name="win.eventdata.currentDirectory" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\ossec-agent</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)chainsaw.exe</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)^C:\\\\Windows\\\\SysWOW64\\\\cmd\.exe$</field>
+    <description>Exclude Chainsaw from Sysmon Event 1</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude svchost.exe Process from WMI SIGMA Alert -->
+  <rule id="900062" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^WMI Persistence - Script Event Consumer File Write$</field>
+    <field name="event.ParentImage" type="pcre2">(?i)^C:\\WINDOWS\\system32\\svchost\.exe$</field>
+    <field name="event.CommandLine" type="pcre2">(?i)^C:\WINDOWS\system32\wbem\scrcons.exe</field>
+    <description>Exclude svchost.exe Process from WMI SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude SOCFortress SIGMA Chainsaw Execution -->
+  <rule id="900063" level="1">
+    <if_sid>200051</if_sid>
+    <field name="event.CurrentDirectory" type="pcre2">(?i)^C:\\Program Files \(x86\)\\ossec-agent</field>
+    <field name="event.ParentCommandLine" type="pcre2">(?i)^Powershell.exe -executionpolicy bypass -File "C:\\Program Files \(x86\)\\ossec-agent\\active-response\\bin\\chainsaw\.ps1"$</field>
+    <description>Exclude SOCFortress SIGMA Chainsaw Execution</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chainsaw Batch File -->
+  <rule id="900064" level="1">
+    <if_sid>92032</if_sid>
+    <field name="win.eventdata.parentCommandLine" type="pcre2">(?i)^\\"C:\\\\Windows\\\\system32\\\\cmd\.exe\\" \/c \\"C:\\\\Windows\\\\TEMP\\\\chainsaw_batch\.bat &amp;&amp; set CHAINSAW_KILLED\\"$</field>
+    <description>Exclude LogonSessions Running Sigma Alert</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude LogonSessions Running Sigma Alert -->
+  <rule id="900065" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Remote Thread Creation In Uncommon Target Image$</field>
+    <field name="event.SourceImage" type="pcre2">(?i)^C:\\Program Files\\socfortress\\sysinternals\\logonsessions64\.exe$</field>
+    <description>Exclude LogonSessions Running Sigma Aler</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Windows Defender using Invoke-Command -->
+  <rule id="900066" level="1">
+    <if_sid>91822</if_sid>
+    <field name="win.eventdata.path" type="pcre2">(?i)^C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender Advanced Threat Protection\\\\DataCollection</field>
+    <description>Exclude Windows Defender using Invoke-Command</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OneDrive Sigma -->
+  <rule id="900067" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Remote Thread Creation In Uncommon Target Image$</field>
+    <field name="event.TargetImage" type="pcre2">(?i)^C:\\windows\\Explorer\.EXE$</field>
+    <field name="event.SourceImage" type="pcre2">(?i)AppData\\Local\\Microsoft\\OneDrive\\OneDrive\.exe$</field>
+    <description>Exclude OneDrive Sigma</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower Remote Thread Creation By Uncommon Source Image Sigma due to too many FPs -->
+  <rule id="900068" level="8">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Remote Thread Creation By Uncommon Source Image$</field>
+    <description>Remote Thread Creation By Uncommon Source Image</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower CodeIntegrity - Blocked Image/Driver Load For Policy Violation Sigma due to too many FPs -->
+  <rule id="900069" level="8">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^CodeIntegrity - Blocked Image\/Driver Load For Policy Violation$</field>
+    <description>CodeIntegrity - Blocked Image/Driver Load For Policy Violation</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower Application Compatibility Database launched due to too many Hits -->
+  <rule id="900070" level="8">
+    <if_sid>92058</if_sid>
+    <description>Application Compatibility Database launched</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower Remote Thread Creation In Uncommon Target Image Sigma due to too many FPs -->
+  <rule id="900071" level="8">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Remote Thread Creation In Uncommon Target Image$</field>
+    <description>Remote Thread Creation In Uncommon Target Image</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude TEAMS network connection SIGMA Alert -->
+  <rule id="900072" level="1">
+    <if_sid>200051</if_sid>
+    <field name="name" type="pcre2">(?i)^Suspicious Program Location with Network Connections$</field>
+    <field name="event.Image" type="pcre2">(?i)AppData\\Local\\Microsoft\\Teams\\current\\Teams\.exe$</field>
+    <description>Exclude TEAMS network connection SIGMA Alert</description>
+    <options>no_full_log</options>
+  </rule>
+    <!-- Exclude Office Creating Local LNK files NEW -->
+  <rule id="900073" level="1">
+    <if_sid>92214</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Program Files\\\\Microsoft Office\\\\(root\\\\)?Office[0-9]+\\\\OUTLOOK\.EXE$|(?i)^C:\\\\Program Files\\\\Microsoft Office\\\\(root\\\\)?Office[0-9]+\\\\EXCEL\.EXE$|(?i)^C:\\\\Program Files\\\\Microsoft Office\\\\(root\\\\)?Office[0-9]+\\\\WINWORD\.EXE$|(?i)^C:\\\\Program Files \(x86\)\\\\Microsoft Office\\\\(root\\\\)?Office[0-9]+\\\\WINWORD\.EXE$|(?i)^C:\\\\Program Files \(x86\)\\\\Microsoft Office\\\\(root\\\\)?Office[0-9]+\\\\EXCEL\.EXE$</field>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i)^C:\\\\Users\\\\\w+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Office\\\\Recent\\\\.+\.LNK$|(?i)^C:\\\\Users\\\\\w+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Internet Explorer\\\\Quick Launch\\\\.+\.LNK$|(?i)^C:\\\\Users\\\\\w+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Word\.lnk$|(?i)^C:\\\\Users\\\\\w+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Excel\\\\.+\.lnk$|(?i)^C:\\\\Users\\\\\w+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Word\\\\.*?\\\\[^\\\\]+\.lnk$|(?i)^[A-Z]:\\\\Users\\\\[\w\.]+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Excel\\\\.+\.lnk$|(?i)^[A-Z]:\\\\Users\\\\[\w\.]+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Office\\\\.+\.lnk$</field>
+    <description>MITRE T1187 is only regarding LNK files created on external resources allowing local  profile specific sources.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Windows Defender DNS Queries -->
+  <rule id="900074" level="1">
+    <if_sid>121101</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Program Files\\\\Windows Defender Advanced Threat Protection</field>
+    <description>Exceptions rule created for Exclude Windows Defender DNS Queries.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Windows Defender SIGMA Rules -->
+  <rule id="900075" level="1">
+    <if_sid>62123</if_sid>
+    <field name="win.eventdata.path" type="pcre2">(?i)^file:_C:\\\\Program Files \(x86\)\\\\ossec-agent\\\\shared</field>
+    <description>Exceptions rule created for Windows Defender SIGMA Rules.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Lower File Changes OSQUERY -->
+  <rule id="900076" level="5">
+    <if_sid>200259</if_sid>
+    <description>Detects file and folder permission changes.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude NINJA RMM -->
+  <rule id="900077" level="1">
+    <if_sid>92920</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\[A-Za-z0-9]+.*\\\\NinjaRMMAgent\.exe$</field>
+    <description>Exceptions NINJA RMM.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude NINJA RMM -->
+  <rule id="900078" level="1">
+    <if_sid>109102</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\[A-Za-z0-9]+.*\\\\NinjaRMMAgent\.exe$</field>
+    <description>Exceptions NINJA RMM.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude HPAnalytics Proc -->
+  <rule id="900079" level="1">
+    <if_sid>92920</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)^C:\\\\Windows\\\\System32\\\\DriverStore\\\\FileRepository\\\\[^\\\\]+\\\\x64\\\\Provider Data Sources\\\\ProcInfo\\\\ProcInfo\.exe$</field>
+    <description>Exceptions HPAnalytics Proc.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude NINJA Agent -->
+  <rule id="900080" level="1">
+    <if_sid>109102</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\[A-Za-z0-9]+.*\\\\njvmagent.exe$|(?i)^C:\\\\Program Files\\\\Huntress\\\\Rio\\\\Rio\.exe$</field>
+    <description>Exceptions NINJA RMM.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude NINJA RMM -->
+  <rule id="900081" level="1">
+    <if_sid>110109</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\[A-Za-z0-9]+.*\\\\NinjaRMMAgent\.exe$</field>
+    <description>Exceptions NINJA RMM.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Windows Admin Center -->
+  <rule id="900082" level="1">
+    <if_sid>92151</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Program Files\\\\Windows Admin Center\\\\sme\.exe$</field>
+    <field name="win.eventdata.user" type="pcre2">(?i)^NT AUTHORITY\\\\NETWORK SERVICE$</field>
+    <description>Exceptions Windows Admin Center.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude OneDrive Process Injection -->
+  <rule id="900083" level="3">
+    <if_sid>92910</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">\\\\Microsoft\\\\OneDrive\\\\Update\\\\OneDriveSetup\.exe$</field>
+    <description>Exclude OneDrive Setup</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude VMWARE Tools Process Injection -->
+  <rule id="900084" level="1">
+    <if_sid>92400</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)^C:\\\\Program Files\\\\VMware\\\\VMware Tools\\\\vmtoolsd.exe$</field>
+    <description>Exceptions rule created for VMWARE Tools.</description>
+    <options>no_full_log</options>
+  </rule>
+  <!-- Exclude Chrome.exe Privileged Execution Causing High Amount of Noise -->
+  <rule id="900085" level="1">
+    <if_sid>60107</if_sid>
+    <field name="win.eventdata.processName" type="pcre2">(?i)^C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome\.exe$</field>
+    <description>Exclude Chrome.exe Privileged Execution Causing High Amount of Noise</description>
+    <options>no_full_log</options>
+  </rule>
+</group>
