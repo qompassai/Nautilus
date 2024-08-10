@@ -1,0 +1,14 @@
+.{
+    .name = "openssl",
+    .version = "3.3.1",
+    .paths = .{
+        "build.zig",
+        "crypto",
+        "include_gen",
+        "include",
+        "LICENSE",
+        "providers",
+        "README.md",
+        "ssl",
+    },
+}
