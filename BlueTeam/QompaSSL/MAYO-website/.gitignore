@@ -1,0 +1,11 @@
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+
+# Folder view configuration files
+.DS_Store
+*/.DS_Store
+Desktop.ini
+Footer

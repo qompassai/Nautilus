@@ -1,0 +1,27 @@
+<header class="site-header">
+    <div class="wrapper-header">
+        <a class="site-title" href="{{ site.baseurl }}/" title="Home">
+          <img src="/assets/mayo.svg" class="home-logo" alt="Home logo">
+        </a>
+
+      <div class="menu">
+          {% for page in site.pages %}
+            {% if page.tags == "menu" %}
+              <a class="menu-link" href="{{ page.url | prepend: site.baseurl }}" >{{ page.title }}</a>
+            {% endif %}
+          {% endfor %}
+        {% if page.layout == "post" %}
+          {% for page in site.pages %}
+            {% if page.tags == "menu" %}
+              <a class="menu-link" href="{{ page.url | prepend: site.baseurl }}" >{{ page.title }}</a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="division">
+			<div>
+
+    </div>
+
+</header>

@@ -1,0 +1,67 @@
+---
+layout: page
+permalink: /about/
+title: about
+tags: menu
+usemathjax: true
+---
+
+<div>
+  <br>
+  <p>
+The Oil and Vinegar signature scheme, proposed in 1997 by Patarin, is one of the oldest and best understood multivariate quadratic signature schemes. It has excellent performance and signature sizes but suffers from large key sizes on the order of 50 KB, which makes it less practical as a general-purpose signature scheme.</p>
+  <br>
+  <p>To solve this problem, we propose <strong>MAYO</strong>, a variant of the UOV signature scheme whose public keys are two orders of magnitude smaller. MAYO works by using a UOV map with an unusually small oil space, which makes it possible to represent the public key very compactly. The usual UOV signing algorithm fails if the oil space is too small, but MAYO works around this problem by "whipping up" the base oil and vinegar map into a larger map, that does have a sufficiently large oil space.
+  </p>
+  <br>
+	<h3>Oil and Vinegar: </h3>
+  <br>
+	<p>Since 1985, various authors have proposed building public key schemes where the public key is a set of multivariate quadratic equations over a small finite field $K$. The general problem of solving such a set of equations is NP-hard and considered a good basis for post-quantum cryptography. The Oil and Vinegar scheme (sometimes referred to as "unbalanced Oil and Vinegar" is one of the earliest signature schemes in this framework, and has withstood the test of time remarkably well, despite considerable cryptanalytic efforts. It has very small signature sizes and good performance but suffers from somewhat larger public keys.</p>
+  <br>
+  <p>In the Oil and Vinegar scheme, the public key represents a trapdoored homogeneous multivariate map:</p>
+  <div id="polynomials">
+	$P(x) = (p_1,\dots, p_m) : F_q^{n} \rightarrow F_q^m$
+	</div>
+	<p>which consists of a sequence of $m$ multivariate quadratic polynomials $p_1(x),\cdots, p_m(x)$ in $n$ variables $x = (x_1, \cdots, x_n)$. The trapdoor information is a secret subspace $O \subset F_q^n$ of dimension $m$, on which $P(x)$ evaluates to zero. Given a salted hash digest $t \in F_q^m$ of a message $M$, the trapdoor information allows sampling a signature $s$ such that $P(s) = t$.</p>
+  <br>
+	<p>To do this, the signer first picks a random vector $v \in F_q^n$, and then solves for a vector $o$ in the oil space $O$ such that $P(v + o) = t$. In general, for quadratic maps $P$ we can define it's differential $P'$ as <span id="polynomials">$P'(x,y) := P(x + y) - P(x) - P(y)$</span>, which is a bilinear map. Using $P'$, it becomes apparent that solving for $o$ is easy, because:<br><br>
+	<center>
+  <div id="polynomials">
+	<p>$P(v + o) = $</p>
+	<p>$\underbrace{P'\left(v, o \right)}_\text{Linear in o} + \underbrace{\cancel{ P(o) }}_\text{P vanishes on O} + \underbrace{P(v)}_\text{fixed} = t \, ,$</p>
+	</div>
+	</center>
+	<br>
+
+is a system of $m$ linear equations in $m$ variables (since $O$ has dimension $m$). The signer outputs the signature $s = v + o$. To verify a signature, the verifier simply recomputes $P(s)$ and the hash digest $t$ and verifies that they are equal.</p>
+  <br>
+  <p>One practical drawback of the scheme is that the public map $P$ consists of approximately $mn^2/2$ coefficients. We can sample $P$ such that approximately $m(n^2 - m^2)/2$ of the coefficients can be expanded publicly from a short seed, but the remaining $m^3/2$ coefficient still make for a relatively large public key size. (e.g., $66$ KB for 128 bits of security). This problem is solved by MAYO.</p>
+	<br>
+  <h3>MAYO</h3>
+	<br>
+  <p>MAYO is a variant of the Oil and Vinegar scheme whose public keys are smaller. A MAYO public key $P$ has the same structure as an Oil and Vinegar public key, except that the dimension of the space $O$ on which $P$ evaluates to zero is "too small", i.e., $\dim(O) = o$ with $o$ less than $m$. The advantage of this is that the problem of recovering $O$ from $P$ becomes much harder, which allows for smaller parameters. The reader can imagine $O$ as being a needle that sits in the haystack $F_q^n$. If the needle becomes smaller, then the haystack is allowed to be smaller as well, and the search problem remains difficult. However, since $O$ is "too small", the algorithm to sample a signature $s$ such that $P(s) = t$ breaks down: the system $P(v + o) = t$ is now a system of $m$ linear equations in only $o$ variables, so it is very unlikely to have any solutions. We need a new way to produce and verify signatures.</p>
+	<br>
+  <p>The solution is to publicly "whip up" the oil and vinegar map $P(x) : F_q^{n} \rightarrow F_q^m$ into a $k$-fold larger map $P^*(x_1, \dots, x_k) : F_q^{kn} \rightarrow F_q^m$, where $k$ is a parameter of the scheme. The whipped map $P^*$ is constructed in such a way that it evaluates to zero on the subspace $O^k = \{ (o_1, \dots, o_k) \, | \, \forall i: o_i \in O \}$ which has dimension $ko$. Concretely, we define:
+
+ <br>
+ <br>
+ <div id="polynomials">
+ <p>$P^*(x_1,\dots,x_k) := $</p>
+ <p>$\sum_{i = 1}^k E_{ii} P(x_i)$
+ <p>$+ \sum_{i = 1}^k \sum_{j = i+1}^k E_{ij} P'(x_i,x_j)$</p>
+ </div>
+ <br>
+
+where the $E_{ij} \in F_q^{m \times m}$ are fixed public matrices (for security reasons, we choose these matrices to have the property that all their non-trivial linear combinations have rank $m$), which are referred to as $E$-matrices), and $P'(x,y)$, the differential of $P$, is defined as:
+  <div id="polynomials">
+	$P'(x, y) := P(x + y) - P(x) - P(y).$
+	</div>
+	<br>
+	<p>We choose parameters such that $ko >m$ to make sure that the space $O^k$ is large enough so that the signer can sample signatures $s = (s_1, \cdots, s_k)$ such that $P^*(s) = t$ with the usual Oil and Vinegar approach. The signer first samples $(v_1, \dots, v_k) \in F_q^{kn}$ at random, and then solves for $(o_1, \dots o_k) \in O^k$ such that \[
+        P^*(v_1 + o_1, \dots, v_k + o_k) = t \, \]
+which is a system of $m$ linear equations in $ko$ variables.</p>
+   <br>
+	 <p>This approach drastically reduces the public key size, since all but approximately $mo^2/2$ coefficients of $P$ can be expanded publicly from a short seed. For example, one of the parameter sets we propose for NIST security level 1 is $(n,m,o,k,q) = $ (66,64,8,9,16), which results in a public key of $1168$ bytes, and a signature size of 321 bytes (297 bytes for $s$ and 24 bytes for the salt). Compared to the compressed Oil and Vinegar scheme at the same security level this is a 58-fold reduction in public key size, at the cost of a 3-fold increase in signature size.</p>
+   <br>
+   <br>
+</div>

@@ -1,0 +1,35 @@
+---
+layout: page
+permalink: /code/
+title: code
+tags: menu
+---
+<div>
+  <br>
+  <p>Our scheme is currently under submission and constant revision. But you can find some of our code here:</p>
+	<br>
+  <h3>C:</h3>
+	<br>
+	<p>Our C implementation can be found <a href="https://github.com/PQCMayo/MAYO-C" target="_blank">here</a>.</p>
+	<br>
+	<p>The library provides a reference, optimize and Intel AVX2 optimized implementation.</p>
+	<p>AES-NI is used by default, if available, in the optimized versions.</p>
+	<br>
+	<p>They can be built in this way:</p>
+	<ul>
+	  <li><b>Reference:</b> build with CMake with the option: <code id="flags">-DMAYO_BUILD_TYPE=ref</code>.</li>
+	  <li><b>Optimize:</b> build with CMake with the option: <code id="flags">-DMAYO_BUILD_TYPE=opt</code>.</li>
+	  <li><b>Intel AVX2 Optimize:</b> build with CMake with the option for avx2 op: <code id="flags">-DMAYO_BUILD_TYPE=avx2</code>.</li>
+	</ul>
+	<br>
+  <h3>Sage:</h3>
+	<br>
+	<p>Our pure sage implementation can be found <a href="https://github.com/PQCMayo/MAYO-sage" target="_blank">here</a>.</p>
+	<br>
+  <h3>Arm Cortex-M4:</h3>
+	<br>
+	<p>Our Arm Cortex-M4 implementation can be found <a href="https://github.com/PQCMayo/MAYO-M4" target="_blank">here</a>. It has also been merged into <a href="https://github.com/mupq/pqm4" target="_blank">pqm4</a>.</p>
+	<br>
+	<br>
+	<br>
+</div>

@@ -1,0 +1,392 @@
+/**
+ * Reset some basic elements
+ */
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+\::-webkit-scrollbar {
+    display: none;/* Safari and Chrome */
+}
+
+/**
+ * Basic styling
+ */
+body {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: 300;
+    color: $text-color;
+    background-color: $background-color;
+    -webkit-text-size-adjust: $full-width;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/**
+ * Images
+ */
+img {
+    max-width: $small-width;
+    vertical-align: middle;
+}
+
+
+
+/**
+ * Lists
+ */
+ul, ol {
+    margin-left: $spacing-unit;
+}
+
+li {
+    > ul,
+    > ol {
+         margin-bottom: 0;
+    }
+}
+
+.download {
+    margin-right: $spacing-unit;
+    font-size: 0.8em;
+}
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+}
+
+
+
+/**
+ * Links
+ */
+a {
+    color: $black-color;
+    text-decoration: none;
+    background-color: $orange-hover-color;
+    padding: 5px;
+    word-wrap: break-word;
+
+    &:hover {
+      color: $white-color;
+    }
+}
+
+
+
+/**
+ * Wrapper
+ */
+.wrapper {
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    border: solid;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+    padding-bottom: 3rem;
+    min-height: 800px;
+
+    @extend %clearfix;
+
+    @include media-query($on-palm) {
+        margin-bottom: 3rem;
+        margin-top: 1rem;
+        padding-right: $spacing-unit / 2;
+        padding-left: $spacing-unit / 2;
+    }
+
+    > a {
+        background-color: white;
+    }
+}
+
+.wrapper-home {
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border: solid;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+    min-height: 600px;
+
+    @extend %clearfix;
+
+    @include media-query($on-palm) {
+        margin-bottom: 3rem;
+        margin-top: 1rem;
+        padding-right: $spacing-unit / 2;
+        padding-left: $spacing-unit / 2;
+        min-height: 200px;
+    }
+
+    > a {
+        background-color: white;
+    }
+}
+
+.wrapper-header {
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    border: solid;
+
+    @extend %clearfix;
+
+    @include media-query($on-laptop) {
+        margin-bottom: 10rem;
+    }
+
+    @include media-query($on-palm) {
+        margin-bottom: 3rem;
+        padding-right: $spacing-unit / 2;
+        padding-left: $spacing-unit / 2;
+    }
+
+    > a {
+        background-color: white;
+    }
+}
+
+.division {
+    @include media-query($on-palm) {
+      transform: skewY(-15deg);
+    }
+}
+
+
+/**
+ * Clearfix
+ */
+%clearfix {
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+
+/**
+ * Icons
+ */
+
+.home-logo {
+    margin-top: 5px;
+    width: 80%;
+    height: auto;
+
+    @include media-query($on-palm) {
+        width: 40%;
+        padding-top: 0.5rem;
+    }
+}
+
+.icon-footer {
+    margin-top: 0px;
+  > svg {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.icon-footer-pixel {
+  > svg {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.icon-footer,
+.icon-footer-pixel,
+.icon-inside-big {
+  > svg {
+    path, rect {
+      fill: $black-color;
+      webkit-transition: fill 1s ease-out; /* For Safari 3.1 to 6.0 */
+      transition: fill 1s ease-out;
+    }
+
+    .st0 {
+      fill: $black-color;
+      webkit-transition: fill 1s ease-out; /* For Safari 3.1 to 6.0 */
+      transition: fill 1s ease-out;
+    }
+
+    &:hover path {
+      fill: $white-color;
+    }
+
+    &:hover .st0 {
+      fill: $white-color;
+    }
+
+    &:hover rect {
+      fill: $white-color;
+    }
+  }
+}
+
+@mixin pixelize($size, $matrix, $colors, $default-color: null) {
+  $ret: "";
+  $moz: "";
+  @if ($default-color == null) {
+    // count number of each color in matrix and decide main color by highest count
+    $matrix-colors: ();
+    $counts: ();
+    @each $row in $matrix {
+      @each $item in $row {
+        @if $item != 0 {
+          $index: index($matrix-colors, $item);
+          @if not $index {
+            $matrix-colors: append($matrix-colors, $item);
+            $counts: append($counts, 1);
+          } @else {
+            $count: nth($counts, $index) + 1;
+            $counts: set-nth($counts, $index, $count);
+          }
+        }
+      }
+    }
+    // use index of the highest count to get the corresponding matrix color
+    $default-color: nth($colors, nth($matrix-colors, index($counts, max($counts...))));
+  }
+
+  @for $i from 1 through length($matrix) {
+    $row: nth($matrix, $i);
+
+    @for $j from 1 through length($row) {
+      $dot: nth($row, $j);
+
+      @if $dot != 0 {
+        @if $ret != "" {
+          $ret: $ret + ",";
+          $moz: $moz + ",";
+        }
+
+        $color: nth($colors, $dot);
+        @if $color == $default-color {
+          $ret: $ret + ($j * $size) + " " + ($i * $size);
+          $moz: $moz + ($j * $size) + " " + ($i * $size) + " 0 0.020em";
+        } @else {
+          $ret: $ret + ($j * $size) + " " + ($i * $size) + " " + $color;
+          $moz: $moz + ($j * $size) + " " + ($i * $size) + " 0 0.020em " + $color;
+        }
+      }
+    }
+  }
+
+  width: $size;
+  height: $size;
+  color: $default-color;
+  box-shadow: unquote($ret);
+
+  // firefox only style
+  @supports (-moz-appearance: meterbar) {
+    box-shadow: unquote($moz);
+  }
+}
+
+$icon-github-colors: (#F97625, #000);
+// prettier-ignore
+$icon-github: (
+  ( 0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0 ),
+  ( 2,2,2,2,1,2,2,2,2,2,2,2,2,1,2,2 ),
+  ( 2,2,2,2,1,1,2,2,2,2,2,2,1,1,2,2 ),
+  ( 2,2,2,2,1,1,1,1,1,1,1,1,1,1,2,2 ),
+  ( 2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2 ),
+  ( 2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2 ),
+  ( 2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2 ),
+  ( 2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2 ),
+  ( 2,2,2,2,1,1,1,1,1,1,1,1,1,1,2,2 ),
+  ( 2,2,2,2,2,1,1,1,1,1,1,1,1,2,2,2 ),
+  ( 2,1,1,2,2,2,2,1,1,1,1,2,2,2,2,2 ),
+  ( 2,2,2,1,2,2,1,1,1,1,1,1,2,2,2,2 ),
+  ( 2,2,2,2,1,1,1,1,1,1,1,1,2,2,2,2 ),
+  ( 2,2,2,2,2,2,1,1,1,1,1,1,2,2,2,2 ),
+  ( 2,2,2,2,2,2,1,1,1,1,1,1,2,2,2,2 ),
+  ( 0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0 )
+);
+
+.nes-icon {
+  $default-size: 1px;
+  $icon-size: $default-size * 16;
+
+  position: relative;
+  display: inline-block;
+  width: $icon-size;
+  height: $icon-size;
+  margin-right: $icon-size;
+  margin-bottom: $icon-size;
+
+  transform: scale(2);
+  transform-origin: top left;
+
+  margin-bottom: $icon-size;
+  transform: scale(1.5);
+
+  &::before {
+    position: absolute;
+    top: $default-size * -1;
+    left: $default-size * -1;
+    display: block;
+    content: "";
+    background: transparent;
+  }
+
+  &.github::before {
+    @include pixelize($default-size, $icon-github, $icon-github-colors);
+  }
+}
+
+.copyright {
+   font-size: 11px;
+   text-align: left;
+
+   > .top-copyright {
+       padding-top: 2rem;
+   }
+
+   @include media-query($on-palm) {
+     font-size: 8px;
+     margin-bottom: 1rem;
+
+     > .top-copyright {
+       padding-top: 0rem;
+     }
+   }
+}
+
+.none {
+  padding: 0;
+
+  &:hover {
+    color: $strong-orange-color;
+  }
+}
+
+table, th, td {
+  border: 5px solid black;
+  border-collapse: collapse;
+  padding: 1rem;
+  text-align: center;
+}
+
+th {
+  font-weight: 900;
+}
