@@ -15,6 +15,19 @@ if [ $# -eq 0 ]; then
 fi
 
 TAG_NAME=$1
+DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+
+# Check if Configure script exists
+if [ ! -f "./Configure" ]; then
+    echo "Configure script not found. Are you in the correct directory?"
+    exit 1
+fi
+
+# Check for write permissions
+if [ ! -w "." ]; then
+    echo "No write permission in the current directory"
+    exit 1
+fi
 
 # Build OpenSSL
 CC=gcc ./Configure shared \
@@ -52,14 +65,29 @@ enable-afalg \
 enable-comp \
 enable-dtls
 
-sudo make depend
-sudo make
+
+# Build and test
+make
 sudo make test
+
+# Create a tar.gz archive
+TAR_FILE="qompassl_${TAG_NAME}.tar.gz"
+tar -czf "$TAR_FILE" libssl.so libcrypto.so
+
+# Prepare release notes
+RELEASE_NOTES="QompaSSL: OpenSSL with classical & post quantum protocols
+
+Release Date: $DATE_TIME
+
+This release includes libssl.so and libcrypto.so compiled with post-quantum algorithms."
 
 # Create a release
 gh release create $TAG_NAME \
-    --title "Release $TAG_NAME" \
-    --notes "Release notes for $TAG_NAME" \
-    ./libssl.so \
-    ./libcrypto.so
+    --title "QompaSSL Release $TAG_NAME" \
+    --notes "$RELEASE_NOTES" \
+    "$TAR_FILE"
 
+# Clean up
+rm "$TAR_FILE"
+
+echo "Release created successfully with $TAR_FILE"
