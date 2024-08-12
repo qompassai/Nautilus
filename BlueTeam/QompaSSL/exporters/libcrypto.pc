@@ -1,7 +1,7 @@
-libdir=/usr/local/lib64
+libdir=/usr/local/lib
 includedir=/usr/local/include
-enginesdir=/usr/local/lib64/engines-3
-modulesdir=/usr/local/lib64/ossl-modules
+enginesdir=/usr/local/lib/engines-3
+modulesdir=/usr/local/lib/ossl-modules
 
 Name: OpenSSL-libcrypto
 Description: OpenSSL cryptography library

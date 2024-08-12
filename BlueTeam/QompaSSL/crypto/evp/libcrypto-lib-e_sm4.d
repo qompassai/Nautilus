@@ -18,5 +18,5 @@ crypto/evp/libcrypto-lib-e_sm4.o: crypto/evp/e_sm4.c \
  include/openssl/obj_mac.h include/openssl/objectserr.h \
  include/openssl/modes.h include/crypto/sm4.h include/crypto/evp.h \
  include/internal/refcount.h include/openssl/trace.h include/crypto/ecx.h \
- include/crypto/types.h include/crypto/sm4_platform.h \
+ include/crypto/types.h include/crypto/sm4_platform.h crypto/arm_arch.h \
  crypto/evp/evp_local.h

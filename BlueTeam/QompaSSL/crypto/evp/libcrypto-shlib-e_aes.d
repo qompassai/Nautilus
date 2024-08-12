@@ -20,4 +20,4 @@ crypto/evp/libcrypto-shlib-e_aes.o: crypto/evp/e_aes.c \
  include/internal/numbers.h include/internal/nelem.h \
  include/openssl/buffer.h include/openssl/buffererr.h \
  include/crypto/modes.h include/openssl/modes.h include/crypto/siv.h \
- include/crypto/aes_platform.h crypto/evp/evp_local.h
+ include/crypto/aes_platform.h crypto/arm_arch.h crypto/evp/evp_local.h

@@ -19,4 +19,4 @@ providers/implementations/ciphers/libdefault-lib-cipher_sm4_hw.o: \
  include/internal/nelem.h include/openssl/buffer.h \
  include/openssl/buffererr.h include/openssl/err.h \
  include/openssl/lhash.h include/crypto/modes.h include/openssl/modes.h \
- include/crypto/sm4.h include/crypto/sm4_platform.h
+ include/crypto/sm4.h include/crypto/sm4_platform.h crypto/arm_arch.h

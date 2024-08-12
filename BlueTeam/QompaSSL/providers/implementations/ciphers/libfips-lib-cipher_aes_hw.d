@@ -20,5 +20,5 @@ providers/implementations/ciphers/libfips-lib-cipher_aes_hw.o: \
  include/internal/numbers.h include/internal/nelem.h \
  include/openssl/buffer.h include/openssl/buffererr.h \
  include/openssl/err.h include/openssl/lhash.h include/crypto/modes.h \
- include/openssl/modes.h include/crypto/aes_platform.h \
- providers/implementations/ciphers/cipher_aes_hw_aesni.inc
+ include/openssl/modes.h include/crypto/aes_platform.h crypto/arm_arch.h \
+ providers/implementations/ciphers/cipher_aes_hw_armv8.inc

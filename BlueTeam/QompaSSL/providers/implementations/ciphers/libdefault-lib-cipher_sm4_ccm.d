@@ -22,7 +22,7 @@ providers/implementations/ciphers/libdefault-lib-cipher_sm4_ccm.o: \
  include/openssl/modes.h \
  providers/implementations/include/prov/ciphercommon_ccm.h \
  providers/implementations/include/prov/ciphercommon_aead.h \
- include/crypto/sm4_platform.h \
+ include/crypto/sm4_platform.h crypto/arm_arch.h \
  providers/implementations/include/prov/implementations.h \
  providers/common/include/prov/providercommon.h \
  include/openssl/provider.h

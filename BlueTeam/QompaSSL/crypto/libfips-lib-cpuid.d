@@ -11,4 +11,4 @@ crypto/libfips-lib-cpuid.o: crypto/cpuid.c include/internal/e_os.h \
  include/openssl/buffer.h include/openssl/buffererr.h \
  include/openssl/bio.h include/openssl/bioerr.h include/openssl/asn1.h \
  include/openssl/asn1err.h include/openssl/bn.h include/openssl/bnerr.h \
- include/openssl/err.h include/openssl/lhash.h include/crypto/ctype.h
+ include/openssl/err.h include/openssl/lhash.h

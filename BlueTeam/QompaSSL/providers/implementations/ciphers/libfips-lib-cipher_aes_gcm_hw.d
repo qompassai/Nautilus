@@ -22,6 +22,5 @@ providers/implementations/ciphers/libfips-lib-cipher_aes_gcm_hw.o: \
  include/openssl/lhash.h include/crypto/modes.h include/openssl/modes.h \
  providers/implementations/include/prov/ciphercommon_gcm.h \
  providers/implementations/include/prov/ciphercommon_aead.h \
- include/crypto/aes_platform.h \
- providers/implementations/ciphers/cipher_aes_gcm_hw_aesni.inc \
- providers/implementations/ciphers/cipher_aes_gcm_hw_vaes_avx512.inc
+ include/crypto/aes_platform.h crypto/arm_arch.h \
+ providers/implementations/ciphers/cipher_aes_gcm_hw_armv8.inc

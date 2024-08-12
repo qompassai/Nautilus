@@ -23,4 +23,4 @@ providers/implementations/ciphers/libdefault-lib-cipher_sm4_gcm_hw.o: \
  providers/implementations/include/prov/ciphercommon_gcm.h \
  include/openssl/aes.h \
  providers/implementations/include/prov/ciphercommon_aead.h \
- include/crypto/sm4_platform.h
+ include/crypto/sm4_platform.h crypto/arm_arch.h

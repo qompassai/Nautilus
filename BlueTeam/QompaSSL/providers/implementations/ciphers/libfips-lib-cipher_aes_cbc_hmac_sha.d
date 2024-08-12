@@ -21,7 +21,7 @@ providers/implementations/ciphers/libfips-lib-cipher_aes_cbc_hmac_sha.o: \
  include/openssl/buffer.h include/openssl/buffererr.h \
  include/openssl/err.h include/openssl/lhash.h include/crypto/modes.h \
  include/openssl/modes.h include/crypto/aes_platform.h \
- include/openssl/aes.h include/openssl/sha.h \
+ include/openssl/aes.h crypto/arm_arch.h \
  providers/implementations/include/prov/implementations.h \
  providers/common/include/prov/providercommon.h \
  include/openssl/provider.h

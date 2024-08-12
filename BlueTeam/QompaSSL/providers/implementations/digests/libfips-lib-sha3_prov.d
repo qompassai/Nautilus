@@ -18,4 +18,5 @@ providers/implementations/digests/libfips-lib-sha3_prov.o: \
  providers/implementations/include/prov/digestcommon.h \
  providers/common/include/prov/providercommon.h \
  include/openssl/provider.h \
- providers/implementations/include/prov/implementations.h
+ providers/implementations/include/prov/implementations.h \
+ crypto/arm_arch.h

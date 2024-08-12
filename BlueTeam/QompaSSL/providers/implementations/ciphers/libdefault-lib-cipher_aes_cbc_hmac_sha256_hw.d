@@ -20,8 +20,4 @@ providers/implementations/ciphers/libdefault-lib-cipher_aes_cbc_hmac_sha256_hw.o
  include/internal/nelem.h include/openssl/buffer.h \
  include/openssl/buffererr.h include/openssl/err.h \
  include/openssl/lhash.h include/crypto/modes.h include/openssl/modes.h \
- include/crypto/aes_platform.h include/openssl/aes.h \
- include/openssl/sha.h include/openssl/rand.h include/openssl/randerr.h \
- include/crypto/evp.h include/internal/refcount.h include/openssl/trace.h \
- include/crypto/ecx.h include/crypto/types.h \
- include/internal/constant_time.h
+ include/crypto/aes_platform.h include/openssl/aes.h crypto/arm_arch.h

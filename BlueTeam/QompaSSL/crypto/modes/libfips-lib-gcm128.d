@@ -12,4 +12,4 @@ crypto/modes/libfips-lib-gcm128.o: crypto/modes/gcm128.c \
  include/openssl/bio.h include/openssl/bioerr.h include/openssl/asn1.h \
  include/openssl/asn1err.h include/openssl/bn.h include/openssl/bnerr.h \
  include/openssl/err.h include/openssl/lhash.h include/internal/endian.h \
- include/crypto/modes.h include/openssl/modes.h
+ include/crypto/modes.h include/openssl/modes.h crypto/arm_arch.h

@@ -22,5 +22,4 @@ providers/implementations/ciphers/libfips-lib-cipher_aes_ccm_hw.o: \
  include/openssl/lhash.h include/crypto/modes.h include/openssl/modes.h \
  providers/implementations/include/prov/ciphercommon_ccm.h \
  providers/implementations/include/prov/ciphercommon_aead.h \
- include/crypto/aes_platform.h \
- providers/implementations/ciphers/cipher_aes_ccm_hw_aesni.inc
+ include/crypto/aes_platform.h crypto/arm_arch.h

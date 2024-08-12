@@ -21,7 +21,7 @@ providers/implementations/ciphers/libdefault-lib-cipher_aes_siv.o: \
  include/openssl/buffer.h include/openssl/buffererr.h \
  include/openssl/err.h include/openssl/lhash.h include/crypto/modes.h \
  include/openssl/modes.h include/crypto/aes_platform.h \
- include/openssl/aes.h include/crypto/siv.h \
+ include/openssl/aes.h crypto/arm_arch.h include/crypto/siv.h \
  providers/implementations/include/prov/implementations.h \
  providers/common/include/prov/providercommon.h \
  include/openssl/provider.h \

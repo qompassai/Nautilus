@@ -27,4 +27,4 @@ providers/implementations/ciphers/libdefault-lib-cipher_aes_gcm_siv.o: \
  include/internal/nelem.h include/openssl/buffer.h \
  include/openssl/buffererr.h include/openssl/err.h \
  include/openssl/lhash.h include/crypto/modes.h include/openssl/modes.h \
- include/crypto/aes_platform.h
+ include/crypto/aes_platform.h crypto/arm_arch.h

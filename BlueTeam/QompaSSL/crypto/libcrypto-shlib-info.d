@@ -17,4 +17,4 @@ crypto/libcrypto-shlib-info.o: crypto/info.c include/openssl/crypto.h \
  include/internal/e_os.h include/internal/numbers.h \
  include/internal/nelem.h include/openssl/buffer.h \
  include/openssl/buffererr.h include/openssl/err.h \
- include/openssl/lhash.h crypto/buildinf.h
+ include/openssl/lhash.h crypto/buildinf.h crypto/arm_arch.h
