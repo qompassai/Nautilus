@@ -61,7 +61,6 @@ enable-gost \
 enable-sm2 \
 enable-sm3 \
 enable-tfo \
-enable-afalg \
 enable-comp \
 enable-dtls
 
