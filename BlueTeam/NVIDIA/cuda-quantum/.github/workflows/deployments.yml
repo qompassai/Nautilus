@@ -1,0 +1,409 @@
+on:
+  # We update the build caches during the pull_request_target event, 
+  # and deploy the images via workflow dispatch on branches with deployment permissions.
+  # A dispatch event is automatically triggered when the pull_request_target event
+  # triggers the workflow.
+  workflow_dispatch:
+    inputs:
+      update_registry_cache:
+        type: boolean
+        description: Create or update the build caches on the container registry. The build terminates after that and no images are pushed.
+        required: false
+        default: false
+      cache_base:
+        required: false
+        type: string
+        description: 'The name of the branch to use as cache base.'
+        default: main
+      platforms:
+        type: string
+        description: The platforms to build the Docker images for. A semicolon separated list creates a separate list for each platform, whereas a comma separate list creates a multi-platform build.
+        required: false
+        default: default
+      create_release:
+        type: string
+        description: Create a GitHub release with the given version number (e.g. 0.3.0). A GitHub release with that version must not exist already.
+        required: false
+        default: ''
+  # We need write permissions for packages to update the build caches of GHCR.
+  # Make sure no external code is checked out as part of this workflow.
+  # This trigger replaces the pull_request_target trigger in prepare_deployment.yml
+  # so that we can use the NVIDIA runners to update the build caches.
+  workflow_run:
+    workflows:
+      - PR merged
+    types:
+      - completed
+  # Whenever we create a release branch, we want to populate the caches.
+  # Unfortunately, it is not currently possible to filter by branch,
+  # see also: https://github.com/orgs/community/discussions/26286
+  push:
+    branches:
+      - 'releases/*'
+      - 'experimental/*'
+      - 'features/*'
+
+name: Deployments # do not change name without updating workflow_run triggers
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.head_branch || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  metadata:
+    name: Prepare build
+    if: github.event_name != 'push' || github.event.created
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    outputs:
+      pull_request_number: ${{ steps.pr_info.outputs.pr_number }}
+      pull_request_base: ${{ steps.pr_info.outputs.pr_base }}
+      pull_request_commit: ${{ steps.pr_info.outputs.merge_commit }}
+      llvm_commit: ${{ steps.repo_info.outputs.llvm_commit }}
+      pybind11_commit: ${{ steps.repo_info.outputs.pybind11_commit }}
+      cache_base: ${{ steps.build_info.outputs.cache_base }}
+      cache_target: ${{ steps.build_info.outputs.cache_target }}
+      multi_platform: ${{ steps.build_info.outputs.multi_platform }}
+      platforms: ${{ steps.build_info.outputs.platforms }}
+      environment: ${{ steps.build_info.outputs.environment }}
+
+    steps:
+      - name: Retrieve PR info
+        if: github.event_name == 'workflow_run'
+        id: pr_info
+        run: |
+          artifacts_url=${{ github.event.workflow_run.artifacts_url }}
+          artifacts=$(gh api $artifacts_url -q '.artifacts[] | {name: .name, url: .archive_download_url}')
+
+          for artifact in `echo "$artifacts"`; do
+            name=`echo $artifact | jq -r '.name'`
+            if [ "$name" == "metadata_pr" ]; then
+              url=`echo $artifact | jq -r '.url'`
+              gh api $url > metadata.zip
+              unzip -d metadata metadata.zip
+              for file in `find metadata/ -type f`; do
+                cat "$file" >> metadata.txt
+              done
+              pr_number=`cat metadata.txt | grep -o 'pr-number: \S*' | cut -d ' ' -f 2`
+              pr_base=`cat metadata.txt | grep -o 'pr-base: \S*' | cut -d ' ' -f 2`
+              merge_commit=`cat metadata.txt | grep -o 'source-sha: \S*' | cut -d ' ' -f 2`
+              rm -rf metadata.zip metadata.txt metadata
+              echo "pr_number=$pr_number" >> $GITHUB_OUTPUT
+              echo "pr_base=$pr_base" >> $GITHUB_OUTPUT
+              echo "merge_commit=$merge_commit" >> $GITHUB_OUTPUT
+            fi
+          done
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Determine build info
+        id: build_info
+        run: |
+          if ${{ github.event_name == 'workflow_dispatch' }}; then 
+            defaults="${{ (inputs.update_registry_cache && 'linux/arm64 linux/amd64') || 'linux/amd64,linux/arm64' }}"
+            requested_platforms=`echo "${{ inputs.platforms }}" | tr + , | sed "s#default#$defaults#g"`
+          else
+            requested_platforms="linux/arm64 linux/amd64"
+          fi
+
+          if [ -n "$(echo "$requested_platforms" | egrep ',')" ]; then
+            multi_platform="{\"ids\":[]}"
+            platform_flag=`echo "$requested_platforms" | tr -d ' '`
+            multi_platform=`echo $multi_platform | jq ".ids |= . + [\"multiplat\"]"`
+            platform={\"multiplat\":{\"docker_flag\":\"$platform_flag\"}}
+            multi_platform=`echo $multi_platform | jq ". |= . + $platform"`
+          fi
+
+          platforms="{\"ids\":[]}"
+          for input in `echo "$requested_platforms" | tr , ' ' | tr ';' ' '`; do
+            platform_id=`echo $input | sed 's/linux\///g' | tr -d ' '`
+            minimal_base_image=`([ "$platform_id" == "amd64" ] && echo amd64/almalinux:8) || ([ "$platform_id" == "arm64" ] && echo arm64v8/almalinux:8) || echo`
+            platforms=`echo $platforms | jq ".ids |= . + [\"$platform_id\"]"`
+            platform={\"$platform_id\":{\"docker_flag\":\"$input\",\"minimal_base_image\":\"$minimal_base_image\"}}
+            platforms=`echo $platforms | jq ". |= . + $platform"`
+          done
+
+          cache_base=${{ (github.event_name == 'push' && 'main') || inputs.cache_base || steps.pr_info.outputs.pr_base }}
+          cache_target=${{ (github.event_name != 'workflow_dispatch' && (steps.pr_info.outputs.pr_base || github.ref_name)) || (inputs.update_registry_cache && github.ref_name) || '' }}
+          environment=${{ (github.event_name != 'workflow_run' && 'ghcr-deployment') || '' }}
+
+          # Store deployment info
+          release_title="${{ inputs.create_release }}"
+          release_version=`echo "$release_title" | (egrep -o "([0-9]{1,}\.)+[0-9]{1,}([A-Za-z0-9_\-\.]*)" || true)`
+
+          echo "source-sha: ${{ github.sha }}" >> deployment_info.txt
+          echo "release-title: $release_title" >> deployment_info.txt
+          echo "release-version: $release_version" >> deployment_info.txt
+
+          echo "cache_base=$cache_base" >> $GITHUB_OUTPUT
+          echo "cache_target=$cache_target" >> $GITHUB_OUTPUT
+          echo "multi_platform=$(echo $multi_platform)" >> $GITHUB_OUTPUT
+          echo "platforms=$(echo $platforms)" >> $GITHUB_OUTPUT
+          echo "environment=$environment" >> $GITHUB_OUTPUT
+
+      - name: Upload deployment info
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment_info # changing the artifact name requires updating other workflows
+          path: deployment_info.txt
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: "${{ steps.pr_info.outputs.merge_commit }}"
+
+      - name: Configure build
+        id: repo_info
+        run: |
+          echo "llvm_commit=$(git rev-parse @:./tpls/llvm)" >> $GITHUB_OUTPUT
+          echo "pybind11_commit=$(git rev-parse @:./tpls/pybind11)" >> $GITHUB_OUTPUT
+
+  devdeps:
+    name: Build dev dependencies
+    needs: metadata
+    if: github.event_name != 'workflow_run' || needs.metadata.outputs.pull_request_number != ''
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms).ids }}
+        toolchain: [clang16, gcc11, gcc12]
+      fail-fast: false
+    uses: ./.github/workflows/dev_environment.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platforms: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      dockerfile: build/devdeps.Dockerfile
+      toolchain: ${{ matrix.toolchain }}
+      registry_cache_from: ${{ needs.metadata.outputs.cache_base }}
+      update_registry_cache: ${{ needs.metadata.outputs.cache_target }}
+      pull_request_number: ${{ needs.metadata.outputs.pull_request_number }}
+      pull_request_commit: ${{ needs.metadata.outputs.pull_request_commit }}
+      checkout_submodules: true
+      environment: ${{ needs.metadata.outputs.environment }}
+      # needed only for the cloudposse GitHub action
+      matrix_key: ${{ matrix.platform }}-${{ matrix.toolchain }}
+
+  wheeldeps:
+    name: Build wheel dependencies
+    needs: metadata
+    if: github.event_name != 'workflow_run' || needs.metadata.outputs.pull_request_number != ''
+    strategy:
+      matrix:
+        # There are currently no multi-platform manylinux images available.
+        # See https://github.com/pypa/manylinux/issues/1306.
+        platform: ${{ fromJson(needs.metadata.outputs.platforms).ids }}
+      fail-fast: false
+    uses: ./.github/workflows/dev_environment.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platforms: ${{ fromJson(needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      dockerfile: build/devdeps.manylinux.Dockerfile
+      toolchain: gcc11
+      build_args: |
+        base_image=ghcr.io/nvidia/pypa/manylinux_2_28${{ (matrix.platform == 'arm64' && '_aarch64') || (matrix.platform == 'amd64' && '_x86_64') || '' }}:latest
+        distro=rhel8
+        llvm_commit=${{ needs.metadata.outputs.llvm_commit }}
+        pybind11_commit=${{ needs.metadata.outputs.pybind11_commit }}
+      registry_cache_from: ${{ needs.metadata.outputs.cache_base }}
+      update_registry_cache: ${{ needs.metadata.outputs.cache_target }}
+      pull_request_number: ${{ needs.metadata.outputs.pull_request_number }}
+      pull_request_commit: ${{ needs.metadata.outputs.pull_request_commit }}
+      environment: ${{ needs.metadata.outputs.environment }}
+      # needed only for the cloudposse GitHub action
+      matrix_key: ${{ matrix.platform }}-python
+
+  source_build:
+    name: Build cross-platform dependencies
+    needs: metadata
+    if: github.event_name != 'workflow_run' || needs.metadata.outputs.pull_request_number != ''
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.platforms).ids }}
+      fail-fast: false
+    uses: ./.github/workflows/dev_environment.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platforms: ${{ fromJson(needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      dockerfile: build/assets.Dockerfile
+      build_target: prereqs
+      toolchain: llvm
+      build_args: |
+        base_image=${{ fromJson(needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].minimal_base_image }}
+      registry_cache_from: ${{ needs.metadata.outputs.cache_base }}
+      update_registry_cache: ${{ needs.metadata.outputs.cache_target }}
+      pull_request_number: ${{ needs.metadata.outputs.pull_request_number }}
+      pull_request_commit: ${{ needs.metadata.outputs.pull_request_commit }}
+      checkout_submodules: true
+      environment: ${{ needs.metadata.outputs.environment }}
+      # needed only for the cloudposse GitHub action
+      matrix_key: ${{ matrix.platform }}-installer
+
+  openmpi:
+    name: Build Open MPI
+    needs: metadata
+    if: github.event_name != 'workflow_run' || needs.metadata.outputs.pull_request_number != ''
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms).ids }}
+      fail-fast: false
+    uses: ./.github/workflows/dev_environment.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platforms: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      dockerfile: build/devdeps.ompi.Dockerfile
+      registry_cache_from: ${{ needs.metadata.outputs.cache_base }}
+      update_registry_cache: ${{ needs.metadata.outputs.cache_target }}
+      environment: ${{ needs.metadata.outputs.environment }}
+      # needed only for the cloudposse GitHub action
+      matrix_key: ${{ matrix.platform }}-ompi
+
+  dispatch:
+    name: Dispatch deployments
+    needs: [metadata, devdeps, wheeldeps, openmpi]
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          # We want this dispatch to trigger additional workflows.
+          github-token: ${{ secrets.REPO_BOT_ACCESS_TOKEN }}
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deployments.yml',
+              ref: '${{ needs.metadata.outputs.pull_request_base || github.ref_name }}',
+              inputs: {
+                platforms: 'linux/arm64,linux/amd64',
+                cache_base: '${{ needs.metadata.outputs.cache_base }}',
+              },
+            })
+
+  # This job is needed only when using the cloudposse GitHub action to read
+  # the output of a matrix job. This is a workaround due to current GitHub
+  # limitations that may not be needed if the work started here concludes:
+  # https://github.com/actions/runner/pull/2477
+  config:
+    name: Configure build
+    needs: [devdeps, wheeldeps, source_build, openmpi]
+    if: github.event_name == 'workflow_dispatch' && ! inputs.update_registry_cache
+    runs-on: ubuntu-latest
+
+    outputs:
+      json: "${{ steps.read_json.outputs.result }}"
+      devdeps_toolchain: gcc11
+
+    steps:
+      - uses: cloudposse/github-action-matrix-outputs-read@1.0.0
+        id: read_json
+        with:
+          matrix-step-name: dev_environment
+
+  extdevdeps:
+    name: Create dev environment
+    needs: [metadata, config, openmpi]
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms).ids }}
+      fail-fast: false
+    uses: ./.github/workflows/dev_environment.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platforms: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      dockerfile: build/devdeps.ext.Dockerfile
+      toolchain: ${{ needs.config.outputs.devdeps_toolchain }}
+      build_args: |
+        base_image=${{ fromJson(needs.config.outputs.json).image_hash[format('{0}-{1}', matrix.platform, needs.config.outputs.devdeps_toolchain)] }}
+        ompidev_image=${{ fromJson(needs.config.outputs.json).image_hash[format('{0}-ompi', matrix.platform)] }}
+      registry_cache_from: ${{ needs.metadata.outputs.cache_base }}
+      update_registry_cache: ${{ needs.metadata.outputs.cache_target }}
+      environment: ${{ needs.metadata.outputs.environment }}
+      # needed only for the cloudposse GitHub action
+      matrix_key: ${{ matrix.platform }}-ext
+
+  # This job is needed only when using the cloudposse GitHub action to read
+  # the output of a matrix job. This is a workaround due to current GitHub
+  # limitations that may not be needed if the work started here concludes:
+  # https://github.com/actions/runner/pull/2477
+  ext_config:
+    name: Configure build
+    needs: extdevdeps
+    runs-on: ubuntu-latest
+
+    outputs:
+      json: "${{ steps.read_json.outputs.result }}"
+
+    steps:
+      - uses: cloudposse/github-action-matrix-outputs-read@1.0.0
+        id: read_json
+        with:
+          matrix-step-name: dev_environment
+
+  docker_images:
+    name: Create Docker images
+    needs: [metadata, config, ext_config]
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms).ids }}
+      fail-fast: false
+    uses: ./.github/workflows/docker_images.yml
+    secrets:
+      NGC_CREDENTIALS: ${{ secrets.NGC_CREDENTIALS }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platforms: ${{ fromJson(needs.metadata.outputs.multi_platform || needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      ompidev_image: ${{ fromJson(needs.config.outputs.json).image_hash[format('{0}-ompi', matrix.platform)] }}
+      devdeps_image: ${{ fromJson(needs.ext_config.outputs.json).image_hash[format('{0}-ext', matrix.platform)] }}
+      build_docs: true
+      environment: ghcr-deployment
+
+  python_wheels:
+    name: Create Python wheels
+    needs: [metadata, config]
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.platforms).ids }}
+        python_version: ['3.8', '3.9', '3.10', '3.11']
+      fail-fast: false
+    uses: ./.github/workflows/python_wheels.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platform: ${{ fromJson(needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      python_version: ${{ matrix.python_version }}
+      devdeps_image: ${{ fromJson(needs.config.outputs.json).image_hash[format('{0}-python', matrix.platform)] }}
+      create_staging_info:  ${{ matrix.python_version == '3.11' }} # staging info is the same for all python versions
+
+  binaries:
+    name: Create CUDA Quantum installer
+    needs: [metadata, config]
+    strategy:
+      matrix:
+        platform: ${{ fromJson(needs.metadata.outputs.platforms).ids }}
+      fail-fast: false
+    uses: ./.github/workflows/prebuilt_binaries.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_READONLY_TOKEN: ${{ secrets.DOCKERHUB_READONLY_TOKEN }}
+    with:
+      platform: ${{ fromJson(needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].docker_flag }}
+      platform_base_image: ${{ fromJson(needs.metadata.outputs.platforms)[format('{0}', matrix.platform)].minimal_base_image }}
+      build_cache: ${{ fromJson(needs.config.outputs.json).build_cache[format('{0}-installer', matrix.platform)] }}
+      toolchain: llvm
+      environment: ghcr-deployment
