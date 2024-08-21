@@ -1,0 +1,2 @@
+0
+21450 162902 1723403547711806437 ce6aab34ae962859d2b244be28c1b9a6 0 /home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL/crypto/srp/srp_vfy.c

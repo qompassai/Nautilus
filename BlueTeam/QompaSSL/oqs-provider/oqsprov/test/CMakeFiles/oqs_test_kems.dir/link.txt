@@ -1,0 +1,1 @@
+/bin/gcc -rdynamic CMakeFiles/oqs_test_kems.dir/oqs_test_kems.c.o CMakeFiles/oqs_test_kems.dir/test_common.c.o -o oqs_test_kems  -Wl,-rpath,/home/phaedrus/miniconda3/lib /home/phaedrus/miniconda3/lib/libcrypto.so

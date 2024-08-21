@@ -49,12 +49,6 @@ extern "C" {
 # ifndef OPENSSL_NO_CAPIENG
 #  define OPENSSL_NO_CAPIENG
 # endif
-# ifndef OPENSSL_NO_CRYPTO_MDEBUG
-#  define OPENSSL_NO_CRYPTO_MDEBUG
-# endif
-# ifndef OPENSSL_NO_CRYPTO_MDEBUG_BACKTRACE
-#  define OPENSSL_NO_CRYPTO_MDEBUG_BACKTRACE
-# endif
 # ifndef OPENSSL_NO_DEPRECATED
 #  define OPENSSL_NO_DEPRECATED
 # endif
@@ -88,12 +82,6 @@ extern "C" {
 # ifndef OPENSSL_NO_PADLOCKENG
 #  define OPENSSL_NO_PADLOCKENG
 # endif
-# ifndef OPENSSL_NO_RC5
-#  define OPENSSL_NO_RC5
-# endif
-# ifndef OPENSSL_NO_SCTP
-#  define OPENSSL_NO_SCTP
-# endif
 # ifndef OPENSSL_NO_SRP
 #  define OPENSSL_NO_SRP
 # endif
@@ -102,9 +90,6 @@ extern "C" {
 # endif
 # ifndef OPENSSL_NO_SSL3_METHOD
 #  define OPENSSL_NO_SSL3_METHOD
-# endif
-# ifndef OPENSSL_NO_TFO
-#  define OPENSSL_NO_TFO
 # endif
 # ifndef OPENSSL_NO_TLS1
 #  define OPENSSL_NO_TLS1
@@ -129,12 +114,6 @@ extern "C" {
 # endif
 # ifndef OPENSSL_NO_WINSTORE
 #  define OPENSSL_NO_WINSTORE
-# endif
-# ifndef OPENSSL_NO_ZLIB
-#  define OPENSSL_NO_ZLIB
-# endif
-# ifndef OPENSSL_NO_ZLIB_DYNAMIC
-#  define OPENSSL_NO_ZLIB_DYNAMIC
 # endif
 # ifndef OPENSSL_NO_ZSTD
 #  define OPENSSL_NO_ZSTD
@@ -161,7 +140,7 @@ extern "C" {
 #  undef THIRTY_TWO_BIT
 # endif
 
-# define RC4_INT unsigned char
+# define RC4_INT unsigned int
 
 # if defined(OPENSSL_NO_COMP) || (defined(OPENSSL_NO_BROTLI) && defined(OPENSSL_NO_ZSTD) && defined(OPENSSL_NO_ZLIB))
 #  define OPENSSL_NO_COMP_ALG
