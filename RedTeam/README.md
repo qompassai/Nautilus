@@ -1,10 +1,10 @@
-# Penetration Testing Educational Repository
+# Red Team/Penetration Testing Educational Repository
 
 ## Disclaimer
 
 This repository contains materials related to ethical hacking for educational purposes only. 
 
-**IMPORTANT:** All information and code in this repository are meant for learning and understanding cybersecurity concepts. By using this repository, you agree to the following:
+**IMPORTANT:** All information and code in these repositories are meant for learning and understanding cybersecurity concepts. By using these repository, you agree to the following:
 
 1. The content is for educational use only.
 2. You will not use the information or code for illegal activities.
@@ -24,6 +24,9 @@ This project aims to provide educational resources for ethical hacking and cyber
 Our goal is to foster a deeper understanding of cybersecurity principles and promote responsible security testing practices.
 
 ## Usage
+
+###NIST AI Redteaming Tools
+NIST released an AI Risk Management Framework (RMF) as well as their suite of redteaming tools known as Dioptra. As they have seen fit to open-source their information and tools, so have we. NIST guidelines are the core framework that we operate under when we consider safe, secure, and trustworthy AI.
 
 ### Purple Llama
 
