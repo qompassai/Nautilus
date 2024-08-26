@@ -4,3 +4,6 @@
 [submodule "BlueTeam/Qompass/BlueTeam/Qompass/KO"]
 	path = BlueTeam/Qompass/BlueTeam/Qompass/KO
 	url = https://github.com/qompassai/KO
+[submodule "RedTeam/RedAI/NIST/NIST_dioptra"]
+	path = RedTeam/RedAI/NIST/NIST_dioptra
+	url = https://github.com/usnistgov/dioptra
