@@ -1,26 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PDF.js Example</title>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <title>AI_RMF_Playbook</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js"></script>
     <style>
-        #pdf-viewer { width: 100%; height: 100vh; }
+        #pdf-viewer { width: 100%; height: 90vh; }
+        #navigation { text-align: center; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div id="pdf-viewer"></div>
+    <div id="navigation">
+        <button id="prev">Previous</button>
+        <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+        <button id="next">Next</button>
+    </div>
     <script>
-        // URL of the PDF file
-        var url = 'AI_RMF_Playbook.pdf';
+        var url = 'https://airc.nist.gov/docs/AI_RMF_Playbook.pdf';
+        var pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1.5,
+            canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d');
 
-        // Load the PDF document
-        pdfjsLib.getDocument(url).promise.then(function(pdf) {
-            // Create a new PDF viewer
-            var viewer = new pdfjsViewer.PDFViewer({
-                container: document.getElementById('pdf-viewer'),
+        document.getElementById('pdf-viewer').appendChild(canvas);
+
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({scale: scale});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
             });
 
-            viewer.setDocument(pdf);
+            document.getElementById('page_num').textContent = num;
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        function onPrevPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        document.getElementById('prev').addEventListener('click', onPrevPage);
+        document.getElementById('next').addEventListener('click', onNextPage);
+
+        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            document.getElementById('page_count').textContent = pdfDoc.numPages;
+            renderPage(pageNum);
         });
     </script>
 </body>
