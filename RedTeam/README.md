@@ -25,7 +25,7 @@ Our goal is to foster a deeper understanding of cybersecurity principles and pro
 
 ## Usage
 
-###NIST AI Redteaming Tools
+### NIST AI Redteaming Tools
 NIST released an AI Risk Management Framework (RMF) as well as their suite of redteaming tools known as Dioptra. As they have seen fit to open-source their information and tools, so have we. NIST guidelines are the core framework that we operate under when we consider safe, secure, and trustworthy AI.
 
 ### Purple Llama
