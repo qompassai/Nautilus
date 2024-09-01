@@ -1,6 +1,6 @@
 # Generated with generate_ssl_tests.pl
 
-num_tests = 9
+num_tests = 18
 
 test-0 = 0-renegotiate-client-no-resume
 test-1 = 1-renegotiate-client-resume
@@ -11,6 +11,15 @@ test-5 = 5-renegotiate-aead-to-non-aead
 test-6 = 6-renegotiate-non-aead-to-aead
 test-7 = 7-renegotiate-non-aead-to-non-aead
 test-8 = 8-renegotiate-aead-to-aead
+test-9 = 9-renegotiate-client-no-resume-sctp
+test-10 = 10-renegotiate-client-resume-sctp
+test-11 = 11-renegotiate-server-resume-sctp
+test-12 = 12-renegotiate-client-auth-require-sctp
+test-13 = 13-renegotiate-client-auth-once-sctp
+test-14 = 14-renegotiate-aead-to-non-aead-sctp
+test-15 = 15-renegotiate-non-aead-to-aead-sctp
+test-16 = 16-renegotiate-non-aead-to-non-aead-sctp
+test-17 = 17-renegotiate-aead-to-aead-sctp
 # ===========================================================
 
 [0-renegotiate-client-no-resume]
@@ -289,6 +298,287 @@ UseSCTP = No
 client = 8-renegotiate-aead-to-aead-client-extra
 
 [8-renegotiate-aead-to-aead-client-extra]
+RenegotiateCiphers = AES256-GCM-SHA384
+
+
+# ===========================================================
+
+[9-renegotiate-client-no-resume-sctp]
+ssl_conf = 9-renegotiate-client-no-resume-sctp-ssl
+
+[9-renegotiate-client-no-resume-sctp-ssl]
+server = 9-renegotiate-client-no-resume-sctp-server
+client = 9-renegotiate-client-no-resume-sctp-client
+
+[9-renegotiate-client-no-resume-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+Options = NoResumptionOnRenegotiation
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[9-renegotiate-client-no-resume-sctp-client]
+CipherString = DEFAULT:@SECLEVEL=0
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-9]
+ExpectedResult = Success
+HandshakeMode = RenegotiateClient
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[10-renegotiate-client-resume-sctp]
+ssl_conf = 10-renegotiate-client-resume-sctp-ssl
+
+[10-renegotiate-client-resume-sctp-ssl]
+server = 10-renegotiate-client-resume-sctp-server
+client = 10-renegotiate-client-resume-sctp-client
+
+[10-renegotiate-client-resume-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[10-renegotiate-client-resume-sctp-client]
+CipherString = DEFAULT:@SECLEVEL=0
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-10]
+ExpectedResult = Success
+HandshakeMode = RenegotiateClient
+Method = DTLS
+ResumptionExpected = Yes
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[11-renegotiate-server-resume-sctp]
+ssl_conf = 11-renegotiate-server-resume-sctp-ssl
+
+[11-renegotiate-server-resume-sctp-ssl]
+server = 11-renegotiate-server-resume-sctp-server
+client = 11-renegotiate-server-resume-sctp-client
+
+[11-renegotiate-server-resume-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[11-renegotiate-server-resume-sctp-client]
+CipherString = DEFAULT:@SECLEVEL=0
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-11]
+ExpectedResult = Success
+HandshakeMode = RenegotiateServer
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[12-renegotiate-client-auth-require-sctp]
+ssl_conf = 12-renegotiate-client-auth-require-sctp-ssl
+
+[12-renegotiate-client-auth-require-sctp-ssl]
+server = 12-renegotiate-client-auth-require-sctp-server
+client = 12-renegotiate-client-auth-require-sctp-client
+
+[12-renegotiate-client-auth-require-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+VerifyMode = Require
+
+[12-renegotiate-client-auth-require-sctp-client]
+Certificate = ${ENV::TEST_CERTS_DIR}/ee-client-chain.pem
+CipherString = DEFAULT:@SECLEVEL=0
+PrivateKey = ${ENV::TEST_CERTS_DIR}/ee-key.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-12]
+ExpectedResult = Success
+HandshakeMode = RenegotiateServer
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[13-renegotiate-client-auth-once-sctp]
+ssl_conf = 13-renegotiate-client-auth-once-sctp-ssl
+
+[13-renegotiate-client-auth-once-sctp-ssl]
+server = 13-renegotiate-client-auth-once-sctp-server
+client = 13-renegotiate-client-auth-once-sctp-client
+
+[13-renegotiate-client-auth-once-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+VerifyMode = Once
+
+[13-renegotiate-client-auth-once-sctp-client]
+Certificate = ${ENV::TEST_CERTS_DIR}/ee-client-chain.pem
+CipherString = DEFAULT:@SECLEVEL=0
+PrivateKey = ${ENV::TEST_CERTS_DIR}/ee-key.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-13]
+ExpectedResult = Success
+HandshakeMode = RenegotiateServer
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[14-renegotiate-aead-to-non-aead-sctp]
+ssl_conf = 14-renegotiate-aead-to-non-aead-sctp-ssl
+
+[14-renegotiate-aead-to-non-aead-sctp-ssl]
+server = 14-renegotiate-aead-to-non-aead-sctp-server
+client = 14-renegotiate-aead-to-non-aead-sctp-client
+
+[14-renegotiate-aead-to-non-aead-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT
+Options = NoResumptionOnRenegotiation
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[14-renegotiate-aead-to-non-aead-sctp-client]
+CipherString = AES128-GCM-SHA256
+MaxProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-14]
+ExpectedResult = Success
+HandshakeMode = RenegotiateClient
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+client = 14-renegotiate-aead-to-non-aead-sctp-client-extra
+
+[14-renegotiate-aead-to-non-aead-sctp-client-extra]
+RenegotiateCiphers = AES128-SHA
+
+
+# ===========================================================
+
+[15-renegotiate-non-aead-to-aead-sctp]
+ssl_conf = 15-renegotiate-non-aead-to-aead-sctp-ssl
+
+[15-renegotiate-non-aead-to-aead-sctp-ssl]
+server = 15-renegotiate-non-aead-to-aead-sctp-server
+client = 15-renegotiate-non-aead-to-aead-sctp-client
+
+[15-renegotiate-non-aead-to-aead-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT
+Options = NoResumptionOnRenegotiation
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[15-renegotiate-non-aead-to-aead-sctp-client]
+CipherString = AES128-SHA
+MaxProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-15]
+ExpectedResult = Success
+HandshakeMode = RenegotiateClient
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+client = 15-renegotiate-non-aead-to-aead-sctp-client-extra
+
+[15-renegotiate-non-aead-to-aead-sctp-client-extra]
+RenegotiateCiphers = AES128-GCM-SHA256
+
+
+# ===========================================================
+
+[16-renegotiate-non-aead-to-non-aead-sctp]
+ssl_conf = 16-renegotiate-non-aead-to-non-aead-sctp-ssl
+
+[16-renegotiate-non-aead-to-non-aead-sctp-ssl]
+server = 16-renegotiate-non-aead-to-non-aead-sctp-server
+client = 16-renegotiate-non-aead-to-non-aead-sctp-client
+
+[16-renegotiate-non-aead-to-non-aead-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT
+Options = NoResumptionOnRenegotiation
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[16-renegotiate-non-aead-to-non-aead-sctp-client]
+CipherString = AES128-SHA
+MaxProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-16]
+ExpectedResult = Success
+HandshakeMode = RenegotiateClient
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+client = 16-renegotiate-non-aead-to-non-aead-sctp-client-extra
+
+[16-renegotiate-non-aead-to-non-aead-sctp-client-extra]
+RenegotiateCiphers = AES256-SHA
+
+
+# ===========================================================
+
+[17-renegotiate-aead-to-aead-sctp]
+ssl_conf = 17-renegotiate-aead-to-aead-sctp-ssl
+
+[17-renegotiate-aead-to-aead-sctp-ssl]
+server = 17-renegotiate-aead-to-aead-sctp-server
+client = 17-renegotiate-aead-to-aead-sctp-client
+
+[17-renegotiate-aead-to-aead-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT
+Options = NoResumptionOnRenegotiation
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[17-renegotiate-aead-to-aead-sctp-client]
+CipherString = AES128-GCM-SHA256
+MaxProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-17]
+ExpectedResult = Success
+HandshakeMode = RenegotiateClient
+Method = DTLS
+ResumptionExpected = No
+UseSCTP = Yes
+client = 17-renegotiate-aead-to-aead-sctp-client-extra
+
+[17-renegotiate-aead-to-aead-sctp-client-extra]
 RenegotiateCiphers = AES256-GCM-SHA384
 
 

@@ -1,6 +1,6 @@
 # Generated with generate_ssl_tests.pl
 
-num_tests = 22
+num_tests = 28
 
 test-0 = 0-server-auth-flex
 test-1 = 1-client-auth-flex-request
@@ -24,6 +24,12 @@ test-18 = 18-client-auth-DTLSv1.2-require-fail
 test-19 = 19-client-auth-DTLSv1.2-require
 test-20 = 20-client-auth-DTLSv1.2-require-non-empty-names
 test-21 = 21-client-auth-DTLSv1.2-noroot
+test-22 = 22-server-auth-DTLSv1.2-sctp
+test-23 = 23-client-auth-DTLSv1.2-request-sctp
+test-24 = 24-client-auth-DTLSv1.2-require-fail-sctp
+test-25 = 25-client-auth-DTLSv1.2-require-sctp
+test-26 = 26-client-auth-DTLSv1.2-require-non-empty-names-sctp
+test-27 = 27-client-auth-DTLSv1.2-noroot-sctp
 # ===========================================================
 
 [0-server-auth-flex]
@@ -689,5 +695,200 @@ VerifyMode = Peer
 ExpectedResult = ServerFail
 ExpectedServerAlert = UnknownCA
 Method = DTLS
+
+
+# ===========================================================
+
+[22-server-auth-DTLSv1.2-sctp]
+ssl_conf = 22-server-auth-DTLSv1.2-sctp-ssl
+
+[22-server-auth-DTLSv1.2-sctp-ssl]
+server = 22-server-auth-DTLSv1.2-sctp-server
+client = 22-server-auth-DTLSv1.2-sctp-client
+
+[22-server-auth-DTLSv1.2-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[22-server-auth-DTLSv1.2-sctp-client]
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-22]
+ExpectedResult = Success
+Method = DTLS
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[23-client-auth-DTLSv1.2-request-sctp]
+ssl_conf = 23-client-auth-DTLSv1.2-request-sctp-ssl
+
+[23-client-auth-DTLSv1.2-request-sctp-ssl]
+server = 23-client-auth-DTLSv1.2-request-sctp-server
+client = 23-client-auth-DTLSv1.2-request-sctp-client
+
+[23-client-auth-DTLSv1.2-request-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyMode = Request
+
+[23-client-auth-DTLSv1.2-request-sctp-client]
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-23]
+ExpectedResult = Success
+Method = DTLS
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[24-client-auth-DTLSv1.2-require-fail-sctp]
+ssl_conf = 24-client-auth-DTLSv1.2-require-fail-sctp-ssl
+
+[24-client-auth-DTLSv1.2-require-fail-sctp-ssl]
+server = 24-client-auth-DTLSv1.2-require-fail-sctp-server
+client = 24-client-auth-DTLSv1.2-require-fail-sctp-client
+
+[24-client-auth-DTLSv1.2-require-fail-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+VerifyMode = Require
+
+[24-client-auth-DTLSv1.2-require-fail-sctp-client]
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-24]
+ExpectedResult = ServerFail
+ExpectedServerAlert = HandshakeFailure
+Method = DTLS
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[25-client-auth-DTLSv1.2-require-sctp]
+ssl_conf = 25-client-auth-DTLSv1.2-require-sctp-ssl
+
+[25-client-auth-DTLSv1.2-require-sctp-ssl]
+server = 25-client-auth-DTLSv1.2-require-sctp-server
+client = 25-client-auth-DTLSv1.2-require-sctp-client
+
+[25-client-auth-DTLSv1.2-require-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+VerifyMode = Request
+
+[25-client-auth-DTLSv1.2-require-sctp-client]
+Certificate = ${ENV::TEST_CERTS_DIR}/ee-client-chain.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/ee-key.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-25]
+ExpectedClientCANames = empty
+ExpectedClientCertType = RSA
+ExpectedResult = Success
+Method = DTLS
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[26-client-auth-DTLSv1.2-require-non-empty-names-sctp]
+ssl_conf = 26-client-auth-DTLSv1.2-require-non-empty-names-sctp-ssl
+
+[26-client-auth-DTLSv1.2-require-non-empty-names-sctp-ssl]
+server = 26-client-auth-DTLSv1.2-require-non-empty-names-sctp-server
+client = 26-client-auth-DTLSv1.2-require-non-empty-names-sctp-client
+
+[26-client-auth-DTLSv1.2-require-non-empty-names-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+ClientCAFile = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+VerifyMode = Request
+
+[26-client-auth-DTLSv1.2-require-non-empty-names-sctp-client]
+Certificate = ${ENV::TEST_CERTS_DIR}/ee-client-chain.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/ee-key.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-26]
+ExpectedClientCANames = ${ENV::TEST_CERTS_DIR}/root-cert.pem
+ExpectedClientCertType = RSA
+ExpectedResult = Success
+Method = DTLS
+UseSCTP = Yes
+
+
+# ===========================================================
+
+[27-client-auth-DTLSv1.2-noroot-sctp]
+ssl_conf = 27-client-auth-DTLSv1.2-noroot-sctp-ssl
+
+[27-client-auth-DTLSv1.2-noroot-sctp-ssl]
+server = 27-client-auth-DTLSv1.2-noroot-sctp-server
+client = 27-client-auth-DTLSv1.2-noroot-sctp-client
+
+[27-client-auth-DTLSv1.2-noroot-sctp-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+VerifyMode = Require
+
+[27-client-auth-DTLSv1.2-noroot-sctp-client]
+Certificate = ${ENV::TEST_CERTS_DIR}/ee-client-chain.pem
+CipherString = DEFAULT:@SECLEVEL=0
+MaxProtocol = DTLSv1.2
+MinProtocol = DTLSv1.2
+PrivateKey = ${ENV::TEST_CERTS_DIR}/ee-key.pem
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-27]
+ExpectedResult = ServerFail
+ExpectedServerAlert = UnknownCA
+Method = DTLS
+UseSCTP = Yes
 
 

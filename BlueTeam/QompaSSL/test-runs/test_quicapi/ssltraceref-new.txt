@@ -6,8 +6,8 @@ Header:
     ClientHello, Length=259
       client_version=0x303 (TLS 1.2)
       Random:
-        gmt_unix_time=0x7A86D7F8
-        random_bytes (len=28): 6F1EDD76A2532ECB420787A93F616A63595F49CFE738EDA38C675D4F
+        gmt_unix_time=0xCEE143FB
+        random_bytes (len=28): 89BA8FF45893152C5A3839AAA12B8FBFAC3DB1A8E30CAF2DAB584C6B
       session_id (len=0): 
       cipher_suites (len=2)
         {0x13, 0x01} TLS_AES_128_GCM_SHA256
@@ -63,7 +63,7 @@ Header:
           psk_dhe_ke (1)
         extension_type=key_share(51), length=38
             NamedGroup: ecdh_x25519 (29)
-            key_exchange:  (len=32): 29299A4ECE732BC8F4727C197E764403EA61C32637080AC523FC9DB3536B2818
+            key_exchange:  (len=32): 0E19CC25EDDED31142FD826C3B806E927EB9437790C40F1A6A4AECD1BC3F5953
         extension_type=compress_certificate(27), length=3
           zlib (1)
 
@@ -74,7 +74,7 @@ Sent Frame: Padding
 Sent Packet
   Packet Type: Initial
   Version: 0x00000001
-  Destination Conn Id: 0x43d194fb4c719ee9
+  Destination Conn Id: 0xc6d1c2db4d53df6a
   Source Conn Id: <zero length id>
   Payload length: 1178
   Token: <zero length token>
@@ -89,7 +89,7 @@ Received Packet
   Packet Type: Initial
   Version: 0x00000001
   Destination Conn Id: <zero length id>
-  Source Conn Id: 0xc942e74069c80e24
+  Source Conn Id: 0x6e55a421b2a3a901
   Payload length: 115
   Token: <zero length token>
   Packet Number: 0x00000000
@@ -110,8 +110,8 @@ Header:
     ServerHello, Length=86
       server_version=0x303 (TLS 1.2)
       Random:
-        gmt_unix_time=0x362D11A5
-        random_bytes (len=28): 887D1FBE081C55A25DB592FE0B83A42091A116D6EF50953D016F151F
+        gmt_unix_time=0x7C1647AA
+        random_bytes (len=28): 79D4435CBBC4A9C76B517BD87E40B99A506890AC0B253667668D6592
       session_id (len=0): 
       cipher_suite {0x13, 0x01} TLS_AES_128_GCM_SHA256
       compression_method: No Compression (0x00)
@@ -120,20 +120,20 @@ Header:
             TLS 1.3 (772)
         extension_type=key_share(51), length=36
             NamedGroup: ecdh_x25519 (29)
-            key_exchange:  (len=32): EEEFD1C7E7EA34ABD442BA5FACEDA830DEAD7149A0F1175ECA8370A36D432200
+            key_exchange:  (len=32): E63FED1917D6586A6C162F9D9298DFB75F9883DD3D5D108BC4E195998D03A847
 
 Received Packet
   Packet Type: Handshake
   Version: 0x00000001
   Destination Conn Id: <zero length id>
-  Source Conn Id: 0xc942e74069c80e24
+  Source Conn Id: 0x6e55a421b2a3a901
   Payload length: 1042
   Packet Number: 0x00000000
 Received Packet
   Packet Type: Handshake
   Version: 0x00000001
   Destination Conn Id: <zero length id>
-  Source Conn Id: 0xc942e74069c80e24
+  Source Conn Id: 0x6e55a421b2a3a901
   Payload length: 213
   Packet Number: 0x00000001
 Received Frame: Crypto
@@ -148,8 +148,8 @@ Header:
     EncryptedExtensions, Length=88
       extensions, length = 86
         extension_type=UNKNOWN(57), length=67
-          0000 - 0c 00 00 08 43 d1 94 fb-4c 71 9e e9 0f 08 c9   ....C...Lq.....
-          000f - 42 e7 40 69 c8 0e 24 01-04 80 00 75 30 03 02   B.@i..$....u0..
+          0000 - 0c 00 00 08 c6 d1 c2 db-4d 53 df 6a 0f 08 6e   ........MS.j..n
+          000f - 55 a4 21 b2 a3 a9 01 01-04 80 00 75 30 03 02   U.!........u0..
           001e - 44 b0 0e 01 02 04 04 80-0c 00 00 05 04 80 08   D..............
           002d - 00 00 06 04 80 08 00 00-07 04 80 08 00 00 08   ...............
           003c - 02 40 64 09 02 40 64                           .@d..@d
@@ -255,10 +255,10 @@ Header:
   Inner Content Type = Handshake (22)
     CertificateVerify, Length=260
       Signature Algorithm: rsa_pss_rsae_sha256 (0x0804)
-      Signature (len=256): AC727ABF6289E099B71C724A4A6A6F95A46E8ED610E21E7056C6AC5D31341A6533225113FD6BA4947DD60E78747E97FBF0DC60245C6F71014CBC4185EC022C188ED0D01A2997AC02B2C24486238BD9AFBDE3A4037B3C9A657BE2C27B7570EF645046128E84516954C679C16B8F9656E14B55A9C11D8DC5C2E6E565C8819D98685F3141D393E6890E6E0810E5B9D801C0848A29B03F5B479505B1BD2419DA5F9AF19B35C279A4A2AFD9E31ED8EAC11247BB305F90D8442A46B80167A76BDCED97B08DBE31E651180CC1907F1F8DBCE644A4CDBD9ABF6153E3650B440C50CEBC40C25149D2BC250A4331CCDC2479A8772922D43B14A87FCA445595FB948D2456D8
+      Signature (len=256): 0B34825791313FD833E3A316F7B3D9AC53C77EB243B32D9CA351C33528E57D5CA2D98A81F6D042E9B3C3B04B364E55AF3782AD09DB8776E3A31C7FDBC657F394EBDA736F86D4CD2121DB926E5EFEC2EEBD3B5B413E89C75EE8905FBF9D7C04652577C95C06FB18550E809256F435C0700E13914DD2176B8C5944115FE0E1ED431792C21DC0DB66EE1047921C820C2D66D190AEAD3E0B95E6DC5EDA35AFBBCD20575C7F11664A698233801932ED5E9754DFB297CEE28C8F94C9341A55007131C172B83E7D9C1A3D0777494F99E616BAD40F106337AEA1181F6CEA6C7E022FC0A435F2ABC9C0749E17081689567B55350DDD842EB0AFF3B55B5F4613BCBD29C0E0
 
     Finished, Length=32
-      verify_data (len=32): 88E8CFA0AFECE089A4E25D1A125B047CDCE484A395A029CE935B3AB820A2C35E
+      verify_data (len=32): F37681FF79B9EBDD3729375FA32020C55D721A15963D0EF7000C9CB91E08A026
 
 Sent TLS Record
 Header:
@@ -267,7 +267,7 @@ Header:
   Length = 36
   Inner Content Type = Handshake (22)
     Finished, Length=32
-      verify_data (len=32): 394F11797F8561758BF634875B65F37C950054208B6D307468E8E785878B33B6
+      verify_data (len=32): 74435107669FDBB9DCEBBC8FEA5B78400775725655F4F69B20C379FD13611758
 
 Sent Frame: Ack  (without ECN)
     Largest acked: 0
@@ -286,7 +286,7 @@ Sent Frame: Padding
 Sent Packet
   Packet Type: Initial
   Version: 0x00000001
-  Destination Conn Id: 0xc942e74069c80e24
+  Destination Conn Id: 0x6e55a421b2a3a901
   Source Conn Id: <zero length id>
   Payload length: 1097
   Token: <zero length token>
@@ -294,7 +294,7 @@ Sent Packet
 Sent Packet
   Packet Type: Handshake
   Version: 0x00000001
-  Destination Conn Id: 0xc942e74069c80e24
+  Destination Conn Id: 0x6e55a421b2a3a901
   Source Conn Id: <zero length id>
   Payload length: 60
   Packet Number: 0x00000000

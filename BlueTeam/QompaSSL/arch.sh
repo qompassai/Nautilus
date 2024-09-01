@@ -1,45 +1,18 @@
 #!/bin/bash
 
-if ! gh auth status &>/dev/null; then
-    echo "GitHub CLI is not authenticated. Attempting to authenticate..."
-    if ! gh auth login; then
-        echo "Failed to authenticate GitHub CLI. Please run 'gh auth login' manually."
-        exit 1
-    fi
-fi
-
-# Ensure a tag is provided
-if [ $# -eq 0 ]; then
-    echo "Please provide a tag name"
-    exit 1
-fi
-
-TAG_NAME=$1
-DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
-
-# Check if Configure script exists
-if [ ! -f "./Configure" ]; then
-    echo "Configure script not found. Are you in the correct directory?"
-    exit 1
-fi
-
-# Check for write permissions
-if [ ! -w "." ]; then
-    echo "No write permission in the current directory"
-    exit 1
-fi
 
 # Build OpenSSL
+export CFLAGS="$CFLAGS -DENGINE_AFALG"
 CC=gcc ./Configure shared \
 linux-x86_64 \
 --prefix=/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL/releases \
 enable-dynamic-engine \
+shared \
 no-weak-ssl-ciphers \
 no-deprecated \
 no-ssl3 \
 no-tls1 \
 no-tls1_1 \
-enable-dynamic-engine \
 enable-ktls \
 enable-ssl-trace \
 enable-srp \
