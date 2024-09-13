@@ -4,7 +4,7 @@ use std::result;
 use std::str::FromStr;
 
 use anyhow::Error;
-use openpgp::packet::UserID;
+use crate::openpgp::packet::UserID;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use Result;
 

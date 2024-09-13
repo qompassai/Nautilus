@@ -1,14 +1,20 @@
-use openpgp::Result;
+use anyhow::Result;
 use std::convert::TryFrom;
 
-use openpgp::{
-    cert::prelude::*, policy::StandardPolicy, serialize::SerializeInto as _,
-    types::RevocationStatus, Cert,
+use crate::openpgp::{
+    cert::prelude::*,
+    packet::{Packet, PacketPile, Signature},
+    policy::{Policy, StandardPolicy},
+    serialize::SerializeInto,
+    types::{HashAlgorithm, KeyFlags, RevocationStatus, SignatureType},
+    Cert,
 };
 
-use Email;
+use crate::types::Email;
 
-pub const POLICY: StandardPolicy = StandardPolicy::new();
+lazy_static::lazy_static! {
+    pub static ref POLICY: StandardPolicy = StandardPolicy::new();
+}
 
 pub fn is_status_revoked(status: RevocationStatus) -> bool {
     match status {
@@ -19,7 +25,7 @@ pub fn is_status_revoked(status: RevocationStatus) -> bool {
 }
 
 pub fn tpk_to_string(tpk: &Cert) -> Result<Vec<u8>> {
-    tpk.armored().export_to_vec()
+    tpk.armored().export_to_vec().map_err(Into::into)
 }
 
 pub fn tpk_clean(tpk: &Cert) -> Result<Cert> {
@@ -79,7 +85,7 @@ pub fn tpk_clean(tpk: &Cert) -> Result<Cert> {
         }
     }
 
-    Cert::from_packets(acc.into_iter())
+    Cert::from_packets(acc.into_iter()).map_err(Into::into)
 }
 
 /// Filters the Cert, keeping only UserIDs that aren't revoked, and whose emails match the given list
@@ -94,3 +100,4 @@ pub fn tpk_filter_alive_emails(tpk: &Cert, emails: &[Email]) -> Cert {
         }
     })
 }
+

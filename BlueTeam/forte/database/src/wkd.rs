@@ -1,3 +1,4 @@
+use anyhow::anyhow;
 use super::Result;
 use crate::openpgp::types::HashAlgorithm;
 use zbase32;

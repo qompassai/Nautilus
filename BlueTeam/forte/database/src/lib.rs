@@ -6,7 +6,8 @@ use std::str::FromStr;
 use anyhow::{anyhow, Result};
 use chrono::Utc;
 use log::{error, info};
-use sequoia_openpgp as openpgp; // Alias `sequoia_openpgp` as `openpgp`
+pub use sequoia_openpgp as openpgp; // Re-export for other modules
+
 use openpgp::serialize::SerializeInto;
 use openpgp::{packet::UserID, parse::Parse, types::KeyFlags, Cert};
 
@@ -16,7 +17,7 @@ use crate::types::{Email, Fingerprint, KeyID};
 pub mod sync;
 pub mod wkd;
 
-mod fs;
+pub mod fs;
 pub use crate::fs::Filesystem as KeyDatabase;
 
 mod stateful_tokens;
@@ -49,11 +50,11 @@ impl Query {
 impl FromStr for Query {
     type Err = anyhow::Error;
 
-    fn from_str(term: &str) -> Result<Self> {
+    fn from_str(term: &str) -> Result<Self, Self::Err> {
         use self::Query::*;
 
-        let looks_like_short_key_id =
-            !term.contains('@') && (term.starts_with("0x") && term.len() < 16 || term.len() == 8);
+        let looks_like_short_key_id = !term.contains('@')
+            && ((term.starts_with("0x") && term.len() < 16) || term.len() == 8);
         if looks_like_short_key_id {
             Ok(InvalidShort())
         } else if let Ok(fp) = Fingerprint::from_str(term) {
@@ -653,8 +654,7 @@ pub trait Database: Sync + Send {
 
 fn tpk_get_emails(cert: &Cert) -> Vec<Email> {
     cert.userids()
-        .map(|binding| Email::try_from(binding.userid()))
-        .flatten()
+        .filter_map(|binding| Email::try_from(binding.userid()).ok())
         .collect()
 }
 
@@ -663,8 +663,8 @@ pub fn tpk_get_linkable_fprs(tpk: &Cert) -> Vec<Fingerprint> {
     let fpr_primary = &Fingerprint::try_from(tpk.fingerprint()).unwrap();
     tpk.keys()
         .into_iter()
-        .flat_map(|bundle| {
-            Fingerprint::try_from(bundle.key().fingerprint()).map(|fpr| {
+        .filter_map(|bundle| {
+            Fingerprint::try_from(bundle.key().fingerprint()).ok().map(|fpr| {
                 (
                     fpr,
                     bundle

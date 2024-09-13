@@ -1,3 +1,4 @@
+use sequoia_openpgp as openpgp;
 use std::collections::HashMap;
 use std::convert::TryFrom;
 use std::fs::{
@@ -11,6 +12,10 @@ use pathdiff::diff_paths;
 use std::time::SystemTime;
 use tempfile;
 use url::form_urlencoded;
+
+// Create a connection pool
+let manager = ConnectionManager::<PgConnection>::new(database_url);
+let pool = Pool::builder().build(manager).expect("Failed to create pool.");
 
 use sync::FlockMutexGuard;
 use types::{Email, Fingerprint, KeyID};
@@ -47,8 +52,8 @@ pub struct Filesystem {
 ///
 /// Use this on paths returned by .path_to_* before creating the
 /// object.
-fn ensure_parent(path: &Path) -> Result<&Path> {
-    let parent = path.parent().unwrap();
+fn ensure_parent(path: &Path) -> anyhow::Result<&Path> {
+    let parent = path.parent().ok_or_else(|| anyhow::anyhow!("Invalid path"))?;
     create_dir_all(parent)?;
     Ok(path)
 }
