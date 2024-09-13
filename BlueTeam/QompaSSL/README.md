@@ -1,12 +1,10 @@
-Welcome to the OpenSSL Project
+QompaSSL
 ==============================
-
-[![openssl logo]][www.openssl.org]
 
 [![github actions ci badge]][github actions ci]
 [![appveyor badge]][appveyor jobs]
 
-OpenSSL is a robust, commercial-grade, full-featured Open Source Toolkit
+QompaSSL is a fork of OpenSSL: A robust, commercial-grade, full-featured Open Source Toolkit
 for the TLS (formerly SSL), DTLS and QUIC (currently client side only)
 protocols.
 
@@ -14,10 +12,7 @@ The protocol implementations are based on a full-strength general purpose
 cryptographic library, which can also be used stand-alone. Also included is a
 cryptographic module validated to conform with FIPS standards.
 
-OpenSSL is descended from the SSLeay library developed by Eric A. Young
-and Tim J. Hudson.
 
-The official Home Page of the OpenSSL Project is [www.openssl.org].
 
 Table of Contents
 =================
@@ -182,12 +177,6 @@ Support
 
 There are various ways to get in touch. The correct channel depends on
 your requirement. See the [SUPPORT](SUPPORT.md) file for more details.
-
-Contributing
-============
-
-If you are interested and willing to contribute to the OpenSSL project,
-please take a look at the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 Legalities
 ==========
