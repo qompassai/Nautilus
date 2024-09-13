@@ -1,7 +1,7 @@
 #!/bin/bash
 ./config shared \
 linux-x86_64 \
-enable-engine
+enable-engine \
 enable-dynamic-engine \
 no-weak-ssl-ciphers \
 no-deprecated \
@@ -196,21 +196,10 @@ This build provides a comprehensive suite of cryptographic algorithms, with a st
 
 We maintain our commitment to high security standards while expanding the feature set to meet the evolving cryptographic needs of the AI era. As always, we include test results to foster transparency and trust. We remain grateful to the cryptography community and the OpenSSL developers for their invaluable contributions to the field."
 
-# Create a release
-gh release create $TAG_NAME \
-    --title "QompaSSL Release $TAG_NAME" \
-    --notes "$RELEASE_NOTES" \
-    "$TAR_FILE"
-
-# Clean up
-rm "$TAR_FILE"
-
-echo "Release created successfully with $TAR_FILE"
-
 # Commands to push release to GitHub repository
 git add .
 git commit -S -m "QompaSSL 2.0 Release $TAG_NAME"
 git tag $TAG_NAME
 git push origin main
 git push origin $TAG_NAME
-gh release create $TAG_NAME --repo qompassai/Nautilus --title "QompaSSL 2.0 Release $TAG_NAME" --notes "$RELEASE_NOTES" "$TAR_FILE"
+gh release create $TAG_NAME --repo qompassai/Nautilus --title "QompaSSL 2.0 Release $TAG_NAME" --notes "$RELEASE_NOTES" "$RELEASE_DIR/$TAR_FILE"

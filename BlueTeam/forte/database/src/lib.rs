@@ -3,46 +3,29 @@
 use std::convert::TryFrom;
 use std::str::FromStr;
 
+use anyhow::{anyhow, Result};
+use chrono::Utc;
+use log::{error, info};
+use sequoia_openpgp as openpgp; // Alias `sequoia_openpgp` as `openpgp`
 use openpgp::serialize::SerializeInto;
-
-use chrono::prelude::Utc;
-
-#[macro_use]
-extern crate anyhow;
-use anyhow::Result;
-extern crate fs2;
-extern crate idna;
-#[macro_use]
-extern crate log;
-extern crate chrono;
-extern crate hex;
-extern crate pathdiff;
-extern crate rand;
-extern crate serde;
-extern crate serde_json;
-extern crate tempfile;
-extern crate time;
-extern crate url;
-extern crate walkdir;
-extern crate zbase32;
-
-extern crate sequoia_openpgp as openpgp;
 use openpgp::{packet::UserID, parse::Parse, types::KeyFlags, Cert};
 
 pub mod types;
-use types::{Email, Fingerprint, KeyID};
+use crate::types::{Email, Fingerprint, KeyID};
 
 pub mod sync;
 pub mod wkd;
 
 mod fs;
-pub use self::fs::Filesystem as KeyDatabase;
+pub use crate::fs::Filesystem as KeyDatabase;
 
 mod stateful_tokens;
-pub use stateful_tokens::StatefulTokens;
+pub use crate::stateful_tokens::StatefulTokens;
 
 mod openpgp_utils;
-use openpgp_utils::{is_status_revoked, tpk_clean, tpk_filter_alive_emails, tpk_to_string, POLICY};
+use crate::openpgp_utils::{
+    is_status_revoked, tpk_clean, tpk_filter_alive_emails, tpk_to_string, POLICY,
+};
 
 #[cfg(test)]
 mod test;

@@ -1,10 +1,10 @@
 use std::fs::{create_dir_all, remove_file, File};
 use std::io::{Read, Write};
 use std::path::PathBuf;
-
 use std::str;
 
-use Result;
+use anyhow::Result;
+use log::info;
 
 pub struct StatefulTokens {
     token_dir: PathBuf,
@@ -53,3 +53,4 @@ impl StatefulTokens {
         Ok(str::from_utf8(&buf)?.to_string())
     }
 }
+
