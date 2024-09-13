@@ -1,0 +1,27 @@
+<div class="about">
+    <center><h2>
+<a href="/about">À propos</a> | <a href="/about/news">Nouvelles</a> | <a href="/about/usage">Utilisation</a> | <a href="/about/faq">FAQ</a> | <a href="/about/stats">Statistiques</a> | Protection des données</h2></center>
+
+    <p style="text-align: left;">Le serveur de clés public derrière keys.openpgp.org traite, stocke et distribue les données des clés OpenPGP. La façon particulière dont les données sont traitées diffère selon le type, comme suit :</p>
+<ul>
+<li>
+<b>Adresses courriel</b><p>Les adresses courriel comprises dans les <abbr title="Packet Tag 13">ID utilisateur</abbr> sont des renseignements qui permettent d’identifier leur détenteur. Des précautions particulières sont prises pour garantir qu’elles ne sont utilisées qu’avec consentement :</p>
+<ul>
+<li>Leur publication exige une confirmation par <a target="_blank" href="https://fr.wikipedia.org/wiki/Opt_in">double consentement</a> afin de prouver la propriété de l’adresse courriel en question.</li>
+                      <li>Seules les adresses courriel exactes peuvent être cherchées, pas les noms associés.</li>
+                      <li>Il n’est pas possible d’énumérer les adresses.</li>
+                      <li>La suppression d’adresses est possible avec une simple preuve de propriété, de façon automatisée, comme pour la publication. Afin de retirer une adresse quand cela n’est pas possible, envoyez un courriel à support arobase keys point openpgp point org.</li>
+                  </ul>
+<p>Ces données ne sont jamais remises à des tiers en bloc (vidage de données).</p>
+          </li>
+          <li>
+<b>Données de clés publiques</b><p>Le contenu cryptographique de clés OpenPGP n’est pas considéré comme des renseignements qui permettent d’identifier les détenteurs des clés. Cela comprend plus particulièrement les <abbr title="Balises de paquet 6 et 14">contenus de clés publiques</abbr>, les <abbr title="Balise de paquet 6, types de signature 0x10-0x13, 0x18, 0x19, 0x1F">autosignatures</abbr> et les <abbr title="Balise de paquet 2, types de signature 0x20, 0x28, 0x30">signatures de révocation</abbr>.</p>
+              <p>Ces données ne sont habituellement pas disponibles en bloc (vidage de données), mais pourraient être remises sur demande à des tiers à des fins de développement ou de recherche.</p>
+          </li>
+          <li>
+<b>Autres données d’ID utilisateur</b><p>Une clé OpenPGP peut comprendre des données personnelles autres que des adresses courriel, telles que les <abbr title="Balise de paquet 13">ID utilisateur</abbr> qui ne comprennent pas d’adresses courriel, ou les <abbr title="Balise de paquet 17">attributs d’image</abbr>. Ces données sont retirées lors du téléversement et ne sont jamais enregistrées, traitées, ni distribuées d’aucune façon.</p>
+              <p>Les types de paquets OpenPGP qui ne sont pas spécifiquement mentionnés ci-dessus sont retirés lors du téléversement et ne sont jamais enregistrés, traités, ni distribués d’aucune façon.</p>
+          </li>
+      </ul>
+<p style="text-align: left">Aucune donnée n’est jamais transmise à des tiers outre ce qui est disponible dans les <a href="/about/api"> interfaces publiques de l’API</a>, ainsi que ce qui est décrit dans cette politique.</p>
+</div>

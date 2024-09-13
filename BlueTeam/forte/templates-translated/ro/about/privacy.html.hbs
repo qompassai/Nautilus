@@ -1,0 +1,54 @@
+<div class="about">
+    <center><h2>
+<a href="/about">Despre</a> | <a href="/about/news">Știri</a> | <a href="/about/usage">Utilizare</a> | <a href="/about/faq">FAQ</a> | <a href="/about/stats">Statistici</a> | Confidențialitate</h2></center>
+
+    <p style="text-align: left;">Serverul de chei publice care rulează pe keys.openpgp.org procesează, stochează și
+        distribuie datele de chei OpenPGP. Modul specific în care sunt procesate datele
+        diferă în funcție de tip, după cum urmează:</p>
+<ul>
+<li>
+<b>Adrese de e-mail</b><p>Adresele de e-mail conținute în <abbr title="Packet Tag 13">User
+                      ID-uri</abbr> sunt informații de identificare personală(PII).
+                  Se acordă o atenție deosebită pentru a ne asigura că acestea sunt utilizate numai cu
+                  consimțământ:</p>
+<ul>
+<li>Publicarea necesită o <a target="_blank" href="https://en.wikipedia.org/wiki/Opt-in_email#Confirmed_opt-in_(COI)_/_Double_opt-in_(DOI)">dublă
+                              opt-in</a> pentru a dovedi proprietatea asupra
+                          adresa de e-mail în cauză.</li>
+                      <li>Adresele pot fi căutate după adresa de e-mail exactă,
+                          dar nu și după numele asociat.</li>
+                      <li>Enumerarea adreselor nu este posibilă.</li>
+                      <li>Ștergerea adreselor este posibilă printr-o dovadă simplă
+                          de proprietate în mod automat, similar cu
+                          publicarea. Pentru a scoate de pe listă o adresă în cazul în care acest lucru nu este
+                          posibilă, scrieți la support at keys dot openpgp dot
+                          org.</li>
+                  </ul>
+<p>Aceste date nu sunt niciodată transmise în mod colectiv ("ca un dumping") către terțe
+                  părți.</p>
+          </li>
+          <li>
+<b>Date privind cheia publică</b><p>TConținutul criptografic al cheilor OpenPGP nu este luat în considerare personal.
+                  identificabile. Aceasta include în mod specific
+                  <abbr title="Packet Tags 6 and 14">materialul cheii publice</abbr>,
+                  <abbr title="Packet Tag 2, Signature types 0x10-0x13, 0x18, 0x19, 0x1F">semnăturile proprii</abbr>, și
+                  <abbr title="Packet Tag 2, Signature types 0x20, 0x28, 0x30">semnăturile de revocare</abbr>.</p>
+              <p>Aceste date nu sunt de obicei disponibile în mod colectiv ("ca
+                  ca un dumping"), dar pot fi transmise, la cerere, unor terți.
+                  părților terțe în scopuri de dezvoltare sau de cercetare.</p>
+          </li>
+          <li>
+<b>Alte date ID utilizator</b><p>O cheie OpenPGP poate conține date cu caracter personal, altele decât
+                  adrese de e-mail, cum ar fi <abbr title="Packet Tag 13">User IDs</abbr>
+                  care nu conțin adrese de e-mail sau <abbr title="Packet Tag 17">atribute de imagine</abbr>. Aceste date sunt eliminate
+              în timpul încărcării și nu sunt niciodată stocate, procesate sau distribuite în
+              niciun fel.</p>
+              <p>Tipurile de pachete OpenPGP care nu au fost menționate în mod specific mai sus sunt
+                  sunt eliminate în timpul încărcării și nu sunt niciodată stocate, procesate sau
+                  distribuite în niciun fel.</p>
+          </li>
+      </ul>
+<p style="text-align: left">Datele nu sunt niciodată transmise unor terțe părți în afara
+         ceea ce este disponibil prin <a href="/about/api">interfețele API publice</a>,
+          și ceea ce este descris în această politică.</p>
+</div>

@@ -1,0 +1,13 @@
+[Unit]
+Description=Forte Verifying Keyserver
+After=network.target
+
+[Service]
+ExecStart=/opt/piano/target/release/piano /opt/piano/dist -D %i -F piano@%i
+WorkingDirectory=/opt/piano
+User=piano
+Group=piano
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

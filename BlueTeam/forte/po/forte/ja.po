@@ -1,0 +1,398 @@
+# Translators:
+# Yutaka Niibe <gniibe@fsij.org>, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hagrid\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-15 16:33-0700\n"
+"PO-Revision-Date: 2019-09-27 18:05+0000\n"
+"Last-Translator: Yutaka Niibe <gniibe@fsij.org>, 2020\n"
+"Language-Team: Japanese (https://www.transifex.com/otf/teams/102430/ja/)\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Looks like something went wrong :("
+msgstr "なにかがうまくいかないようです :("
+
+msgid "Error message: {{ internal_error }}"
+msgstr "エラーメッセージ: {{ internal_error }}"
+
+msgid "There was an error with your request:"
+msgstr "あなたのリクエストにエラーがありました。"
+
+msgid "We found an entry for <span class=\"email\">{{ query }}</span>:"
+msgstr ""
+"<span class=\"email\">{{ query }}</span>に対して一つのエントリをみつけました:"
+
+msgid ""
+"<strong>Hint:</strong> It's more convenient to use <span class=\"brand"
+"\">keys.openpgp.org</span> from your OpenPGP software.<br /> Take a look at "
+"our <a href=\"/about/usage\">usage guide</a> for details."
+msgstr ""
+"<strong>ヒント:</strong><span class=\"brand\">keys.openpgp.org</span>はあなた"
+"のOpenPGPソフトウェアから使うのがより便利です。<br /> 詳しくは、わたしたちの"
+"<a href=\"/about/usage\">使い方のガイド</a>をご覧ください。"
+
+msgid "debug info"
+msgstr "デバッグ情報"
+
+msgid "Search by Email Address / Key ID / Fingerprint"
+msgstr "メールアドレス / 鍵ID / フィンガープリントで検索する。"
+
+msgid "Search"
+msgstr "検索"
+
+msgid ""
+"You can also <a href=\"/upload\">upload</a> or <a href=\"/manage\">manage</"
+"a> your key."
+msgstr ""
+"あなたの鍵を<a href=\"/upload\">アップロード</a>または<a href=\"/manage\">管"
+"理</a>もできます。"
+
+msgid "Find out more <a href=\"/about\">about this service</a>."
+msgstr "<a href=\"/about\">このサービスについて</a>さらにくわしく。"
+
+msgid "News:"
+msgstr "ニュース:"
+
+msgid ""
+"<a href=\"/about/news#2019-11-12-celebrating-100k\">Celebrating 100.000 "
+"verified addresses! 📈</a> (2019-11-12)"
+msgstr ""
+
+msgid "v{{ version }} built from"
+msgstr "v{{ version }} 、以下でビルトされました"
+
+msgid "Powered by <a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>"
+msgstr "<a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>で動いています"
+
+msgid ""
+"Background image retrieved from <a href=\"https://www.toptal.com/designers/"
+"subtlepatterns/subtle-grey/\">Subtle Patterns</a> under CC BY-SA 3.0"
+msgstr ""
+"背景の画像は<a href=\"https://www.toptal.com/designers/subtlepatterns/subtle-"
+"grey/\">Subtle Patterns</a> からCC BY-SA 3.0のもとで取得されました。"
+
+msgid "Maintenance Mode"
+msgstr "メンテナンスモード"
+
+msgid "Manage your key"
+msgstr "あなたの鍵を管理する"
+
+msgid "Enter any verified email address for your key"
+msgstr ""
+"あなたの鍵に対して検証されたメールアドレスをどれでもよいので入力してください"
+
+msgid "Send link"
+msgstr "リンクを送る"
+
+msgid ""
+"We will send you an email with a link you can use to remove any of your "
+"email addresses from search."
+msgstr ""
+"検索からあなたのメールアドレスを削除するためのリンクのメールを送ります。"
+
+msgid ""
+"Managing the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+"鍵<span class=\"fingerprint\"><a href=\"{{ key_link }}\" target=\"_blank"
+"\">{{ key_fpr }}</a></span>を管理する。"
+
+msgid "Your key is published with the following identity information:"
+msgstr "以下のアイデンティティ情報であなたの鍵は公開されました。"
+
+msgid "Delete"
+msgstr "削除する"
+
+msgid ""
+"Clicking \"delete\" on any address will remove it from this key. It will no "
+"longer appear in a search.<br /> To add another address, <a href=\"/upload"
+"\">upload</a> the key again."
+msgstr ""
+"どのアドレスでも\"delete\"をクリックすると鍵から削除します。そのアドレスは検"
+"索に現れなくなります。<br />アドレスを加えるにはその鍵を再度<a href=\"/upload"
+"\">アップロード</a>してください。"
+
+msgid ""
+"Your key is published as only non-identity information.  (<a href=\"/about\" "
+"target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+"アイデンティティなしのみの情報であなたの鍵は公開されました。.  (<a href=\"/"
+"about\" target=\"_blank\">これはどういう意味?</a>)"
+
+msgid "To add an address, <a href=\"/upload\">upload</a> the key again."
+msgstr ""
+"アドレスを加えるにはその鍵を再度<a href=\"/upload\">アップロード</a>してくだ"
+"さい。 "
+
+msgid ""
+"We have sent an email with further instructions to <span class=\"email"
+"\">{{ address }}</span>."
+msgstr ""
+"くわしい手順を<span class=\"email\">{{ address }}</span>にメールしました。"
+
+msgid "This address has already been verified."
+msgstr "このアドレスはすでに検証されています。"
+
+msgid ""
+"Your key <span class=\"fingerprint\">{{ key_fpr }}</span> is now published "
+"for the identity <a href=\"{{userid_link}}\" target=\"_blank\"><span class="
+"\"email\">{{ userid }}</span></a>."
+msgstr ""
+"あなたの鍵<span class=\"fingerprint\">{{ key_fpr }}</span>は、今、アイデン"
+"ティティ<a href=\"{{userid_link}}\" target=\"_blank\"><span class=\"email"
+"\">{{ userid }}</span></a>に対して公開されました。"
+
+msgid "Upload your key"
+msgstr "あなたの鍵をアップロードする"
+
+msgid "Upload"
+msgstr "アップロード"
+
+msgid ""
+"Need more info? Check our <a target=\"_blank\" href=\"/about\">intro</a> and "
+"<a target=\"_blank\" href=\"/about/usage\">usage guide</a>."
+msgstr ""
+"もっと情報が必要ですか？わたしたちの<a target=\"_blank\" href=\"/about\">イン"
+"トロ</a> と<a target=\"_blank\" href=\"/about/usage\">ユーザーガイド</a>をご"
+"覧ください。"
+
+msgid ""
+"You uploaded the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+"この鍵<span class=\"fingerprint\"><a href=\"{{ key_link }}\" target=\"_blank"
+"\">{{ key_fpr }}</a></span>をあなたはアップロードしました。"
+
+msgid "This key is revoked."
+msgstr "この鍵はリボークされました。"
+
+msgid ""
+"It is published without identity information and can't be made available for "
+"search by email address (<a href=\"/about\" target=\"_blank\">what does this "
+"mean?</a>)."
+msgstr ""
+"アイデンティティの情報なしで公開され、メールアドレスによる検索は利用可能では"
+"ありません(<a href=\"/about\" target=\"_blank\">どういう意味か？</a>)。"
+
+msgid ""
+"This key is now published with the following identity information (<a href="
+"\"/about\" target=\"_blank\">what does this mean?</a>):"
+msgstr ""
+"この鍵は下記のアイデンティティ情報とともに公開されました (<a href=\"/about\" "
+"target=\"_blank\">どういう意味?</a>):"
+
+msgid "Published"
+msgstr "公開されました"
+
+msgid ""
+"This key is now published with only non-identity information. (<a href=\"/"
+"about\" target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+"アイデンティティではない情報だけでこの鍵は公開されました。(<a href=\"/about"
+"\" target=\"_blank\">どういう意味か？</a>)"
+
+msgid ""
+"To make the key available for search by email address, you can verify it "
+"belongs to you:"
+msgstr ""
+"メールアドレスでの検索で鍵が利用できるようにするために、そのメールアドレスが"
+"あなたのものであることを検証することができます。"
+
+msgid "Verification Pending"
+msgstr "検証を出願中です。"
+
+msgid ""
+"<strong>Note:</strong> Some providers delay emails for up to 15 minutes to "
+"prevent spam. Please be patient."
+msgstr ""
+"<strong>注意:</strong> 迷惑メール防止のために、プロバイダは15分ほどメールを遅"
+"らせることがあります。しばらくお待ちください。"
+
+msgid "Send Verification Email"
+msgstr "検証のメールを送る"
+
+msgid ""
+"This key contains one identity that could not be parsed as an email address."
+"<br /> This identity can't be published on <span class=\"brand\">keys."
+"openpgp.org</span>.  (<a href=\"/about/faq#non-email-uids\" target=\"_blank"
+"\">Why?</a>)"
+msgstr ""
+"この鍵にはメールアドレスとしてパーズできないアイデンティティが含まれます。"
+"<br /> <span class=\"brand\">keys.openpgp.org</span>.ではこのアイデンティティ"
+"は公開できません。 (<a href=\"/about/faq#non-email-uids\" target=\"_blank\">"
+"なぜか？</a>)"
+
+msgid ""
+"This key contains {{ count_unparsed }} identities that could not be parsed "
+"as an email address.<br /> These identities can't be published on <span "
+"class=\"brand\">keys.openpgp.org</span>.  (<a href=\"/about/faq#non-email-"
+"uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"この鍵は {{ count_unparsed }}のメールアドレスとしてパーズできないアイデンティ"
+"ティを有します。<br /><span class=\"brand\">keys.openpgp.org</span>ではこれら"
+"のアイデンティティは公開できません。 (<a href=\"/about/faq#non-email-uids\" "
+"target=\"_blank\">なぜか?</a>)"
+
+msgid ""
+"This key contains one revoked identity, which is not published. (<a href=\"/"
+"about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"この鍵はリボークされたアイデンティティが含まれており、公開されませんでした。 "
+"(<a href=\"/about/faq#revoked-uids\" target=\"_blank\">なぜか?</a>)"
+
+msgid ""
+"This key contains {{ count_revoked }} revoked identities, which are not "
+"published. (<a href=\"/about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"この鍵には{{ count_revoked }} 個のリボークされたアイデンティティが含まれます"
+"が、公開されません。 (<a href=\"/about/faq#revoked-uids\" target=\"_blank\">"
+"なぜか？</a>)"
+
+msgid "Your keys have been successfully uploaded:"
+msgstr "あなたの鍵はアップロードに成功しました:"
+
+msgid ""
+"<strong>Note:</strong> To make keys searchable by email address, you must "
+"upload them individually."
+msgstr ""
+"<strong>注意:</strong> メールアドレスで鍵を検索可能とするために、ひとつひとつ"
+"独立にアップロードする必要があります。"
+
+msgid "Verifying your email address…"
+msgstr "メールアドレスを確認しています..."
+
+msgid ""
+"If the process doesn't complete after a few seconds, please <input type="
+"\"submit\" class=\"textbutton\" value=\"click here\" />."
+msgstr ""
+"数秒後にこのプロセスが完了しない場合、どうぞこちらに<input type=\"submit\" "
+"class=\"textbutton\" value=\"click here\" />お願いします。"
+
+msgid "Manage your key on {{domain}}"
+msgstr "{{domain}}のあなたの鍵を管理する"
+
+msgid "Hi,"
+msgstr "どうも、"
+
+msgid ""
+"This is an automated message from <a href=\"{{base_uri}}\" style=\"text-"
+"decoration:none; color: #333\">{{domain}}</a>."
+msgstr ""
+"<a href=\"{{base_uri}}\" style=\"text-decoration:none; color: "
+"#333\">{{domain}}</a>からの自動メッセージです。"
+
+msgid "If you didn't request this message, please ignore it."
+msgstr "このメッセージを要求していない場合、無視してください。"
+
+msgid "OpenPGP key: <tt>{{primary_fp}}</tt>"
+msgstr "OpenPGPの鍵: <tt>{{primary_fp}}</tt>"
+
+msgid ""
+"To manage and delete listed addresses on this key, please follow the link "
+"below:"
+msgstr ""
+"この鍵の掲示されたアドレスを管理し削除するには、以下のリンクをたどってくださ"
+"い:"
+
+msgid ""
+"You can find more info at <a href=\"{{base_uri}}/about\">{{domain}}/about</"
+"a>."
+msgstr ""
+"よりくわしい情報はこちら <a href=\"{{base_uri}}/about\">{{domain}}/about</a>"
+"にあります。"
+
+msgid "distributing OpenPGP keys since 2019"
+msgstr "OpenPGPの鍵を2019年から配布しています"
+
+msgid "This is an automated message from {{domain}}."
+msgstr "{{domain}}からの自動メッセージです。"
+
+msgid "OpenPGP key: {{primary_fp}}"
+msgstr "OpenPGPの鍵: {{primary_fp}}"
+
+msgid "You can find more info at {{base_uri}}/about"
+msgstr "詳しい情報はこちらにあります:  {{base_uri}}/about"
+
+msgid "Verify {{userid}} for your key on {{domain}}"
+msgstr " {{domain}}に対するあなたの鍵の {{userid}}を検証する"
+
+msgid ""
+"To let others find this key from your email address \"<a rel=\"nofollow\" "
+"href=\"#\" style=\"text-decoration:none; color: #333\">{{userid}}</a>\", "
+"please click the link below:"
+msgstr ""
+"他人があなたのメールアドレス \"<a rel=\"nofollow\" href=\"#\" style=\"text-"
+"decoration:none; color: #333\">{{userid}}</a>\"からこの鍵を見つけられるために"
+"は、以下のリンクをクリックしてください:"
+
+msgid ""
+"To let others find this key from your email address \"{{userid}}\",\n"
+"please follow the link below:"
+msgstr ""
+"あなたのメールアドレス\"{{userid}}\"から他人がこの鍵をみつけられるために"
+"は、\n"
+"以下のリンクをたどってください:"
+
+msgid "No key found for fingerprint {}"
+msgstr "このアドレスに対する鍵がありません: {}"
+
+msgid "No key found for key id {}"
+msgstr "このアドレスに対する鍵がありません: {}"
+
+msgid "No key found for email address {}"
+msgstr "このアドレスに対する鍵がありません: {}"
+
+msgid "Search by Short Key ID is not supported."
+msgstr ""
+
+msgid "Invalid search query."
+msgstr ""
+
+msgctxt "Subject for verification email, {0} = userid, {1} = keyserver domain"
+msgid "Verify {0} for your key on {1}"
+msgstr "  {1}のあなたの鍵のために{1}を検証する"
+
+msgctxt "Subject for manage email, {} = keyserver domain"
+msgid "Manage your key on {}"
+msgstr "{}の鍵を管理する"
+
+msgid "This link is invalid or expired"
+msgstr "このリンクは無効であるか失効しています"
+
+#, fuzzy
+msgid "Malformed address: {}"
+msgstr "形のこわれたアドレスです: {address}"
+
+#, fuzzy
+msgid "No key for address: {}"
+msgstr "このアドレスに対する鍵がありません: {address}"
+
+msgid "A request has already been sent for this address recently."
+msgstr "最近、このアドレスへリクエストがすでに送信されています。"
+
+msgid "Parsing of key data failed."
+msgstr "鍵データのパーズが失敗しました。"
+
+msgid "Whoops, please don't upload secret keys!"
+msgstr "あらら、秘密鍵をアップロードしないでください!"
+
+msgid "No key uploaded."
+msgstr "鍵はアップロードされませんでした。"
+
+msgid "Error processing uploaded key."
+msgstr "アップロードされた鍵の処理に失敗しました。"
+
+msgid "Upload session expired. Please try again."
+msgstr "アップロードのセッションが時間切れです。もう一度試してください。"
+
+msgid "Invalid verification link."
+msgstr "無効な検証のリンクです。"

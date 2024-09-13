@@ -1,0 +1,392 @@
+# Translators:
+# 德夫 乔 <dszw2000@gmail.com>, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hagrid\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-15 16:33-0700\n"
+"PO-Revision-Date: 2019-09-27 18:05+0000\n"
+"Last-Translator: 德夫 乔 <dszw2000@gmail.com>, 2019\n"
+"Language-Team: Chinese Simplified (https://www.transifex.com/otf/"
+"teams/102430/zh-Hans/)\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Looks like something went wrong :("
+msgstr "看上去有些东西出错了 :("
+
+msgid "Error message: {{ internal_error }}"
+msgstr "错误信息：{{ internal_error }}"
+
+msgid "There was an error with your request:"
+msgstr "你的请求有一个错误："
+
+msgid "We found an entry for <span class=\"email\">{{ query }}</span>:"
+msgstr "我们找到了询问的地址<span class=\"email\">{{ query }}</span>："
+
+msgid ""
+"<strong>Hint:</strong> It's more convenient to use <span class=\"brand"
+"\">keys.openpgp.org</span> from your OpenPGP software.<br /> Take a look at "
+"our <a href=\"/about/usage\">usage guide</a> for details."
+msgstr ""
+"<strong>提示：</strong>在你的OpenPGP软件上使用<span class=\"brand\">keys."
+"openpgp.org</span>会更方便。<br />查阅我们的<a href=\"/about/usage\">用户指南"
+"</a>获取细节。"
+
+msgid "debug info"
+msgstr "调试信息"
+
+msgid "Search by Email Address / Key ID / Fingerprint"
+msgstr "通过电子邮件地址 / 密钥ID / 指纹搜索"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid ""
+"You can also <a href=\"/upload\">upload</a> or <a href=\"/manage\">manage</"
+"a> your key."
+msgstr ""
+"你也可以<a href=\"/upload\">上传</a>或<a href=\"/manage\">管理</a>你的密钥。"
+
+msgid "Find out more <a href=\"/about\">about this service</a>."
+msgstr "找到<a href=\"/about\">关于这项服务</a>的更多信息。"
+
+msgid "News:"
+msgstr "新闻："
+
+msgid ""
+"<a href=\"/about/news#2019-11-12-celebrating-100k\">Celebrating 100.000 "
+"verified addresses! 📈</a> (2019-11-12)"
+msgstr ""
+
+msgid "v{{ version }} built from"
+msgstr "v{{ version }} built from"
+
+msgid "Powered by <a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>"
+msgstr "由<a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>支持"
+
+msgid ""
+"Background image retrieved from <a href=\"https://www.toptal.com/designers/"
+"subtlepatterns/subtle-grey/\">Subtle Patterns</a> under CC BY-SA 3.0"
+msgstr ""
+"背景图从<a href=\"https://www.toptal.com/designers/subtlepatterns/subtle-"
+"grey/\">Subtle Patterns</a>依据CC BY-SA 3.0协议获得"
+
+msgid "Maintenance Mode"
+msgstr "修复模式"
+
+msgid "Manage your key"
+msgstr "管理你的密钥"
+
+msgid "Enter any verified email address for your key"
+msgstr "输入任意关联到你的密钥的电子邮件地址"
+
+msgid "Send link"
+msgstr "发送链接"
+
+msgid ""
+"We will send you an email with a link you can use to remove any of your "
+"email addresses from search."
+msgstr ""
+"我们将把链接用电子邮件的形式发给你，那条链接可以让你在搜索结果中移除你的任意"
+"邮箱地址"
+
+msgid ""
+"Managing the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+"管理密钥<span class=\"fingerprint\"><a href=\"{{ key_link }}\" target="
+"\"_blank\">{{ key_fpr }}</a></span>"
+
+msgid "Your key is published with the following identity information:"
+msgstr "你的密钥已经用以下身份发布："
+
+msgid "Delete"
+msgstr "删除"
+
+msgid ""
+"Clicking \"delete\" on any address will remove it from this key. It will no "
+"longer appear in a search.<br /> To add another address, <a href=\"/upload"
+"\">upload</a> the key again."
+msgstr ""
+"点击“删除”将会在密钥中删除该地址的关联。之后该地址将不会在搜索结果中出现。"
+"<br />如果需要添加另外的地址，请<a href=\"/upload\">重新上传此密钥</a>"
+
+msgid ""
+"Your key is published as only non-identity information.  (<a href=\"/about\" "
+"target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+"你的密钥以无身份的形式发布。（<a href=\"/about\" target=\"_blank\">这意味着什"
+"么？</a>）"
+
+msgid "To add an address, <a href=\"/upload\">upload</a> the key again."
+msgstr "如果要添加地址，<a href=\"/upload\">重新上传此密钥</a>"
+
+msgid ""
+"We have sent an email with further instructions to <span class=\"email"
+"\">{{ address }}</span>."
+msgstr ""
+"我们已经向<span class=\"email\">{{ address }}</span>发送了包含后续说明的电子"
+"邮件。"
+
+msgid "This address has already been verified."
+msgstr "该地址已经被验证过了。"
+
+msgid ""
+"Your key <span class=\"fingerprint\">{{ key_fpr }}</span> is now published "
+"for the identity <a href=\"{{userid_link}}\" target=\"_blank\"><span class="
+"\"email\">{{ userid }}</span></a>."
+msgstr ""
+"你的密钥<span class=\"fingerprint\">{{ key_fpr }}</span>已经以<a href="
+"\"{{userid_link}}\" target=\"_blank\"><span class=\"email\">{{ userid }}</"
+"span></a>的身份发布"
+
+msgid "Upload your key"
+msgstr "上传你的密钥"
+
+msgid "Upload"
+msgstr "上传"
+
+msgid ""
+"Need more info? Check our <a target=\"_blank\" href=\"/about\">intro</a> and "
+"<a target=\"_blank\" href=\"/about/usage\">usage guide</a>."
+msgstr ""
+"想了解更多信息？查阅我们的<a target=\"_blank\" href=\"/about\">介绍</a>和<a "
+"target=\"_blank\" href=\"/about/usage\">用户指南</a>。"
+
+msgid ""
+"You uploaded the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+"你上传了密钥<span class=\"fingerprint\"><a href=\"{{ key_link }}\" target="
+"\"_blank\">{{ key_fpr }}</a></span>。"
+
+msgid "This key is revoked."
+msgstr "该密钥已经被吊销。"
+
+msgid ""
+"It is published without identity information and can't be made available for "
+"search by email address (<a href=\"/about\" target=\"_blank\">what does this "
+"mean?</a>)."
+msgstr ""
+"该密钥以无身份信息的形式发布，不能使用电子邮件地址搜索到（<a href=\"/about\" "
+"target=\"_blank\">这意味着什么？</a>）"
+
+msgid ""
+"This key is now published with the following identity information (<a href="
+"\"/about\" target=\"_blank\">what does this mean?</a>):"
+msgstr ""
+"该密钥已经用以下身份信息发布（<a href=\"/about\" target=\"_blank\">这意味着什"
+"么？</a>）"
+
+msgid "Published"
+msgstr "已发布"
+
+msgid ""
+"This key is now published with only non-identity information. (<a href=\"/"
+"about\" target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+"你的密钥现在以无身份的形式发布。（<a href=\"/about\" target=\"_blank\">这意味"
+"着什么？</a>）"
+
+msgid ""
+"To make the key available for search by email address, you can verify it "
+"belongs to you:"
+msgstr "要让密钥能通过电子邮件地址搜索到，你可以验证该地址属于你："
+
+msgid "Verification Pending"
+msgstr "等待验证"
+
+msgid ""
+"<strong>Note:</strong> Some providers delay emails for up to 15 minutes to "
+"prevent spam. Please be patient."
+msgstr ""
+"<strong>提醒：</strong>部分服务商会将邮件拖延最多15分钟来阻止垃圾邮件。请保持"
+"耐心。"
+
+msgid "Send Verification Email"
+msgstr "发送验证邮件"
+
+msgid ""
+"This key contains one identity that could not be parsed as an email address."
+"<br /> This identity can't be published on <span class=\"brand\">keys."
+"openpgp.org</span>.  (<a href=\"/about/faq#non-email-uids\" target=\"_blank"
+"\">Why?</a>)"
+msgstr ""
+"该密钥包含一个不能解析为邮件地址的身份。 <br />该身份无法在<span class="
+"\"brand\">keys.openpgp.org</span>上发布。 （<a href=\"/about/faq#non-email-"
+"uids\" target=\"_blank\">为什么？</a>）"
+
+msgid ""
+"This key contains {{ count_unparsed }} identities that could not be parsed "
+"as an email address.<br /> These identities can't be published on <span "
+"class=\"brand\">keys.openpgp.org</span>.  (<a href=\"/about/faq#non-email-"
+"uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"该密钥包含一个不能解析为邮件地址的身份{{ count_unparsed }} 。 <br />这些身份"
+"无法在<span class=\"brand\">keys.openpgp.org</span>上发布。 （<a href=\"/"
+"about/faq#non-email-uids\" target=\"_blank\">为什么？</a>）"
+
+msgid ""
+"This key contains one revoked identity, which is not published. (<a href=\"/"
+"about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"该密钥包含一个被吊销的身份，所以没有发布（<a href=\"/about/faq#revoked-uids"
+"\" target=\"_blank\">为什么？</a>）"
+
+msgid ""
+"This key contains {{ count_revoked }} revoked identities, which are not "
+"published. (<a href=\"/about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"该密钥包含 {{ count_revoked }}个被吊销的身份，所以没有发布（<a href=\"/about/"
+"faq#revoked-uids\" target=\"_blank\">为什么？</a>）"
+
+msgid "Your keys have been successfully uploaded:"
+msgstr "你的密钥已成功上传"
+
+msgid ""
+"<strong>Note:</strong> To make keys searchable by email address, you must "
+"upload them individually."
+msgstr ""
+"<strong>提示：</strong>如果想让一些密钥可以通过邮箱地址搜索到，你必须把这些密"
+"钥逐个上传。"
+
+msgid "Verifying your email address…"
+msgstr "正在验证你的邮箱地址……"
+
+msgid ""
+"If the process doesn't complete after a few seconds, please <input type="
+"\"submit\" class=\"textbutton\" value=\"click here\" />."
+msgstr ""
+"如果这项操作在若干秒后仍没有完成，<input type=\"submit\" class=\"textbutton"
+"\" value=\"click here\" />。"
+
+msgid "Manage your key on {{domain}}"
+msgstr "在{{domain}}上管理你的密钥"
+
+msgid "Hi,"
+msgstr "你好，"
+
+msgid ""
+"This is an automated message from <a href=\"{{base_uri}}\" style=\"text-"
+"decoration:none; color: #333\">{{domain}}</a>."
+msgstr ""
+"这是来自<a href=\"{{base_uri}}\" style=\"text-decoration:none; color: "
+"#333\">{{domain}}</a>的一条自动信息"
+
+msgid "If you didn't request this message, please ignore it."
+msgstr "如果你没有申请过这条信息，请忽略。"
+
+msgid "OpenPGP key: <tt>{{primary_fp}}</tt>"
+msgstr "OpenPGP密钥：<tt>{{primary_fp}}</tt>"
+
+msgid ""
+"To manage and delete listed addresses on this key, please follow the link "
+"below:"
+msgstr "要管理和删除此密钥上列出的地址，请点击以下链接："
+
+msgid ""
+"You can find more info at <a href=\"{{base_uri}}/about\">{{domain}}/about</"
+"a>."
+msgstr ""
+"你可以在以下链接找到更多信息 <a href=\"{{base_uri}}/about\">{{domain}}/"
+"about</a>。"
+
+msgid "distributing OpenPGP keys since 2019"
+msgstr "自2019年起传播 OpenPGP 密钥"
+
+msgid "This is an automated message from {{domain}}."
+msgstr "这是一条来自 {{domain}} 的自动信息。"
+
+msgid "OpenPGP key: {{primary_fp}}"
+msgstr "OpenPGP密钥：{{primary_fp}}"
+
+msgid "You can find more info at {{base_uri}}/about"
+msgstr "你可以在以下链接找到更多信息 {{base_uri}}/about"
+
+msgid "Verify {{userid}} for your key on {{domain}}"
+msgstr "在 {{domain}} 上验证你的密钥 {{userid}}"
+
+msgid ""
+"To let others find this key from your email address \"<a rel=\"nofollow\" "
+"href=\"#\" style=\"text-decoration:none; color: #333\">{{userid}}</a>\", "
+"please click the link below:"
+msgstr ""
+"要让其他人能通过你的邮件地址找到此密钥\"<a rel=\"nofollow\" href=\"#\" style="
+"\"text-decoration:none; color: #333\">{{userid}}</a>\"，请点击下方的链接："
+
+msgid ""
+"To let others find this key from your email address \"{{userid}}\",\n"
+"please follow the link below:"
+msgstr ""
+"要让其他人能通过你的邮件地址找到此密钥\"{{userid}}\"，\n"
+"请点击下方的链接："
+
+msgid "No key found for fingerprint {}"
+msgstr "此地址下没有密钥：{}"
+
+msgid "No key found for key id {}"
+msgstr "此地址下没有密钥：{}"
+
+msgid "No key found for email address {}"
+msgstr "此地址下没有密钥：{}"
+
+msgid "Search by Short Key ID is not supported."
+msgstr ""
+
+msgid "Invalid search query."
+msgstr ""
+
+msgctxt "Subject for verification email, {0} = userid, {1} = keyserver domain"
+msgid "Verify {0} for your key on {1}"
+msgstr "在 {0} 上验证你的密钥 {1}"
+
+msgctxt "Subject for manage email, {} = keyserver domain"
+msgid "Manage your key on {}"
+msgstr "在 {} 上管理你的密钥"
+
+msgid "This link is invalid or expired"
+msgstr "此链接无效或者已经过期"
+
+#, fuzzy
+msgid "Malformed address: {}"
+msgstr "地址格式错误：{address}"
+
+#, fuzzy
+msgid "No key for address: {}"
+msgstr "此地址下没有密钥：{address}"
+
+msgid "A request has already been sent for this address recently."
+msgstr "对此地址的申请已经发送"
+
+msgid "Parsing of key data failed."
+msgstr "密钥数据解析失败。"
+
+msgid "Whoops, please don't upload secret keys!"
+msgstr "我的天！请不要上传私钥！"
+
+msgid "No key uploaded."
+msgstr "没有密钥被上传"
+
+msgid "Error processing uploaded key."
+msgstr "处理已上传的密钥时出现问题"
+
+msgid "Upload session expired. Please try again."
+msgstr "上传会话过期，请重试。"
+
+msgid "Invalid verification link."
+msgstr "无效的验证链接"
+
+#~ msgid ""
+#~ "<a href=\"/about/news#2019-09-12-three-months-later\">Three months after "
+#~ "launch ✨</a> (2019-09-12)"
+#~ msgstr ""
+#~ "<a href=\"/about/news#2019-09-12-three-months-later\">已成功运行三个月✨</"
+#~ "a>(2019-09-12)"

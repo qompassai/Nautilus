@@ -1,3 +1,33 @@
+# Ignore all .pem, .crt, and .key files
+*.pem
+*.crt
+*.key
+
+# Ignore large files
+*.tar.gz
+*.iso
+*.bin
+*.exe
+*.dll
+*.dylib
+*.a
+
+# Ignore the entire test-runs directory
+test-runs/
+
+# Ignore compiled binaries
+*.so
+*.a
+*.o
+
+# Ignore build artifacts
+*.log
+*.out
+
+# Ignore any temporary files
+*.tmp
+*~
+
 BlueTeam/QompaSSL/test-runs/test_ca/newkey.pem
 BlueTeam/Cloudflare/boring/boring/test/alt_name_cert.pem
 BlueTeam/Cloudflare/boring/boring/test/cert-wildcard.pem

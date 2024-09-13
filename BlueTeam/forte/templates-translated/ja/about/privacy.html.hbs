@@ -1,0 +1,43 @@
+<div class="about">
+    <center><h2>
+<a href="/about">このサイトについて</a> | <a href="/about/news">ニュース</a> | <a href="/about/usage">使い方</a> | <a href="/about/faq">FAQ</a> | <a href="/about/stats">統計</a> | プライバシ</h2></center>
+
+    <p style="text-align: left;">keys.openpgp.org 上の公開鍵サーバは OpenPGP 鍵のデータを処理、保存、配信します。
+データを処理する具体的な方式は次のタイプによって異なります。</p>
+<ul>
+<li>
+<b>メールアドレス</b><p><abbr title="Packet Tag 13">ユーザID</abbr>に保存されているメールアドレスは個人識別情報（PII）であります。
+この情報は同意なしに使われないよう、格別に留意しております。</p>
+<ul>
+<li>鍵を公開するときには、本人のメールアドレスであることを確認するために、
+<a target="_blank" href="https://en.wikipedia.org/wiki/Opt-in_email#Confirmed_opt-in_(COI)_/_Double_opt-in_(DOI)">認証のメール</a>をお送りします。</li>
+                      <li>メールアドレスによる検索のためには、メールの一部分だけではない
+メールアドレス全体をそのまま入力する必要があります。
+名前から鍵を検索することはできません。</li>
+                      <li>メールアドレスを列挙することはできません。</li>
+                      <li>メールアドレスを削除するときも、公開の時のように、メールアドレスが
+本人のものであることを簡単に認証し、削除することができます。
+この方法による削除ができない場合、support at keys dot openpgp dot org宛に
+サポートメールを送ってください。</li>
+                  </ul>
+<p>このデータが（一括的に）サードパーティのものに渡されることはありません。</p>
+          </li>
+          <li>
+<b>公開鍵データ</b><p>OpenPGP 鍵の暗号化された内容は個人識別情報として扱われません。
+具体的にはこれらのものが含まれます：
+<abbr title="Packet Tags 6 and 14">公開鍵の資料</abbr>
+<abbr title="Packet Tag 2, Signature types 0x10-0x13, 0x18, 0x19, 0x1F">自己署名</abbr>
+<abbr title="Packet Tag 2, Signature types 0x20, 0x28, 0x30">破棄の署名</abbr></p>
+              <p>このデータは普通、（一括的に）渡されませんが、
+開発や研究を目的にするサードパーティのリクエストに限り提供される場合があります。</p>
+          </li>
+          <li>
+<b>ほかのユーザ ID データ</b><p>OpenPGP 鍵はメールアドレスが含まれない<abbr title="Packet Tag 13">ユーザ ID</abbr> や<abbr title="Packet Tag 17">画像</abbr>などの、
+メールアドレス以外の個人のデータを含んでいる可能性があります。
+このデータはアップロードする際に排除され、どの場合にも保存、処理、配信されません。</p>
+              <p>上の方に言及されていない OpenPGP パケットタイプはアップロードの際に排除され、
+どの場合にも保存、処理、配信されません。</p>
+          </li>
+      </ul>
+<p style="text-align: left">データは<a href="/about/api">公開 API インタフェース</a>やポリシーに記述されていないサードパーティには提供されません。</p>
+</div>

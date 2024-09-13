@@ -1,0 +1,402 @@
+#
+# Translators:
+# Luis Figueroa, 2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hagrid\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-15 16:33-0700\n"
+"PO-Revision-Date: 2019-09-27 18:05+0000\n"
+"Last-Translator: Luis Figueroa, 2021\n"
+"Language-Team: Spanish (https://www.transifex.com/otf/teams/102430/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Looks like something went wrong :("
+msgstr "Parece que algo salió mal :("
+
+msgid "Error message: {{ internal_error }}"
+msgstr "Mensaje de error: {{ internal_error }}"
+
+msgid "There was an error with your request:"
+msgstr "Hubo un error con tu solicitud:"
+
+msgid "We found an entry for <span class=\"email\">{{ query }}</span>:"
+msgstr "Encontramos un registro para <span class=\"email\">{{ query }}</span>:"
+
+msgid ""
+"<strong>Hint:</strong> It's more convenient to use <span class=\"brand"
+"\">keys.openpgp.org</span> from your OpenPGP software.<br /> Take a look at "
+"our <a href=\"/about/usage\">usage guide</a> for details."
+msgstr ""
+"<strong>Consejo:</strong> Es más conveniente usar <span class=\"brand\">keys."
+"openpgp.org</span> desde tu software con OpenPGP.<br /> Echa un vistazo a "
+"nuestra <a href=\"/about/usage\">guía de uso</a> para más detalles."
+
+msgid "debug info"
+msgstr "información de depuración"
+
+msgid "Search by Email Address / Key ID / Fingerprint"
+msgstr "Busca por Dirección de Correo / ID de Clave / Huella Digital"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid ""
+"You can also <a href=\"/upload\">upload</a> or <a href=\"/manage\">manage</"
+"a> your key."
+msgstr ""
+"También puedes <a href=\"/upload\">subir</a> o <a href=\"/manage"
+"\">administrar</a> tu clave."
+
+msgid "Find out more <a href=\"/about\">about this service</a>."
+msgstr "Encuentra más <a href=\"/about\">acerca de este servicio</a>."
+
+msgid "News:"
+msgstr "Noticias:"
+
+msgid ""
+"<a href=\"/about/news#2019-11-12-celebrating-100k\">Celebrating 100.000 "
+"verified addresses! 📈</a> (2019-11-12)"
+msgstr ""
+"<a href=\"/about/news#2019-11-12-celebrating-100k\">¡Celebrando 100.000 "
+"direcciones verificadas! 📈</a> (2019-11-12)"
+
+msgid "v{{ version }} built from"
+msgstr "v{{ version }} hecho desde"
+
+msgid "Powered by <a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>"
+msgstr "impulsado por <a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>"
+
+msgid ""
+"Background image retrieved from <a href=\"https://www.toptal.com/designers/"
+"subtlepatterns/subtle-grey/\">Subtle Patterns</a> under CC BY-SA 3.0"
+msgstr ""
+"Imagen de fondo tomada de <a href=\"https://www.toptal.com/designers/"
+"subtlepatterns/subtle-grey/\">Subtle Patterns</a> bajo licencia CC BY-SA 3.0"
+
+msgid "Maintenance Mode"
+msgstr "Modo Mantenimiento"
+
+msgid "Manage your key"
+msgstr "Administra tu clave"
+
+msgid "Enter any verified email address for your key"
+msgstr "Ingresa cualquier dirección de correo verificada para tu clave"
+
+msgid "Send link"
+msgstr "Enviar enlace"
+
+msgid ""
+"We will send you an email with a link you can use to remove any of your "
+"email addresses from search."
+msgstr ""
+"Te enviaremos un correo con un enlace que puedes usar para eliminar "
+"cualquiera de tus direcciones de correo de la búsqueda."
+
+msgid ""
+"Managing the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+"Administrando la clave <span class=\"fingerprint\"><a href="
+"\"{{ key_link }}\" target=\"_blank\">{{ key_fpr }}</a></span>."
+
+msgid "Your key is published with the following identity information:"
+msgstr "Tu clave está publicada con la siguiente información de identidad:"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid ""
+"Clicking \"delete\" on any address will remove it from this key. It will no "
+"longer appear in a search.<br /> To add another address, <a href=\"/upload"
+"\">upload</a> the key again."
+msgstr ""
+"Haciendo clic en \"Eliminar\" en cualquier dirección la removerá de esta "
+"llave. No aparecerá más en una búsqueda.<br />Para añadir otra dirección, <a "
+"href=\"/upload\">sube</a> la clave de nuevo."
+
+msgid ""
+"Your key is published as only non-identity information.  (<a href=\"/about\" "
+"target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+"Tu clave está publicada sin información de identidad. (<a href=\"/about\" "
+"target=\"_blank\">¿Qué significa esto?</a>)"
+
+msgid "To add an address, <a href=\"/upload\">upload</a> the key again."
+msgstr ""
+"Para añadir una dirección de correo, <a href=\"/upload\">sube</a> la clave "
+"de nuevo."
+
+msgid ""
+"We have sent an email with further instructions to <span class=\"email"
+"\">{{ address }}</span>."
+msgstr ""
+"Te hemos enviado un correo con más instrucciones a <span class=\"email"
+"\">{{ address }}</span>."
+
+msgid "This address has already been verified."
+msgstr "Esta dirección ya ha sido verificada."
+
+msgid ""
+"Your key <span class=\"fingerprint\">{{ key_fpr }}</span> is now published "
+"for the identity <a href=\"{{userid_link}}\" target=\"_blank\"><span class="
+"\"email\">{{ userid }}</span></a>."
+msgstr ""
+"Tu clave <span class=\"fingerprint\">{{ key_fpr }}</span> ahora está "
+"publicada con la identidad <a href=\"{{userid_link}}\" target=\"_blank"
+"\"><span class=\"email\">{{ userid }}</span></a>."
+
+msgid "Upload your key"
+msgstr "Sube tu clave"
+
+msgid "Upload"
+msgstr "Subir"
+
+msgid ""
+"Need more info? Check our <a target=\"_blank\" href=\"/about\">intro</a> and "
+"<a target=\"_blank\" href=\"/about/usage\">usage guide</a>."
+msgstr ""
+"¿Necesitas más información? Mira nuestra <a target=\"_blank\" href=\"/about"
+"\">introducción</a> y <a target=\"_blank\" href=\"/about/usage\">guía de "
+"uso</a>."
+
+msgid ""
+"You uploaded the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+"Subiste la clave <span class=\"fingerprint\"><a href=\"{{ key_link }}\" "
+"target=\"_blank\">{{ key_fpr }}</a></span>."
+
+msgid "This key is revoked."
+msgstr "Esta clave está revocada."
+
+msgid ""
+"It is published without identity information and can't be made available for "
+"search by email address (<a href=\"/about\" target=\"_blank\">what does this "
+"mean?</a>)."
+msgstr ""
+"Está publicada sin información de identidad y no puede hacerse disponible "
+"para buscar por dirección de correo electrónico. (<a href=\"/about\" target="
+"\"_blank\">¿Qué significa esto?</a>)."
+
+msgid ""
+"This key is now published with the following identity information (<a href="
+"\"/about\" target=\"_blank\">what does this mean?</a>):"
+msgstr ""
+"Esta clave ahora está publicada con la siguiente información de identidad "
+"(<a href=\"/about\" target=\"_blank\">¿Qué significa esto?</a>):"
+
+msgid "Published"
+msgstr "Publicada"
+
+msgid ""
+"This key is now published with only non-identity information. (<a href=\"/"
+"about\" target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+"Esta clave ahora está publicada sin información de identidad. (<a href=\"/"
+"about\" target=\"_blank\">¿Qué significa esto?</a>)"
+
+msgid ""
+"To make the key available for search by email address, you can verify it "
+"belongs to you:"
+msgstr ""
+"Para hacer la clave disponible en la búsqueda con dirección de correo, "
+"puedes verificar que te pertenece:"
+
+msgid "Verification Pending"
+msgstr "Verificación Pendiente"
+
+msgid ""
+"<strong>Note:</strong> Some providers delay emails for up to 15 minutes to "
+"prevent spam. Please be patient."
+msgstr ""
+"<strong>Nota:</strong> Algunos proveedores retrasan los correos hasta por 15 "
+"minutos para prevenir correo no deseado. Por favor sé paciente."
+
+msgid "Send Verification Email"
+msgstr "Enviar Correo de Verificación"
+
+msgid ""
+"This key contains one identity that could not be parsed as an email address."
+"<br /> This identity can't be published on <span class=\"brand\">keys."
+"openpgp.org</span>.  (<a href=\"/about/faq#non-email-uids\" target=\"_blank"
+"\">Why?</a>)"
+msgstr ""
+"Esta clave contiene una identidad que no pudo ser interpretada como una "
+"dirección de correo.<br />Esta identidad no puede ser publicada en <span "
+"class=\"brand\">keys.openpgp.org</span>. (<a href=\"/about/faq#non-email-uids"
+"\" target=\"_blank\">¿Por qué?</a>)"
+
+msgid ""
+"This key contains {{ count_unparsed }} identities that could not be parsed "
+"as an email address.<br /> These identities can't be published on <span "
+"class=\"brand\">keys.openpgp.org</span>.  (<a href=\"/about/faq#non-email-"
+"uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"Esta clave contiene {{ count_unparsed }} identidades que no pudieron ser "
+"interpretadas como una dirección de correo.<br />Estas identidades no pueden "
+"ser publicadas en <span class=\"brand\">keys.openpgp.org</span>. (<a href=\"/"
+"about/faq#non-email-uids\" target=\"_blank\">¿Por qué?</a>)"
+
+msgid ""
+"This key contains one revoked identity, which is not published. (<a href=\"/"
+"about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"Esta clave contiene una identidad revocada, la cual no está publicada. (<a "
+"href=\"/about/faq#revoked-uids\" target=\"_blank\">¿Por qué?)"
+
+msgid ""
+"This key contains {{ count_revoked }} revoked identities, which are not "
+"published. (<a href=\"/about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+"Esta clave contiene {{ count_revoked }} identidades revocadas, las cual no "
+"están publicadas. (<a href=\"/about/faq#revoked-uids\" target=\"_blank"
+"\">¿Por qué?)"
+
+msgid "Your keys have been successfully uploaded:"
+msgstr "Tus claves han sido subidas exitosamente:"
+
+msgid ""
+"<strong>Note:</strong> To make keys searchable by email address, you must "
+"upload them individually."
+msgstr ""
+"<strong>Nota:</strong> Para hacer que las claves se puedan buscar por "
+"dirección de correo, debes subirlas individualmente."
+
+msgid "Verifying your email address…"
+msgstr "Verificando tu dirección de correo..."
+
+msgid ""
+"If the process doesn't complete after a few seconds, please <input type="
+"\"submit\" class=\"textbutton\" value=\"click here\" />."
+msgstr ""
+"Si el proceso no se completa luego de unos segundos, por favor <input type="
+"\"submit\" class=\"textbutton\" value=\"click here\" />."
+
+msgid "Manage your key on {{domain}}"
+msgstr "Administra tu clave en {{domain}}"
+
+msgid "Hi,"
+msgstr "Hola,"
+
+msgid ""
+"This is an automated message from <a href=\"{{base_uri}}\" style=\"text-"
+"decoration:none; color: #333\">{{domain}}</a>."
+msgstr ""
+"Este es un mensaje automatizado de <a href=\"{{base_uri}}\" style=\"text-"
+"decoration:none; color: #333\">{{domain}}</a>."
+
+msgid "If you didn't request this message, please ignore it."
+msgstr "Si tú no solicitaste este mensaje, por favor ignóralo."
+
+msgid "OpenPGP key: <tt>{{primary_fp}}</tt>"
+msgstr "Clave OpenPGP: <tt>{{primary_fp}}</tt>"
+
+msgid ""
+"To manage and delete listed addresses on this key, please follow the link "
+"below:"
+msgstr ""
+"Para administrar y eliminar las direcciones listadas en esta clave, por "
+"favor ve al siguiente enlace:"
+
+msgid ""
+"You can find more info at <a href=\"{{base_uri}}/about\">{{domain}}/about</"
+"a>."
+msgstr ""
+"Puedes encontrar más información en <a href=\"{{base_uri}}/about"
+"\">{{domain}}/about</a>."
+
+msgid "distributing OpenPGP keys since 2019"
+msgstr "distribuyendo claves OpenPGP desde 2019"
+
+msgid "This is an automated message from {{domain}}."
+msgstr "Este es un mensaje automatizado de {{domain}}."
+
+msgid "OpenPGP key: {{primary_fp}}"
+msgstr "Clave OpenPGP: {{primary_fp}}"
+
+msgid "You can find more info at {{base_uri}}/about"
+msgstr "Puedes encontrar más información en {{base_uri}}/about"
+
+msgid "Verify {{userid}} for your key on {{domain}}"
+msgstr "Verifica {{userid}} para tu clave en {{domain}}"
+
+msgid ""
+"To let others find this key from your email address \"<a rel=\"nofollow\" "
+"href=\"#\" style=\"text-decoration:none; color: #333\">{{userid}}</a>\", "
+"please click the link below:"
+msgstr ""
+"Para permitir que otros encuentren esta clave mediante tu dirección de "
+"correo \"<a rel=\"nofollow\" href=\"#\" style=\"text-decoration:none; color: "
+"#333\">{{userid}}</a>\", por favor haz clic en el siguiente enlace:"
+
+msgid ""
+"To let others find this key from your email address \"{{userid}}\",\n"
+"please follow the link below:"
+msgstr ""
+"Para permitir que otros encuentren esta clave mediante tu dirección de "
+"correo \"{{userid}}\", \n"
+"por favor haz clic en el siguiente enlace:"
+
+msgid "No key found for fingerprint {}"
+msgstr "No se encontraron claves para la huella digital {}"
+
+msgid "No key found for key id {}"
+msgstr "No se encontraron claves para el ID de clave {}"
+
+msgid "No key found for email address {}"
+msgstr "No se encontraron claves para la dirección de correo electrónico {}"
+
+msgid "Search by Short Key ID is not supported."
+msgstr "Buscar por ID de Short Key no está soportado."
+
+msgid "Invalid search query."
+msgstr "Búsqueda inválida."
+
+msgctxt "Subject for verification email, {0} = userid, {1} = keyserver domain"
+msgid "Verify {0} for your key on {1}"
+msgstr "Verifica {0} para tu clave en {1}"
+
+msgctxt "Subject for manage email, {} = keyserver domain"
+msgid "Manage your key on {}"
+msgstr "Administra tu clave en {}"
+
+msgid "This link is invalid or expired"
+msgstr "Este enlace es inválido o caducado"
+
+#, fuzzy
+msgid "Malformed address: {}"
+msgstr "Dirección malformada: {address}"
+
+#, fuzzy
+msgid "No key for address: {}"
+msgstr "No hay claves para la dirección: {address}"
+
+msgid "A request has already been sent for this address recently."
+msgstr "Una solicitud para esta dirección ya se ha enviado recientemente."
+
+msgid "Parsing of key data failed."
+msgstr "Interpretación de datos de la clave fallida."
+
+msgid "Whoops, please don't upload secret keys!"
+msgstr "Ups, ¡por favor no subas claves secretas!"
+
+msgid "No key uploaded."
+msgstr "No se subió una clave."
+
+msgid "Error processing uploaded key."
+msgstr "Error procesando la clave subida."
+
+msgid "Upload session expired. Please try again."
+msgstr "Sesión de subida caducada. Por favor intente de nuevo."
+
+msgid "Invalid verification link."
+msgstr "Enlace de verificación inválido."

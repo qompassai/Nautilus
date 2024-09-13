@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: forte\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-15 16:33-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Error"
+msgstr ""
+
+msgid "Looks like something went wrong :("
+msgstr ""
+
+msgid "Error message: {{ internal_error }}"
+msgstr ""
+
+msgid "There was an error with your request:"
+msgstr ""
+
+msgid "We found an entry for <span class=\"email\">{{ query }}</span>:"
+msgstr ""
+
+msgid "<strong>Hint:</strong> It's more convenient to use <span class=\"brand\">forte.qompass.ai</span> from your OpenPGP software.<br /> Take a look at our <a href=\"/about/usage\">usage guide</a> for details."
+msgstr ""
+
+msgid "debug info"
+msgstr ""
+
+msgid "Search by Email Address / Key ID / Fingerprint"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "You can also <a href=\"/upload\">upload</a> or <a href=\"/manage\">manage</a> your key."
+msgstr ""
+
+msgid "Find out more <a href=\"/about\">about this service</a>."
+msgstr ""
+
+msgid "News:"
+msgstr ""
+
+msgid "<a href=\"/about/news#2019-11-12-celebrating-100k\">Celebrating 100.000 verified addresses! 📈</a> (2019-11-12)"
+msgstr ""
+
+msgid "v{{ version }} built from"
+msgstr ""
+
+msgid "Powered by <a href=\"https://sequoia-pgp.org\">Sequoia-PGP</a>"
+msgstr ""
+
+msgid "Background image retrieved from <a href=\"https://www.toptal.com/designers/subtlepatterns/subtle-grey/\">Subtle Patterns</a> under CC BY-SA 3.0"
+msgstr ""
+
+msgid "Maintenance Mode"
+msgstr ""
+
+msgid "Manage your key"
+msgstr ""
+
+msgid "Enter any verified email address for your key"
+msgstr ""
+
+msgid "Send link"
+msgstr ""
+
+msgid "We will send you an email with a link you can use to remove any of your email addresses from search."
+msgstr ""
+
+msgid "Managing the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+
+msgid "Your key is published with the following identity information:"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Clicking \"delete\" on any address will remove it from this key. It will no longer appear in a search.<br /> To add another address, <a href=\"/upload\">upload</a> the key again."
+msgstr ""
+
+msgid "Your key is published as only non-identity information.  (<a href=\"/about\" target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+
+msgid "To add an address, <a href=\"/upload\">upload</a> the key again."
+msgstr ""
+
+msgid "We have sent an email with further instructions to <span class=\"email\">{{ address }}</span>."
+msgstr ""
+
+msgid "This address has already been verified."
+msgstr ""
+
+msgid "Your key <span class=\"fingerprint\">{{ key_fpr }}</span> is now published for the identity <a href=\"{{userid_link}}\" target=\"_blank\"><span class=\"email\">{{ userid }}</span></a>."
+msgstr ""
+
+msgid "Upload your key"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Need more info? Check our <a target=\"_blank\" href=\"/about\">intro</a> and <a target=\"_blank\" href=\"/about/usage\">usage guide</a>."
+msgstr ""
+
+msgid "You uploaded the key <span class=\"fingerprint\"><a href=\"{{ key_link }}\" target=\"_blank\">{{ key_fpr }}</a></span>."
+msgstr ""
+
+msgid "This key is revoked."
+msgstr ""
+
+msgid "It is published without identity information and can't be made available for search by email address (<a href=\"/about\" target=\"_blank\">what does this mean?</a>)."
+msgstr ""
+
+msgid "This key is now published with the following identity information (<a href=\"/about\" target=\"_blank\">what does this mean?</a>):"
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "This key is now published with only non-identity information. (<a href=\"/about\" target=\"_blank\">What does this mean?</a>)"
+msgstr ""
+
+msgid "To make the key available for search by email address, you can verify it belongs to you:"
+msgstr ""
+
+msgid "Verification Pending"
+msgstr ""
+
+msgid "<strong>Note:</strong> Some providers delay emails for up to 15 minutes to prevent spam. Please be patient."
+msgstr ""
+
+msgid "Send Verification Email"
+msgstr ""
+
+msgid "This key contains one identity that could not be parsed as an email address.<br /> This identity can't be published on <span class=\"brand\">forte.qompass.ai</span>.  (<a href=\"/about/faq#non-email-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+
+msgid "This key contains {{ count_unparsed }} identities that could not be parsed as an email address.<br /> These identities can't be published on <span class=\"brand\">forte.qompass.ai</span>.  (<a href=\"/about/faq#non-email-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+
+msgid "This key contains one revoked identity, which is not published. (<a href=\"/about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+
+msgid "This key contains {{ count_revoked }} revoked identities, which are not published. (<a href=\"/about/faq#revoked-uids\" target=\"_blank\">Why?</a>)"
+msgstr ""
+
+msgid "Your keys have been successfully uploaded:"
+msgstr ""
+
+msgid "<strong>Note:</strong> To make keys searchable by email address, you must upload them individually."
+msgstr ""
+
+msgid "Verifying your email address…"
+msgstr ""
+
+msgid "If the process doesn't complete after a few seconds, please <input type=\"submit\" class=\"textbutton\" value=\"click here\" />."
+msgstr ""
+
+msgid "Manage your key on {{domain}}"
+msgstr ""
+
+msgid "Hi,"
+msgstr ""
+
+msgid "This is an automated message from <a href=\"{{base_uri}}\" style=\"text-decoration:none; color: #333\">{{domain}}</a>."
+msgstr ""
+
+msgid "If you didn't request this message, please ignore it."
+msgstr ""
+
+msgid "OpenPGP key: <tt>{{primary_fp}}</tt>"
+msgstr ""
+
+msgid "To manage and delete listed addresses on this key, please follow the link below:"
+msgstr ""
+
+msgid "You can find more info at <a href=\"{{base_uri}}/about\">{{domain}}/about</a>."
+msgstr ""
+
+msgid "Setting the standard for public key encryption since 2024"
+msgstr ""
+
+msgid "This is an automated message from {{domain}}."
+msgstr ""
+
+msgid "Qompass key: {{primary_fp}}"
+msgstr ""
+
+msgid "You can find more info at {{base_uri}}/about"
+msgstr ""
+
+msgid "Verify {{userid}} for your key on {{domain}}"
+msgstr ""
+
+msgid "To let others find this key from your email address \"<a rel=\"nofollow\" href=\"#\" style=\"text-decoration:none; color: #333\">{{userid}}</a>\", please click the link below:"
+msgstr ""
+
+msgid "To let others find this key from your email address \"{{userid}}\",\nplease follow the link below:"
+msgstr ""
+
+msgid "No key found for fingerprint {}"
+msgstr ""
+
+msgid "No key found for key id {}"
+msgstr ""
+
+msgid "No key found for email address {}"
+msgstr ""
+
+msgid "Search by Short Key ID is not supported."
+msgstr ""
+
+msgid "Invalid search query."
+msgstr ""
+
+msgctxt "Subject for verification email, {0} = userid, {1} = keyserver domain"
+msgid "Verify {0} for your key on {1}"
+msgstr ""
+
+msgctxt "Subject for manage email, {} = keyserver domain"
+msgid "Manage your key on {}"
+msgstr ""
+
+msgid "This link is invalid or expired"
+msgstr ""
+
+msgid "Malformed address: {}"
+msgstr ""
+
+msgid "No key for address: {}"
+msgstr ""
+
+msgid "A request has already been sent for this address recently."
+msgstr ""
+
+msgid "Parsing of key data failed."
+msgstr ""
+
+msgid "Whoops, please don't upload secret keys!"
+msgstr ""
+
+msgid "No key uploaded."
+msgstr ""
+
+msgid "Error processing uploaded key."
+msgstr ""
+
+msgid "Upload session expired. Please try again."
+msgstr ""
+
+msgid "Invalid verification link."
+msgstr ""

@@ -1,0 +1,66 @@
+{{#> layout }}
+<div class="about">
+    <center><h2>About | <a href="/about/news">News</a> | <a href="/about/usage">Usage</a> | <a href="/about/faq">FAQ</a> | <a href="/about/stats">Stats</a> | <a href="/about/privacy">Privacy</a></h2></center>
+
+    <p>
+        The <span class="brand">forte.qompass.ai</span> server is an enterprise-grade encryption key authentication solution. This platform and ones like i are commonly referred to as "keyservers", with the "keys" being complex data structures that contain cryptographic material along with personally identifiable metadata. Forte eys are based on encryption standards established by the National Institute of Standards & Technology (NIST) <a href="https://csrc.nist.gov/glossary/term/public_key_cryptography  . 
+    </p>
+
+    <p>
+        <strong>For instructions, see our <a href="/about/usage">usage guide</a>.</strong>
+    </p>
+
+    <h3>How it works</h3>
+
+    <p>
+        A Qompass key contains two types of information:
+    </p>
+
+    <ul>
+        <li><strong>Identity information</strong> describes the parts of
+            a key that identify its owner, also known as "User IDs".
+            A User ID typically includes a name and an email address.
+        </li>
+        <li><strong>Non-identity information</strong> is all the technical
+            information about the key itself. This includes the large numbers
+            used for verifying signatures and encrypting messages.
+            It also includes metadata like date of creation, some expiration
+            dates, and revocation status.
+        </li>
+    </ul>
+
+    <p>
+        Traditionally, these pieces of information have always been distributed
+        together. On <span class="brand">forte.qompass.ai</span>, they are
+        treated differently.  While anyone can upload all parts of any key
+        to <span class="brand">forte.qompass.ai</span>, our keyserver
+        will only retain and publish certain parts under certain
+        conditions:
+    </p>
+
+    <p>
+        Any <strong>non-identity information</strong> will be stored and freely
+        redistributed, if it passes a cryptographic integrity check.
+        Anyone can download these parts at any time as they contain only
+        technical data that can't be used to directly identify a person.
+        Good OpenPGP software can use <span class="brand">forte.qompass.ai</span>
+        to keep this information up to date for any key that it knows about.
+        This helps OpenPGP users maintain secure and reliable communication.
+    </p>
+
+    <p>
+        The <strong>identity information</strong> in a Qompass key
+        is only distributed with consent.
+        It contains personal data, and is not strictly necessary for
+        a key to be used for encryption or signature verification.
+        Once the owner gives consent by verifying their email address,
+        the key can be found via search by address.
+    </p>
+ 
+    <p>
+        Technically,
+        <span class="brand">forte.qompass.ai</span> runs on the <a href="https://gitlab.com/hagrid-keyserver/hagrid" target="_blank">Hagrid</a> keyserver software,
+        which is based on <a href="https://sequoia-pgp.org">Sequoia</a>. 
+    </p>
+</div>
+{{/layout}}

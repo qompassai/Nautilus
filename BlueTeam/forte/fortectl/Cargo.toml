@@ -1,0 +1,41 @@
+[package]
+name = "fortectl"
+version = "0.1.0"
+authors = ["Matt A. Porter <map@qompass.ai>"]
+edition = "2021"
+
+[dependencies]
+forte-database = { path = "../database" }
+anyhow = "1"
+sequoia-openpgp = { version = "1", default-features = false, features = ["crypto-nettle"] }
+multipart = "0.18"
+log = "0.4"
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+time = "0.3"
+tempfile = "3.5"
+url = "2.3"
+hex = "0.4"
+base64 = "0.21"
+pathdiff = "0.2"
+idna = "0.3"
+fs2 = "0.4"
+walkdir = "2.3"
+clap = "4.0"
+toml = "0.7"
+indicatif = "0.17"
+chrono = "0.4"
+structopt = "0.3"
+handlebars = "4.3"
+num_cpus = "1.15"
+ring = "0.16"
+uuid = { version = "1.3", features = ["v4"] }
+lazy_static = "1.4"
+gettext-macros = "0.6"
+gettext-utils = "0.1"
+gettext = "0.4"
+glob = "0.3"
+rfc2047 = "0.1"
+hyperx = "1.4"
+oqs = "0.9.0"

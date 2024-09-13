@@ -1,0 +1,20 @@
+certifi==2023.7.22
+chardet==5.2.0
+click==8.1.7
+Flask==2.3.3
+gunicorn==21.2.0
+idna==3.4
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.3
+publicsuffix2==2.20191221
+requests==2.31.0
+urllib3==2.0.4
+Werkzeug==2.3.7
+
+# Cryptography related packages
+pyopenssl==23.2.0
+cryptography==41.0.3
+
+# For potential Python-Rust integration
+maturin==1.2.3

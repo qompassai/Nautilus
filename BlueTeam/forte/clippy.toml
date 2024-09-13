@@ -1,0 +1,3 @@
+# Disabled until we use at least Rust 1.49.0, which is the first
+# version that supports the msrv field.
+too-many-arguments-threshold = 10

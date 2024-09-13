@@ -1,0 +1,30 @@
+[package]
+name = "forte-database"
+version = "1.1.0"
+authors = ["Matt A. Porter <map@qompass.ai>"]
+edition = "2021"
+rust-version = "1.65"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", features = ["serde"] }
+diesel = { version = "2.0", features = ["chrono", "r2d2", "uuid"] }
+diesel_migrations = "2.0"
+dotenv = "0.15"
+lazy_static = "1.4"
+log = "0.4"
+r2d2 = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+uuid = { version = "1.3", features = ["v4", "serde"] }
+
+[dependencies.rocket]
+version = "0.5.0-rc.2"
+features = ["json"]
+
+[features]
+default = ["postgres"]
+postgres = ["diesel/postgres"]
+sqlite = ["diesel/sqlite"]
+mysql = ["diesel/mysql"]

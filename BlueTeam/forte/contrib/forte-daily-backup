@@ -1,0 +1,71 @@
+#!/bin/bash
+
+set -e
+
+if [[ $# != 4 && $# != 5 ]]; then
+    echo "Usage: $0 keys-internal-dir keys-external-dir encryption-key backup-dir [date]" >&2
+    exit 1
+fi
+
+keys_internal_dir=$1
+keys_external_dir=$2
+encryption_key=$3
+backup_dir=$4
+# backupdate in format YYYY-MM-DD
+backupdate=$5
+
+[[ -d $keys_internal_dir ]] || { echo "Missing dir $keys_internal_dir" >&2; exit 1; }
+[[ -d $keys_internal_dir/log ]] || { echo "Missing dir $keys_internal_dir/log" >&2; exit 1; }
+[[ -d $keys_external_dir ]] || { echo "Missing dir $keys_external_dir" >&2; exit 1; }
+[[ -d $keys_external_dir/pub ]] || { echo "Missing dir $keys_external_dir/pub" >&2; exit 1; }
+[[ -f $encryption_key ]] || { echo "Missing file $encryption_key" >&2; exit 1; }
+[[ -d $backup_dir ]] || { echo "Missing dir $backup_dir" >&2; exit 1; }
+
+if [[ -z $backupdate ]]; then
+    backupdate=$(date -d "yesterday" +"%Y-%m-%d")
+fi
+
+log_file="$keys_internal_dir/log/$backupdate"
+[[ -f $log_file ]] || { echo "Missing file $log_file" >&2; exit 1; }
+
+tempdir=$(mktemp -d)
+trap 'rm -rf "$tempdir"' EXIT
+
+keylist_file=$tempdir/keylist
+
+count=0
+while read -r fp; do
+    key_file=${fp:0:2}/${fp:2:2}/${fp:4}
+    [[ -f $keys_external_dir/pub/$key_file ]] || { echo "Missing file $key_file" >&2; exit 1; }
+    echo "$key_file"
+    ((count++))
+done < <(cut -d' ' -f2 "$log_file" | sort -u) > "$keylist_file"
+
+backup_file_unencrypted=$tempdir/$backupdate.tar.gz
+backup_file_encrypted=$tempdir/$backupdate.tar.gz.pgp
+
+tar \
+    --create \
+    --gzip \
+    --file "$backup_file_unencrypted" \
+    --verbatim-files-from \
+    --directory "$keys_external_dir/pub" \
+    --files-from "$keylist_file"
+
+GNUPGHOME=$tempdir gpg \
+    --quiet \
+    --no-keyring \
+    --compress-level 0 \
+    --recipient-file "$encryption_key" \
+    --output "$backup_file_encrypted" \
+    --encrypt "$backup_file_unencrypted"
+
+backup_file=$backup_dir/$backupdate.tar.gz.pgp
+mv "$backup_file_encrypted" "$backup_file"
+
+sha256sum=$(cd "$backup_dir" && sha256sum "$backupdate.tar.gz.pgp")
+echo "$sha256sum" >> "$backup_dir/SHA256SUM"
+
+echo "finished backup for $backupdate, total keys $count"
+ls -l "$backup_file"
+echo "$sha256sum"

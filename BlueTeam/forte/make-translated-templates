@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+for i in templates-untranslated/**/*.hbs; do
+    template=${i#templates-untranslated/}
+    prefix_file="${i%/*}/template-prefix"
+    suffix_file="${i%/*}/template-suffix"
+
+    echo -n "$template: "
+
+    echo -n "en "
+    dist_path="dist/templates/$template"
+    cat "$prefix_file" "$i" "$suffix_file" > "$dist_path"
+
+    for translated in templates-translated/*/"$template"; do
+        if [ -f "$translated" ]; then
+            locale=$(echo "$translated" | sed -E 's|templates-translated/([^/]+)/.*|\1|')
+            dist_path="dist/templates/localized/$locale/$template"
+            if [ ! -d "${dist_path%/*}" ]; then
+                mkdir -p "${dist_path%/*}"
+            fi
+            echo -n "$locale "
+            cat "$prefix_file" "$translated" "$suffix_file" > "$dist_path"
+        fi
+    done
+    echo
+done

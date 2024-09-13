@@ -1,0 +1,85 @@
+QompaSSL Test Report - 2024-09-12 21:16:35
+==================================
+
+/usr/bin/perl "-I." "-Mconfigdata" "-Mbuilddata" "util/dofile.pl" "-oMakefile" exporters/cmake/OpenSSLConfig.cmake.in > OpenSSLConfig.cmake
+/usr/bin/perl "-I." "-Mconfigdata" "-Mconfigdata" "-Mbuilddata" "util/dofile.pl" "-oMakefile" exporters/cmake/OpenSSLConfigVersion.cmake.in > OpenSSLConfigVersion.cmake
+/usr/bin/perl "-I." "-Iutil/perl" "-Mconfigdata" "-MOpenSSL::paramnames" "util/dofile.pl" "-oMakefile" crypto/params_idx.c.in > crypto/params_idx.c
+/usr/bin/perl "-I." "-Mconfigdata" "-Minstalldata" "util/dofile.pl" "-oMakefile" exporters/cmake/OpenSSLConfig.cmake.in > exporters/OpenSSLConfig.cmake
+/usr/bin/perl "-I." "-Mconfigdata" "-Mconfigdata" "-Minstalldata" "util/dofile.pl" "-oMakefile" exporters/cmake/OpenSSLConfigVersion.cmake.in > exporters/OpenSSLConfigVersion.cmake
+/usr/bin/perl "-I." "-Mconfigdata" "-Minstalldata" "util/dofile.pl" "-oMakefile" exporters/pkg-config/libcrypto.pc.in > exporters/libcrypto.pc
+/usr/bin/perl "-I." "-Mconfigdata" "-Minstalldata" "util/dofile.pl" "-oMakefile" exporters/pkg-config/libssl.pc.in > exporters/libssl.pc
+/usr/bin/perl "-I." "-Mconfigdata" "-Mconfigdata" "-Mconfigdata" "-Minstalldata" "util/dofile.pl" "-oMakefile" exporters/pkg-config/openssl.pc.in > exporters/openssl.pc
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/crypto/bn_conf.h.in > include/crypto/bn_conf.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/crypto/dso_conf.h.in > include/crypto/dso_conf.h
+/usr/bin/perl "-I." "-Iutil/perl" "-Mconfigdata" "-MOpenSSL::paramnames" "util/dofile.pl" "-oMakefile" include/internal/param_names.h.in > include/internal/param_names.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/asn1.h.in > include/openssl/asn1.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/asn1t.h.in > include/openssl/asn1t.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/bio.h.in > include/openssl/bio.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/cmp.h.in > include/openssl/cmp.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/cms.h.in > include/openssl/cms.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/conf.h.in > include/openssl/conf.h
+/usr/bin/perl "-I." "-Iutil/perl" "-Mconfigdata" "-MOpenSSL::paramnames" "util/dofile.pl" "-oMakefile" include/openssl/core_names.h.in > include/openssl/core_names.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/crmf.h.in > include/openssl/crmf.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/crypto.h.in > include/openssl/crypto.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/ct.h.in > include/openssl/ct.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/err.h.in > include/openssl/err.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/ess.h.in > include/openssl/ess.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/fipskey.h.in > include/openssl/fipskey.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/lhash.h.in > include/openssl/lhash.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/ocsp.h.in > include/openssl/ocsp.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/opensslv.h.in > include/openssl/opensslv.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/pkcs12.h.in > include/openssl/pkcs12.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/pkcs7.h.in > include/openssl/pkcs7.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/safestack.h.in > include/openssl/safestack.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/srp.h.in > include/openssl/srp.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/ssl.h.in > include/openssl/ssl.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/ui.h.in > include/openssl/ui.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/x509.h.in > include/openssl/x509.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/x509_vfy.h.in > include/openssl/x509_vfy.h
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" include/openssl/x509v3.h.in > include/openssl/x509v3.h
+/usr/bin/perl "-I." "-Mconfigdata" "-Mbuilddata" "util/dofile.pl" "-oMakefile" exporters/pkg-config/libcrypto.pc.in > libcrypto.pc
+/usr/bin/perl "-I." "-Mconfigdata" "-Mbuilddata" "util/dofile.pl" "-oMakefile" exporters/pkg-config/libssl.pc.in > libssl.pc
+/usr/bin/perl "-I." "-Mconfigdata" "-Mbuilddata" "-Mbuilddata" "-Mbuilddata" "util/dofile.pl" "-oMakefile" exporters/pkg-config/openssl.pc.in > openssl.pc
+/usr/bin/perl "-I." "-Mconfigdata" "util/dofile.pl" "-oMakefile" test/provider_internal_test.cnf.in > test/provider_internal_test.cnf
+"make" depend && "make" _tests
+make[1]: Entering directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make[1]: Entering directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+/usr/bin/perl apps/progs.pl "-C" "apps/openssl" > apps/progs.c
+/usr/bin/perl apps/progs.pl "-H" "apps/openssl" > apps/progs.h
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/lib/openssl-bin-cmp_mock_srv.d.tmp -MT apps/lib/openssl-bin-cmp_mock_srv.o -c -o apps/lib/openssl-bin-cmp_mock_srv.o apps/lib/cmp_mock_srv.c
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/openssl-bin-asn1parse.d.tmp -MT apps/openssl-bin-asn1parse.o -c -o apps/openssl-bin-asn1parse.o apps/asn1parse.c
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/openssl-bin-ca.d.tmp -MT apps/openssl-bin-ca.o -c -o apps/openssl-bin-ca.o apps/ca.c
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/openssl-bin-ciphers.d.tmp -MT apps/openssl-bin-ciphers.o -c -o apps/openssl-bin-ciphers.o apps/ciphers.c
+In file included from apps/ciphers.c:17:
+apps/include/s_apps.h:107:5: error: unknown type name 'SRP_VBASE'
+  107 |     SRP_VBASE *vb;
+      |     ^~~~~~~~~
+apps/include/s_apps.h:108:5: error: unknown type name 'SRP_user_pwd'
+  108 |     SRP_user_pwd *user;
+      |     ^~~~~~~~~~~~
+make[1]: *** [Makefile:24392: apps/openssl-bin-ciphers.o] Error 1
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make: *** [Makefile:3746: tests] Error 2
+
+--- Test Summary ---
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make[1]: Entering directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+/usr/bin/perl apps/progs.pl "-C" "apps/openssl" > apps/progs.c
+/usr/bin/perl apps/progs.pl "-H" "apps/openssl" > apps/progs.h
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/lib/openssl-bin-cmp_mock_srv.d.tmp -MT apps/lib/openssl-bin-cmp_mock_srv.o -c -o apps/lib/openssl-bin-cmp_mock_srv.o apps/lib/cmp_mock_srv.c
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/openssl-bin-asn1parse.d.tmp -MT apps/openssl-bin-asn1parse.o -c -o apps/openssl-bin-asn1parse.o apps/asn1parse.c
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/openssl-bin-ca.d.tmp -MT apps/openssl-bin-ca.o -c -o apps/openssl-bin-ca.o apps/ca.c
+/bin/gcc  -Iapps -I. -Iinclude -Iapps/include  -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -MMD -MF apps/openssl-bin-ciphers.d.tmp -MT apps/openssl-bin-ciphers.o -c -o apps/openssl-bin-ciphers.o apps/ciphers.c
+In file included from apps/ciphers.c:17:
+apps/include/s_apps.h:107:5: error: unknown type name 'SRP_VBASE'
+  107 |     SRP_VBASE *vb;
+      |     ^~~~~~~~~
+apps/include/s_apps.h:108:5: error: unknown type name 'SRP_user_pwd'
+  108 |     SRP_user_pwd *user;
+      |     ^~~~~~~~~~~~
+make[1]: *** [Makefile:24392: apps/openssl-bin-ciphers.o] Error 1
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make: *** [Makefile:3746: tests] Error 2
+
+--- Test Summary ---

@@ -1,1 +1,0 @@
-/bin/gcc -rdynamic CMakeFiles/oqs_test_endecode.dir/oqs_test_endecode.c.o CMakeFiles/oqs_test_endecode.dir/test_common.c.o -o oqs_test_endecode  -Wl,-rpath,/home/phaedrus/miniconda3/envs/3.12/lib /home/phaedrus/miniconda3/envs/3.12/lib/libcrypto.so

@@ -1,0 +1,59 @@
+[main]
+host = https://www.transifex.com
+
+[forte.forte]
+minimum_perc = 100
+source_file = po/forte/forte.pot
+source_lang = en
+file_filter = po/forte/<lang>.po
+trans.zh-Hans = po/forte/zh_Hans.po
+type = PO
+
+[forte.about-about]
+minimum_perc = 100
+source_file = templates-untranslated/about/about.html.hbs
+file_filter = templates-translated/<lang>/about/about.html.hbs
+trans.zh-Hans = templates-translated/zh_Hans/about/about.html.hbs
+source_lang = en
+type = HTML
+
+[forte.about-faq]
+minimum_perc = 100
+source_file = templates-untranslated/about/faq.html.hbs
+file_filter = templates-translated/<lang>/about/faq.html.hbs
+trans.zh-Hans = templates-translated/zh_Hans/about/faq.html.hbs
+source_lang = en
+type = HTML
+
+[forte.about-news]
+minimum_perc = 100
+source_file = templates-untranslated/about/news.html.hbs
+file_filter = templates-translated/<lang>/about/news.html.hbs
+trans.zh-Hans = templates-translated/zh_Hans/about/news.html.hbs
+source_lang = en
+type = HTML
+
+[forte.about-privacy]
+minimum_perc = 100
+source_file = templates-untranslated/about/privacy.html.hbs
+file_filter = templates-translated/<lang>/about/privacy.html.hbs
+trans.zh-Hans = templates-translated/zh_Hans/about/privacy.html.hbs
+source_lang = en
+type = HTML
+
+[forte.about-stats]
+minimum_perc = 100
+source_file = templates-untranslated/about/stats.html.hbs
+file_filter = templates-translated/<lang>/about/stats.html.hbs
+trans.zh-Hans = templates-translated/zh_Hans/about/stats.html.hbs
+source_lang = en
+type = HTML
+
+[forte.about-usage]
+minimum_perc = 100
+source_file = templates-untranslated/about/usage.html.hbs
+file_filter = templates-translated/<lang>/about/usage.html.hbs
+trans.zh-Hans = templates-translated/zh_Hans/about/usage.html.hbs
+source_lang = en
+type = HTML
+

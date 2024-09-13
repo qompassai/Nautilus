@@ -1,1 +1,0 @@
-/bin/gcc -rdynamic CMakeFiles/oqs_test_tlssig.dir/oqs_test_tlssig.c.o CMakeFiles/oqs_test_tlssig.dir/test_common.c.o CMakeFiles/oqs_test_tlssig.dir/tlstest_helpers.c.o -o oqs_test_tlssig  -Wl,-rpath,/home/phaedrus/miniconda3/envs/3.12/lib /home/phaedrus/miniconda3/envs/3.12/lib/libssl.so /home/phaedrus/miniconda3/envs/3.12/lib/libcrypto.so

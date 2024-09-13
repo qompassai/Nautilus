@@ -1,0 +1,68 @@
+{{#> layout }}
+<div class="about">
+    <center><h2><a href="/about">About</a> | <a href="/about/news">News</a> | <a href="/about/usage">Usage</a> | <a href="/about/faq">FAQ</a> | <a href="/about/stats">Stats</a> | Privacy</h2></center>
+
+    <p style="text-align: left;">
+        The public keyserver running on forte.qompass.ai processes, stores and
+        distributes OpenPGP key data. The specific way in which data is processed
+        differs by type as follows:
+        <ul>
+          <li><b>Email Addresses</b>
+              <p>Email addresses contained in <abbr title="Packet Tag 13">User
+                      IDs</abbr> are personally identifiable information (PII).
+                  Special care is taken to make sure they are used only with
+                  consent:
+                  <ul>
+                      <li>
+                          Publishing requires <a target="_blank"
+                              href="https://en.wikipedia.org/wiki/Opt-in_email#Confirmed_opt-in_(COI)_/_Double_opt-in_(DOI)">double
+                              opt-in</a> validation, to prove ownership of the
+                          email address in question.
+                      </li>
+                      <li>Addresses are searchable by exact email address,
+                          but not by associated name.</li>
+                      <li>Enumeration of addresses is not possible.</li>
+                      <li>Deletion of addresses is possible via simple proof
+                          of ownership in an automated fashion, similar to
+                          publication. To unlist an address where this isn't
+                          possible, write to support at keys dot openpgp dot
+                          org.
+                      </li>
+                  </ul>
+              </p>
+              <p>This data is never handed collectively ("as a dump") to third
+                  parties.
+              </p>
+          </li>
+          <li><b>Public Key Data</b>
+              <p>The cryptographic content of OpenPGP keys is not considered personally
+                  identifiable information. This includes specifically
+                  <abbr title="Packet Tags 6 and 14">public key material</abbr>,
+                  <abbr title="Packet Tag 2, Signature types 0x10-0x13, 0x18, 0x19, 0x1F">self-signatures</abbr>, and
+                  <abbr title="Packet Tag 2, Signature types 0x20, 0x28, 0x30">revocation signatures</abbr>.
+              </p>
+              <p>This data is not usually collectively available ("as
+                  a dump"), but may be handed upon request to third
+                  parties for purposes of development or research.
+              </p>
+          </li>
+          <li><b>Other User ID data</b>
+              <p>An OpenPGP key may contain personal data other than email
+                  addresses, such as <abbr title="Packet Tag 13">User IDs</abbr>
+                  that do not contain email addresses, or <abbr
+                  title="Packet Tag 17">image attributes</abbr>. This data is stripped
+              during upload and never stored, processed, or distributed in
+              any way.
+              </p>
+              <p>OpenPGP packet types that were not specifically mentioned above are
+                  stripped during upload and never stored, processed or
+                  distributed in any way.
+              </p>
+          </li>
+      </ul>
+      <p style="text-align: left">Data is never relayed to third parties outside of
+          what is available from the <a href="/about/api">public API interfaces</a>,
+          and what is described in this policy.
+      </p>
+</div>
+{{/layout}}
