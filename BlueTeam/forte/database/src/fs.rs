@@ -14,8 +14,8 @@ use tempfile;
 use url::form_urlencoded;
 
 // Create a connection pool
-let manager = ConnectionManager::<PgConnection>::new(database_url);
-let pool = Pool::builder().build(manager).expect("Failed to create pool.");
+const manager = ConnectionManager::<PgConnection>::new(database_url);
+const pool = Pool::builder().build(manager).expect("Failed to create pool.");
 
 use sync::FlockMutexGuard;
 use types::{Email, Fingerprint, KeyID};
