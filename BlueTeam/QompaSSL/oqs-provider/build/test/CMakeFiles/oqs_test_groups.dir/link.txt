@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/oqs_test_groups.dir/oqs_test_groups.c.o CMakeFiles/oqs_test_groups.dir/test_common.c.o CMakeFiles/oqs_test_groups.dir/tlstest_helpers.c.o -o oqs_test_groups  -lssl -lcrypto

@@ -19,24 +19,28 @@ our %config = (
         "qc"
     ],
     "ASFLAGS" => [],
-    "CC" => "gcc",
+    "CC" => "/bin/gcc",
     "CFLAGS" => [
-        "-Wall -O3"
+        "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native"
     ],
     "CPPDEFINES" => [
         "OPENSSL_NO_HEARTBEATS",
         "OPENSSL_TLS_SECURITY_LEVEL=2",
         "OQS_DEFAULT_GROUPS=p256_kyber512:p384_kyber768:p521_kyber1024:kyber512:kyber768:kyber1024:p256_falcon512:p384_falcon512:p521_falcon1024:falcon512:falcon1024:p256_dilithium2:p384_dilithium3:p521_dilithium5:dilithium2:dilithium3:dilithium5:p384_mceliece348864:p521_mceliece460896:mceliece348864:mceliece460896:mceliece6688128:mceliece6960119:mceliece8192128:x25519_kyber512:x25519_kyber768:x25519_kyber1024:x25519_falcon512:x25519_falcon1024:x25519_dilithium2:x25519_dilithium3:x25519_dilithium5:x25519_mceliece348864:x25519_mceliece460896:x25519_mceliece6688128:x25519_mceliece6960119:x25519_mceliece8192128:frodo640aes:frodo976aes:frodo1344aes:bike1l1cpa:bike1l3cpa:bike1l5cpa:hqc128:hqc192:hqc256:sphincssha256128frobust:sphincssha256192frobust:sphincssha256256frobust:secp256k1_kyber512:secp256k1_kyber768:secp256k1_kyber1024:mayo1:mayo2:mayo3:mayo5:mceliece348864_kyber512:mceliece348864_kyber768:mceliece348864_kyber1024:mceliece460896_kyber512:mceliece460896_kyber768:mceliece460896_kyber1024:mceliece6688128_kyber512:mceliece6688128_kyber768:mceliece6688128_kyber1024:mceliece6960119_kyber512:mceliece6960119_kyber768:mceliece6960119_kyber1024:mceliece8192128_kyber512:mceliece8192128_kyber768:mceliece8192128_kyber1024:lightsaber:saber:firesaber:p384_falcon1024:secp256k1_falcon512:secp256k1_falcon1024:p384_kyber768:p521_kyber1024:secp256k1_dilithium2:secp256k1_dilithium3:secp256k1_dilithium5:falcon512:falcon1024:ntru-hps-2048-509:ntru-hps-2048-677:ntru-hps-4096-821:ntru-hrss-701"
     ],
-    "CPPFLAGS" => [],
+    "CPPFLAGS" => [
+        "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs"
+    ],
     "CPPINCLUDES" => [],
     "CXX" => "g++",
     "CXXFLAGS" => [
-        "-Wall -O3"
+        "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -std=c++17 -I/opt/libtorch/include -fcommon -march=native -O2 -pipe -fno-plt -fexceptions -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-deprecated-declarations -Wno-error=sign-conversion -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -I/usr/include/c++/14.2.1 -I/usr/include/c++utilities -isystem /usr/include -isystem /usr/include/c++/14.2.1 -DOPENSSL_API_COMPAT=10101 -DOPENSSL_NO_DEPRECATED -Wno-error=implicit-function-declaration -I/usr/include/oqs"
     ],
     "FIPSKEY" => "f4556650ac31d35461610bac4ed81b1a181b2d8a43ea2854cbae22ca74560813",
     "HASHBANGPERL" => "/usr/bin/env perl",
-    "LDFLAGS" => [],
+    "LDFLAGS" => [
+        "-Wl,-O3,--sort-common,--as-needed,-z,relro,-L/opt/libtorch/lib -ltorch -lc10 -z,now -fstack-protector-strong -fcf-protection -lsctp"
+    ],
     "LDLIBS" => [
         "-lm"
     ],
@@ -294,14 +298,14 @@ our %config = (
     "perlenv" => {
         "AR" => undef,
         "BUILDFILE" => undef,
-        "CC" => undef,
-        "CFLAGS" => undef,
-        "CPPFLAGS" => undef,
+        "CC" => "/bin/gcc",
+        "CFLAGS" => "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native",
+        "CPPFLAGS" => "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs",
         "CROSS_COMPILE" => undef,
-        "CXX" => undef,
-        "CXXFLAGS" => undef,
+        "CXX" => "g++",
+        "CXXFLAGS" => "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -std=c++17 -I/opt/libtorch/include -fcommon -march=native -O2 -pipe -fno-plt -fexceptions -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-deprecated-declarations -Wno-error=sign-conversion -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -I/usr/include/c++/14.2.1 -I/usr/include/c++utilities -isystem /usr/include -isystem /usr/include/c++/14.2.1 -DOPENSSL_API_COMPAT=10101 -DOPENSSL_NO_DEPRECATED -Wno-error=implicit-function-declaration -I/usr/include/oqs",
         "HASHBANGPERL" => undef,
-        "LDFLAGS" => undef,
+        "LDFLAGS" => "-Wl,-O3,--sort-common,--as-needed,-z,relro,-L/opt/libtorch/lib -ltorch -lc10 -z,now -fstack-protector-strong -fcf-protection -lsctp",
         "LDLIBS" => undef,
         "OPENSSL_LOCAL_CONFIG_DIR" => undef,
         "PERL" => undef,

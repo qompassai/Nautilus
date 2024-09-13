@@ -127,15 +127,15 @@ Industry Adoption and Real-World Applications:
 These industry leaders are at the forefront of adopting post-quantum cryptography, demonstrating the growing importance of quantum-resistant security measures across various sectors.
 
 References:
-[1] https://www.roche.com/innovation/quantum-computing/
-[2] https://www.antheminc.com/PressReleaseDetails.aspx?xlid=1&id=1784
-[3] https://www.jpmorgan.com/news/jpmorgan-chase-joins-forces-with-toshiba-and-ciena-to-launch-quantum-key-distribution-network
-[4] https://usa.visa.com/visa-everywhere/blog/bdp/2021/06/17/preparing-for-post-quantum-1623960895033.html
+[1] https://www.roche.com/stories/quantum-computers-calculating-the-unimaginable
+[2] https://news.ncsu.edu/2020/02/health-care-anthem-joins-q-hub/
+[3] https://www.jpmorgan.com/technology/technology-blog/jpmc-toshiba-ciena-build-first-quantum-key-distribution-network-critical-blockchain-application
+[4] https://usa.visa.com/about-visa/visa-research/research-areas.html
 [5] https://security.googleblog.com/2016/07/experimenting-with-post-quantum.html
 [6] https://www.ibm.com/blogs/research/2019/08/quantum-safe-cryptography/
-[7] https://www.defense.gov/News/Releases/Release/Article/2418922/dod-announces-2-billion-investment-in-artificial-intelligence/
+[7] https://www.defense.gov/News/News-Stories/Article/Article/3682355/pentagon-official-lays-out-dod-vision-for-ai/
 [8] https://www.etsi.org/technologies/quantum-safe-cryptography
-[9] https://about.att.com/story/2021/quantum-networking.html
+[9] https://techblog.comsoc.org/2022/10/07/att-will-be-quantum-ready-by-the-year-2025-but-may-not-be-fully-quantum-secured/
 
 
 # Change Log
