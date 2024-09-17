@@ -1,1 +1,0 @@
-/usr/bin/cc -rdynamic CMakeFiles/oqs_test_evp_pkey_params.dir/oqs_test_evp_pkey_params.c.o CMakeFiles/oqs_test_evp_pkey_params.dir/test_common.c.o -o oqs_test_evp_pkey_params  -lcrypto

@@ -38,17 +38,17 @@ As standardization for these algorithms within TLS is not done, all TLS code poi
 | p256_kyber768 | 0x639A | Yes | OQS_CODEPOINT_P256_KYBER768 |
 | kyber1024 | 0x023D | Yes | OQS_CODEPOINT_KYBER1024 |
 | p521_kyber1024 | 0x2F3D | Yes | OQS_CODEPOINT_P521_KYBER1024 |
-| mlkem512 | 0x0247 | Yes | OQS_CODEPOINT_MLKEM512 |
-| p256_mlkem512 | 0x2F47 | Yes | OQS_CODEPOINT_P256_MLKEM512 |
-| x25519_mlkem512 | 0x2FB2 | Yes | OQS_CODEPOINT_X25519_MLKEM512 |
-| mlkem768 | 0x0248 | Yes | OQS_CODEPOINT_MLKEM768 |
-| p384_mlkem768 | 0x2F48 | Yes | OQS_CODEPOINT_P384_MLKEM768 |
-| x448_mlkem768 | 0x2FB3 | Yes | OQS_CODEPOINT_X448_MLKEM768 |
-| x25519_mlkem768 | 0x2FB4 | Yes | OQS_CODEPOINT_X25519_MLKEM768 |
-| p256_mlkem768 | 0x2FB5 | Yes | OQS_CODEPOINT_P256_MLKEM768 |
-| mlkem1024 | 0x0249 | Yes | OQS_CODEPOINT_MLKEM1024 |
-| p521_mlkem1024 | 0x2F49 | Yes | OQS_CODEPOINT_P521_MLKEM1024 |
-| p384_mlkem1024 | 0x2F4A | Yes | OQS_CODEPOINT_P384_MLKEM1024 |
+| mlkem512 | 0x024A | Yes | OQS_CODEPOINT_MLKEM512 |
+| p256_mlkem512 | 0x2F4B | Yes | OQS_CODEPOINT_P256_MLKEM512 |
+| x25519_mlkem512 | 0x2FB6 | Yes | OQS_CODEPOINT_X25519_MLKEM512 |
+| mlkem768 | 0x0768 | Yes | OQS_CODEPOINT_MLKEM768 |
+| p384_mlkem768 | 0x2F4C | Yes | OQS_CODEPOINT_P384_MLKEM768 |
+| x448_mlkem768 | 0x2FB7 | Yes | OQS_CODEPOINT_X448_MLKEM768 |
+| x25519_mlkem768 | 0x2FB8 | Yes | OQS_CODEPOINT_X25519_MLKEM768 |
+| p256_mlkem768 | 4587 | Yes | OQS_CODEPOINT_P256_MLKEM768 |
+| mlkem1024 | 0x1024 | Yes | OQS_CODEPOINT_MLKEM1024 |
+| p521_mlkem1024 | 0x2F4D | Yes | OQS_CODEPOINT_P521_MLKEM1024 |
+| p384_mlkem1024 | 0x2F4E | Yes | OQS_CODEPOINT_P384_MLKEM1024 |
 | bikel1 | 0x0241 | Yes | OQS_CODEPOINT_BIKEL1 |
 | p256_bikel1 | 0x2F41 | Yes | OQS_CODEPOINT_P256_BIKEL1 |
 | x25519_bikel1 | 0x2FAE | Yes | OQS_CODEPOINT_X25519_BIKEL1 |
@@ -117,6 +117,14 @@ As standardization for these algorithms within TLS is not done, all TLS code poi
 | p521_sphincsshake256fsimple | 0xfecd |No| OQS_CODEPOINT_P521_SPHINCSSHAKE256FSIMPLE
 | sphincsshake256ssimple | 0xfece |No| OQS_CODEPOINT_SPHINCSSHAKE256SSIMPLE
 | p521_sphincsshake256ssimple | 0xfecf |No| OQS_CODEPOINT_P521_SPHINCSSHAKE256SSIMPLE
+| mayo1 | 0xfeee |Yes| OQS_CODEPOINT_MAYO1
+| p256_mayo1 | 0xfef2 |Yes| OQS_CODEPOINT_P256_MAYO1
+| mayo2 | 0xfeef |Yes| OQS_CODEPOINT_MAYO2
+| p256_mayo2 | 0xfef3 |Yes| OQS_CODEPOINT_P256_MAYO2
+| mayo3 | 0xfef0 |Yes| OQS_CODEPOINT_MAYO3
+| p384_mayo3 | 0xfef4 |Yes| OQS_CODEPOINT_P384_MAYO3
+| mayo5 | 0xfef1 |Yes| OQS_CODEPOINT_MAYO5
+| p521_mayo5 | 0xfef5 |Yes| OQS_CODEPOINT_P521_MAYO5
 <!--- OQS_TEMPLATE_FRAGMENT_IDS_END -->
 
 Changing code points
@@ -207,6 +215,14 @@ adapting the OIDs of all supported signature algorithms as per the table below.
 | p521_sphincsshake256fsimple | 1.3.9999.6.9.11 |No| OQS_OID_P521_SPHINCSSHAKE256FSIMPLE
 | sphincsshake256ssimple | 1.3.9999.6.9.12 |No| OQS_OID_SPHINCSSHAKE256SSIMPLE
 | p521_sphincsshake256ssimple | 1.3.9999.6.9.13 |No| OQS_OID_P521_SPHINCSSHAKE256SSIMPLE
+| mayo1 | 1.3.9999.8.1.1 |Yes| OQS_OID_MAYO1
+| p256_mayo1 | 1.3.9999.8.1.2 |Yes| OQS_OID_P256_MAYO1
+| mayo2 | 1.3.9999.8.2.1 |Yes| OQS_OID_MAYO2
+| p256_mayo2 | 1.3.9999.8.2.2 |Yes| OQS_OID_P256_MAYO2
+| mayo3 | 1.3.9999.8.3.1 |Yes| OQS_OID_MAYO3
+| p384_mayo3 | 1.3.9999.8.3.2 |Yes| OQS_OID_P384_MAYO3
+| mayo5 | 1.3.9999.8.5.1 |Yes| OQS_OID_MAYO5
+| p521_mayo5 | 1.3.9999.8.5.2 |Yes| OQS_OID_P521_MAYO5
 
 If [OQS_KEM_ENCODERS](CONFIGURE.md#OQS_KEM_ENCODERS) is enabled the following list is also available:
 
@@ -238,15 +254,15 @@ If [OQS_KEM_ENCODERS](CONFIGURE.md#OQS_KEM_ENCODERS) is enabled the following li
 | p256_kyber768 | 1.3.9999.99.52 | OQS_OID_P256_KYBER768
 | kyber1024 | 1.3.6.1.4.1.2.267.8.4.4 | OQS_OID_KYBER1024
 | p521_kyber1024 | 1.3.9999.99.74 | OQS_OID_P521_KYBER1024
-| mlkem512 | 1.3.6.1.4.1.22554.5.6.1 | OQS_OID_MLKEM512
+| mlkem512 | 2.16.840.1.101.3.4.4.1 | OQS_OID_MLKEM512
 | p256_mlkem512 | 1.3.6.1.4.1.22554.5.7.1 | OQS_OID_P256_MLKEM512
 | x25519_mlkem512 | 1.3.6.1.4.1.22554.5.8.1 | OQS_OID_X25519_MLKEM512
-| mlkem768 | 1.3.6.1.4.1.22554.5.6.2 | OQS_OID_MLKEM768
+| mlkem768 | 2.16.840.1.101.3.4.4.2 | OQS_OID_MLKEM768
 | p384_mlkem768 | 1.3.9999.99.75 | OQS_OID_P384_MLKEM768
 | x448_mlkem768 | 1.3.9999.99.53 | OQS_OID_X448_MLKEM768
 | x25519_mlkem768 | 1.3.9999.99.54 | OQS_OID_X25519_MLKEM768
 | p256_mlkem768 | 1.3.9999.99.55 | OQS_OID_P256_MLKEM768
-| mlkem1024 | 1.3.6.1.4.1.22554.5.6.3 | OQS_OID_MLKEM1024
+| mlkem1024 | 2.16.840.1.101.3.4.4.3 | OQS_OID_MLKEM1024
 | p521_mlkem1024 | 1.3.9999.99.76 | OQS_OID_P521_MLKEM1024
 | p384_mlkem1024 | 1.3.6.1.4.1.42235.6 | OQS_OID_P384_MLKEM1024
 | bikel1 | 1.3.9999.99.78 | OQS_OID_BIKEL1
@@ -267,40 +283,3 @@ If [OQS_KEM_ENCODERS](CONFIGURE.md#OQS_KEM_ENCODERS) is enabled the following li
 | p521_hqc256 | 1.3.9999.99.87 | OQS_OID_P521_HQC256
 <!--- OQS_TEMPLATE_FRAGMENT_OIDS_END -->
 
-# Key Encodings
-
-By setting environment variables, oqs-provider can be configured to encode keys (subjectPublicKey and and privateKey ASN.1 structures) according to the following IETF drafts:
-
-- https://datatracker.ietf.org/doc/draft-uni-qsckeys-dilithium/00/
-- https://datatracker.ietf.org/doc/draft-uni-qsckeys-falcon/00/
-- https://datatracker.ietf.org/doc/draft-uni-qsckeys-sphincsplus/00/
-
-<!--- OQS_TEMPLATE_FRAGMENT_ENCODINGS_START -->
-|Environment Variable | Permissible Values |
-| --- | --- |
-|`OQS_ENCODING_DILITHIUM2`|`draft-uni-qsckeys-dilithium-00/sk-pk`|
-|`OQS_ENCODING_DILITHIUM3`|`draft-uni-qsckeys-dilithium-00/sk-pk`|
-|`OQS_ENCODING_DILITHIUM5`|`draft-uni-qsckeys-dilithium-00/sk-pk`|
-|`OQS_ENCODING_FALCON512`|`draft-uni-qsckeys-falcon-00/sk-pk`|
-|`OQS_ENCODING_FALCONPADDED512`|`draft-uni-qsckeys-falcon-00/sk-pk`|
-|`OQS_ENCODING_FALCON1024`|`draft-uni-qsckeys-falcon-00/sk-pk`|
-|`OQS_ENCODING_FALCONPADDED1024`|`draft-uni-qsckeys-falcon-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHA2128FSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHA2128SSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHA2192FSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHA2192SSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHA2256FSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHA2256SSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHAKE128FSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHAKE128SSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHAKE192FSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHAKE192SSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHAKE256FSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-|`OQS_ENCODING_SPHINCSSHAKE256SSIMPLE`|`draft-uni-qsckeys-sphincsplus-00/sk-pk`|
-<!--- OQS_TEMPLATE_FRAGMENT_ENCODINGS_END -->
-
-By setting `OQS_ENCODING_<ALGORITHM>_ALGNAME` environment variables, the corresponding algorithm names are set. The names are documented in the [`qsc_encoding.h`](https://github.com/Quantum-Safe-Collaboration/qsc-key-encoder/blob/main/include/qsc_encoding.h) header file of the encoder library.
-
-If no environment variable is set, or if an unknown value is set, the default is 'no' encoding, meaning that key serialization uses the 'raw' keys of the crypto implementations. If unknown values are set as environment variables, a run-time error will be raised.
-
-The test script `scripts/runtests_encodings.sh` (instead of `scripts/runtests.sh`) can be used for a test run with all supported encodings activated.

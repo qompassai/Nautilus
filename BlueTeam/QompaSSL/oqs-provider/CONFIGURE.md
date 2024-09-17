@@ -30,6 +30,16 @@ activate further warning messages. In particular, when "Debug" has been set, dis
 [debugging capabilities](https://github.com/open-quantum-safe/oqs-provider/wiki/Debugging)
 are activated and additional setup warnings are output.
 
+### CMAKE_PARAMS
+
+This environment variable lets you specify additional flags to pass to `cmake` explicitly when using the `fullbuild.sh` script.
+
+For example, in order to point `cmake` to a specific library, you might run:
+
+```
+$ env CMAKE_PARAMS="-DOPENSSL_CRYPTO_LIBRARY=/opt/lib64/libcrypto.so" bash scripts/fullbuild.sh
+```
+
 ### liboqs_DIR
 
 This environment variable must be set to the location of the `liboqs` installation to be
@@ -38,13 +48,6 @@ By default, this is un-set, requiring installation of `liboqs` in a standard
 location for the OS.
 This uses the [`find_package`](https://cmake.org/cmake/help/latest/command/find_package.html)
 command in `cmake`, which checks for local builds of a package at `<PackageName>_DIR`
-
-### USE_ENCODING_LIB
-
-By setting `-DUSE_ENCODING_LIB=<ON/OFF>` at compile-time, oqs-provider can be
-compiled with with an an external encoding library `qsc-key-encoder`.
-Configuring the encodings is done via environment as described in [ALGORITHMS.md](ALGORITHMS.md).
-The default value is `OFF`.
 
 ### NOPUBKEY_IN_PRIVKEY
 
@@ -96,6 +99,10 @@ void load_oqs_provider(OSSL_LIB_CTX *libctx) {
 
 See [`examples/static_oqsprovider.c`](examples/static_oqsprovider.c) for a complete
 example of how to load oqsprovider using `OSSL_PROVIDER_add_builtin`.
+
+### BUILD_TESTING
+
+By setting this to "OFF", no tests or examples will be compiled.
 
 ## Convenience build script options
 

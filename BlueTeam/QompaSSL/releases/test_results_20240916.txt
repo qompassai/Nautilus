@@ -1,0 +1,75 @@
+QompaSSL Test Report - 2024-09-16 23:38:26
+==================================
+
+"make" depend && "make" _tests
+make[1]: Entering directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make[1]: Entering directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+rm -f apps/openssl
+${LDCMD:-/bin/gcc} -pthread -m64 -Wa,--noexecstack -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -I/usr/include -I/usr/include/openssl -I/usr/local/include/openssl -DOPENSSL_SUPPRESS_DEPRECATED -I/usr/include/oqs -fcommon -march=native -fexceptions -O3 -pipe -fno-plt -lm -Wformat -Wformat=2 -fstrict-flex-arrays=3 -Wno-format-nonliteral -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -Wno-implicit-function-declaration -Wno-error=sign-conversion -Wno-error=deprecated-declarations -fstack-clash-protection -fstack-protector-strong -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wno-error=conversion -Wno-error=format-security -Wno-error=unused-result -I/usr/include/gettext -I/usr/include -DOPENSSL_NO_DEPRECATED -I/usr/include/oqs -DENGINE_AFALG -I/usr/include/tss2 -L/usr/lib -O3 -flto -march=native -L.  -Wl,-O3,--sort-common,--as-needed,-z,relro,-L/opt/libtorch/lib -ltorch -lc10 -z,now -fstack-protector-strong -fcf-protection -lsctp \
+	-o apps/openssl \
+	apps/lib/openssl-bin-cmp_mock_srv.o \
+	apps/openssl-bin-asn1parse.o apps/openssl-bin-ca.o \
+	apps/openssl-bin-ciphers.o apps/openssl-bin-cmp.o \
+	apps/openssl-bin-cms.o apps/openssl-bin-crl.o \
+	apps/openssl-bin-crl2pkcs7.o apps/openssl-bin-dgst.o \
+	apps/openssl-bin-dhparam.o apps/openssl-bin-dsa.o \
+	apps/openssl-bin-dsaparam.o apps/openssl-bin-ec.o \
+	apps/openssl-bin-ecparam.o apps/openssl-bin-enc.o \
+	apps/openssl-bin-errstr.o apps/openssl-bin-fipsinstall.o \
+	apps/openssl-bin-gendsa.o apps/openssl-bin-genpkey.o \
+	apps/openssl-bin-genrsa.o apps/openssl-bin-info.o \
+	apps/openssl-bin-kdf.o apps/openssl-bin-list.o \
+	apps/openssl-bin-mac.o apps/openssl-bin-nseq.o \
+	apps/openssl-bin-ocsp.o apps/openssl-bin-openssl.o \
+	apps/openssl-bin-passwd.o apps/openssl-bin-pkcs12.o \
+	apps/openssl-bin-pkcs7.o apps/openssl-bin-pkcs8.o \
+	apps/openssl-bin-pkey.o apps/openssl-bin-pkeyparam.o \
+	apps/openssl-bin-pkeyutl.o apps/openssl-bin-prime.o \
+	apps/openssl-bin-progs.o apps/openssl-bin-rand.o \
+	apps/openssl-bin-rehash.o apps/openssl-bin-req.o \
+	apps/openssl-bin-rsa.o apps/openssl-bin-s_client.o \
+	apps/openssl-bin-s_server.o apps/openssl-bin-s_time.o \
+	apps/openssl-bin-sess_id.o apps/openssl-bin-smime.o \
+	apps/openssl-bin-speed.o apps/openssl-bin-spkac.o \
+	apps/openssl-bin-storeutl.o apps/openssl-bin-ts.o \
+	apps/openssl-bin-verify.o apps/openssl-bin-version.o \
+	apps/openssl-bin-x509.o \
+	apps/libapps.a -lssl -lcrypto -ldl -pthread -lm
+/bin/ld: warning: -z ,now ignored
+lto-wrapper: warning: using serial compilation of 11 LTRANS jobs
+lto-wrapper: note: see the '-flto' option documentation for more information
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans4.ltrans.o: in function `s_client_main':
+<artificial>:(.text+0xbf33): undefined reference to `BIO_new_dgram_sctp'
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans9.ltrans.o: in function `init_client':
+<artificial>:(.text+0x76cf): undefined reference to `BIO_new_dgram_sctp'
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans5.ltrans.o: in function `sv_body':
+<artificial>:(.text+0x1ed2): undefined reference to `BIO_new_dgram_sctp'
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans5.ltrans.o: in function `s_server_main':
+<artificial>:(.text+0x7fd6): undefined reference to `BIO_new_dgram_sctp'
+collect2: error: ld returned 1 exit status
+make[1]: *** [Makefile:26783: apps/openssl] Error 1
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make: *** [Makefile:3879: tests] Error 2
+
+--- Test Summary ---
+	apps/openssl-bin-verify.o apps/openssl-bin-version.o \
+	apps/openssl-bin-x509.o \
+	apps/libapps.a -lssl -lcrypto -ldl -pthread -lm
+/bin/ld: warning: -z ,now ignored
+lto-wrapper: warning: using serial compilation of 11 LTRANS jobs
+lto-wrapper: note: see the '-flto' option documentation for more information
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans4.ltrans.o: in function `s_client_main':
+<artificial>:(.text+0xbf33): undefined reference to `BIO_new_dgram_sctp'
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans9.ltrans.o: in function `init_client':
+<artificial>:(.text+0x76cf): undefined reference to `BIO_new_dgram_sctp'
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans5.ltrans.o: in function `sv_body':
+<artificial>:(.text+0x1ed2): undefined reference to `BIO_new_dgram_sctp'
+/bin/ld: /home/phaedrus/.pyenv_tmp/cci0OROR.ltrans5.ltrans.o: in function `s_server_main':
+<artificial>:(.text+0x7fd6): undefined reference to `BIO_new_dgram_sctp'
+collect2: error: ld returned 1 exit status
+make[1]: *** [Makefile:26783: apps/openssl] Error 1
+make[1]: Leaving directory '/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL'
+make: *** [Makefile:3879: tests] Error 2
+
+--- Test Summary ---

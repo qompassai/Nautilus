@@ -1,66 +1,76 @@
 #!/bin/bash
-./config shared \
-linux-x86_64 \
-enable-engine \
-enable-dynamic-engine \
-no-weak-ssl-ciphers \
-no-deprecated \
-enable-afalgeng \
-no-ssl3 \
-enable-srp \
-no-tls1 \
-no-tls1_1 \
-enable-ktls \
-enable-ssl-trace \
-enable-srp \
-enable-crypto-mdebug \
-enable-crypto-mdebug-backtrace \
-enable-fips \
-enable-tls1_3 \
-enable-sctp \
-enable-ssl-trace \
-enable-zlib \
-enable-zlib-dynamic \
-enable-tls1_2 \
-enable-cms \
-enable-rfc3779 \
-enable-ec_nistp_64_gcc_128 \
-enable-idea \
-enable-mdc2 \
-enable-rc5 \
-enable-ssl-trace \
-enable-fips \
--DOPENSSL_NO_HEARTBEATS \
--DOPENSSL_TLS_SECURITY_LEVEL=2 \
--DOQS_DEFAULT_GROUPS="p256_kyber512:p384_kyber768:p521_kyber1024:kyber512:kyber768:kyber1024:p256_falcon512:p384_falcon512:p521_falcon1024:falcon512:falcon1024:p256_dilithium2:p384_dilithium3:p521_dilithium5:dilithium2:dilithium3:dilithium5:p384_mceliece348864:p521_mceliece460896:mceliece348864:mceliece460896:mceliece6688128:mceliece6960119:mceliece8192128:x25519_kyber512:x25519_kyber768:x25519_kyber1024:x25519_falcon512:x25519_falcon1024:x25519_dilithium2:x25519_dilithium3:x25519_dilithium5:x25519_mceliece348864:x25519_mceliece460896:x25519_mceliece6688128:x25519_mceliece6960119:x25519_mceliece8192128:frodo640aes:frodo976aes:frodo1344aes:bike1l1cpa:bike1l3cpa:bike1l5cpa:hqc128:hqc192:hqc256:sphincssha256128frobust:sphincssha256192frobust:sphincssha256256frobust:secp256k1_kyber512:secp256k1_kyber768:secp256k1_kyber1024:mayo1:mayo2:mayo3:mayo5:mceliece348864_kyber512:mceliece348864_kyber768:mceliece348864_kyber1024:mceliece460896_kyber512:mceliece460896_kyber768:mceliece460896_kyber1024:mceliece6688128_kyber512:mceliece6688128_kyber768:mceliece6688128_kyber1024:mceliece6960119_kyber512:mceliece6960119_kyber768:mceliece6960119_kyber1024:mceliece8192128_kyber512:mceliece8192128_kyber768:mceliece8192128_kyber1024:lightsaber:saber:firesaber:p384_falcon1024:secp256k1_falcon512:secp256k1_falcon1024:p384_kyber768:p521_kyber1024:secp256k1_dilithium2:secp256k1_dilithium3:secp256k1_dilithium5:falcon512:falcon1024:ntru-hps-2048-509:ntru-hps-2048-677:ntru-hps-4096-821:ntru-hrss-701" \
--lm \
-enable-chacha \
-enable-asm \
-enable-quic \
-enable-aria \
-enable-blake2 \
-enable-async \
-enable-sm4 \
-enable-rdrand \
-enable-camellia \
-enable-seed \
-enable-whirlpool \
-enable-psk \
-enable-dsa \
-enable-dh \
-enable-ec \
-enable-ecdh \
-enable-ecdsa \
-enable-ocb \
-enable-gost \
-enable-poly1305 \
-enable-nextprotoneg \
-enable-siphash \
-enable-sm2 \
-enable-sm3 \
-enable-tfo \
-enable-comp \
-enable-dtls
+./config -prefix=/home/phaedrus/Forge/GH/Qompass/Nautilus/BlueTeam/QompaSSL/.local \
+	shared \
+	linux-x86_64 \
+	enable-engine \
+	enable-dynamic-engine \
+	no-weak-ssl-ciphers \
+	no-deprecated \
+	enable-afalgeng \
+	no-ssl3 \
+	enable-srp \
+	no-tls1 \
+	no-tls1_1 \
+	enable-ktls \
+	enable-ssl-trace \
+	enable-srp \
+	enable-crypto-mdebug \
+	enable-crypto-mdebug-backtrace \
+	enable-fips \
+	enable-tls1_3 \
+	enable-sctp \
+	enable-ssl-trace \
+	enable-zlib \
+	enable-zlib-dynamic \
+	enable-tls1_2 \
+	enable-cms \
+	enable-rfc3779 \
+	enable-ec_nistp_64_gcc_128 \
+	enable-idea \
+	enable-mdc2 \
+	enable-rc5 \
+	enable-ssl-trace \
+	enable-fips \
+  --with-oqs-dir=/usr \
+  --with-includes=/usr/include:/usr/local/include/oqs-provider \
+  --with-modules-dir=/usr/lib/ossl-modules \
+  --libdir=lib64 \
+  --modulesdir=/usr/lib64/ossl-modules \
+  --with-experimental-modules \
+  enable-legacy \
+  enable-pkcs11 \
+  enable-tpm2 \
+	-DOPENSSL_NO_HEARTBEATS \
+	-DOPENSSL_TLS_SECURITY_LEVEL=2 \
+	-DOQS_DEFAULT_GROUPS="p256_kyber512:p384_kyber768:p521_kyber1024:kyber512:kyber768:kyber1024:p256_falcon512:p384_falcon512:p521_falcon1024:falcon512:falcon1024:p256_dilithium2:p384_dilithium3:p521_dilithium5:dilithium2:dilithium3:dilithium5:p384_mceliece348864:p521_mceliece460896:mceliece348864:mceliece460896:mceliece6688128:mceliece6960119:mceliece8192128:x25519_kyber512:x25519_kyber768:x25519_kyber1024:x25519_falcon512:x25519_falcon1024:x25519_dilithium2:x25519_dilithium3:x25519_dilithium5:x25519_mceliece348864:x25519_mceliece460896:x25519_mceliece6688128:x25519_mceliece6960119:x25519_mceliece8192128:frodo640aes:frodo976aes:frodo1344aes:bike1l1cpa:bike1l3cpa:bike1l5cpa:hqc128:hqc192:hqc256:sphincssha256128frobust:sphincssha256192frobust:sphincssha256256frobust:secp256k1_kyber512:secp256k1_kyber768:secp256k1_kyber1024:mayo1:mayo2:mayo3:mayo5:mceliece348864_kyber512:mceliece348864_kyber768:mceliece348864_kyber1024:mceliece460896_kyber512:mceliece460896_kyber768:mceliece460896_kyber1024:mceliece6688128_kyber512:mceliece6688128_kyber768:mceliece6688128_kyber1024:mceliece6960119_kyber512:mceliece6960119_kyber768:mceliece6960119_kyber1024:mceliece8192128_kyber512:mceliece8192128_kyber768:mceliece8192128_kyber1024:lightsaber:saber:firesaber:p384_falcon1024:secp256k1_falcon512:secp256k1_falcon1024:p384_kyber768:p521_kyber1024:secp256k1_dilithium2:secp256k1_dilithium3:secp256k1_dilithium5:falcon512:falcon1024:ntru-hps-2048-509:ntru-hps-2048-677:ntru-hps-4096-821:ntru-hrss-701" \
+	-lm \
+	enable-chacha \
+	enable-asm \
+	enable-quic \
+	enable-aria \
+	enable-blake2 \
+	enable-async \
+	enable-sm4 \
+	enable-rdrand \
+	enable-camellia \
+	enable-seed \
+	enable-whirlpool \
+	enable-psk \
+	enable-dsa \
+	enable-dh \
+	enable-ec \
+	enable-ecdh \
+	enable-ecdsa \
+	enable-ocb \
+	enable-gost \
+	enable-poly1305 \
+	enable-nextprotoneg \
+	enable-siphash \
+	enable-sm2 \
+	enable-sm3 \
+	enable-tfo \
+	enable-comp \
+	enable-dtls
 # Get current date
 CURRENT_DATE=$(date +'%Y%m%d')
 
@@ -76,15 +86,15 @@ mkdir -p "$RELEASE_DIR"
 # Run make test and create test report with current date
 TEST_REPORT="test_results_${CURRENT_DATE}.txt"
 (
-    echo "QompaSSL Test Report - ${DATE_TIME}"
-    echo "=================================="
-    echo
-    make test
+	echo "QompaSSL Test Report - ${DATE_TIME}"
+	echo "=================================="
+	echo
+	make test
 ) 2>&1 | tee "$RELEASE_DIR/$TEST_REPORT"
 
 # Add test summary to the end of the report
-echo -e "\n--- Test Summary ---" >> "$RELEASE_DIR/$TEST_REPORT"
-tail -n 20 "$RELEASE_DIR/$TEST_REPORT" >> "$RELEASE_DIR/$TEST_REPORT"
+echo -e "\n--- Test Summary ---" >>"$RELEASE_DIR/$TEST_REPORT"
+tail -n 20 "$RELEASE_DIR/$TEST_REPORT" >>"$RELEASE_DIR/$TEST_REPORT"
 
 # Copy files to release directory
 cp "$SOURCE_DIR/libssl.so" "$RELEASE_DIR/" || echo "libssl.so not found"
@@ -199,7 +209,7 @@ We maintain our commitment to high security standards while expanding the featur
 # Commands to push release to GitHub repository
 git add .
 git commit -S -m "QompaSSL 2.0 Release $TAG_NAME"
-git tag $TAG_NAME
+git tag "$TAG_NAME"
 git push origin main
-git push origin $TAG_NAME
-gh release create $TAG_NAME --repo qompassai/Nautilus --title "QompaSSL 2.0 Release $TAG_NAME" --notes "$RELEASE_NOTES" "$RELEASE_DIR/$TAR_FILE"
+git push origin "$TAG_NAME"
+gh release create "$TAG_NAME" --repo qompassai/Nautilus --title "QompaSSL 2.0 Release $TAG_NAME" --notes "$RELEASE_NOTES" "$RELEASE_DIR/$TAR_FILE"
