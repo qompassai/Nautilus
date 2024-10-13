@@ -3,7 +3,8 @@ use std::convert::TryFrom;
 
 use crate::openpgp::{
     cert::prelude::*,
-    packet::{Packet, PacketPile, Signature},
+    packet::{Packet, Signature},
+    PacketPile,
     policy::{Policy, StandardPolicy},
     serialize::SerializeInto,
     types::{HashAlgorithm, KeyFlags, RevocationStatus, SignatureType},

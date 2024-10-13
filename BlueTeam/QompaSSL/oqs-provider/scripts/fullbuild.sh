@@ -44,7 +44,7 @@ if [ -z "$OPENSSL_INSTALL" ]; then
  #if [ \($? -ne 0 \) -o \( ! -z "$OPENSSL_BRANCH" \) ]; then
  if [ $? -ne 0 ] || [ ! -z "$OPENSSL_BRANCH" ]; then
    if [ -z "$OPENSSL_BRANCH" ]; then
-      export OPENSSL_BRANCH="master"
+      export OPENSSL_BRANCH="3.3.2"
    fi
    # No OSSL3 installation given/found, or specific branch build requested
    echo "OpenSSL3 to be built from source at branch $OPENSSL_BRANCH."

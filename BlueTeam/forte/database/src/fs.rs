@@ -16,7 +16,7 @@ use url::form_urlencoded;
 // Create a connection pool
 const manager = ConnectionManager::<PgConnection>::new(database_url);
 const pool = Pool::builder().build(manager).expect("Failed to create pool.");
-
+use std::sync;
 use sync::FlockMutexGuard;
 use types::{Email, Fingerprint, KeyID};
 use Result;

@@ -7325,29 +7325,11 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "aes" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_aes", "src" => "test/buildtest_aes.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_asn1", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_asn1-bin-buildtest_asn1.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_asn1-bin-buildtest_asn1.o", "product" => "test/buildtest_c_asn1", "srcs" => [ "test/buildtest_asn1.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "asn1" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_asn1", "src" => "test/buildtest_asn1.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_asn1t", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_asn1t-bin-buildtest_asn1t.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_asn1t-bin-buildtest_asn1t.o", "product" => "test/buildtest_c_asn1t", "srcs" => [ "test/buildtest_asn1t.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "asn1t" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_asn1t", "src" => "test/buildtest_asn1t.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_async", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_async-bin-buildtest_async.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_async-bin-buildtest_async.o", "product" => "test/buildtest_c_async", "srcs" => [ "test/buildtest_async.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "async" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_async", "src" => "test/buildtest_async.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_bio", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_bio-bin-buildtest_bio.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_bio-bin-buildtest_bio.o", "product" => "test/buildtest_c_bio", "srcs" => [ "test/buildtest_bio.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "bio" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_bio", "src" => "test/buildtest_bio.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_blowfish", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_blowfish-bin-buildtest_blowfish.o" ] ); 
 -}{-
@@ -7385,35 +7367,17 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "cmac" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_cmac", "src" => "test/buildtest_cmac.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_cmp", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_cmp-bin-buildtest_cmp.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_cmp-bin-buildtest_cmp.o", "product" => "test/buildtest_c_cmp", "srcs" => [ "test/buildtest_cmp.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "cmp" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_cmp", "src" => "test/buildtest_cmp.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_cmp_util", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_cmp_util-bin-buildtest_cmp_util.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_cmp_util-bin-buildtest_cmp_util.o", "product" => "test/buildtest_c_cmp_util", "srcs" => [ "test/buildtest_cmp_util.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "cmp_util" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_cmp_util", "src" => "test/buildtest_cmp_util.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_cms", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_cms-bin-buildtest_cms.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_cms-bin-buildtest_cms.o", "product" => "test/buildtest_c_cms", "srcs" => [ "test/buildtest_cms.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "cms" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_cms", "src" => "test/buildtest_cms.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_comp", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_comp-bin-buildtest_comp.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_comp-bin-buildtest_comp.o", "product" => "test/buildtest_c_comp", "srcs" => [ "test/buildtest_comp.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "comp" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_comp", "src" => "test/buildtest_comp.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_conf", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_conf-bin-buildtest_conf.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_conf-bin-buildtest_conf.o", "product" => "test/buildtest_c_conf", "srcs" => [ "test/buildtest_conf.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "conf" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_conf", "src" => "test/buildtest_conf.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_conf_api", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_conf_api-bin-buildtest_conf_api.o" ] ); 
 -}{-
@@ -7445,41 +7409,17 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "core_dispatch" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_core_dispatch", "src" => "test/buildtest_core_dispatch.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_core_names", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_core_names-bin-buildtest_core_names.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_core_names-bin-buildtest_core_names.o", "product" => "test/buildtest_c_core_names", "srcs" => [ "test/buildtest_core_names.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "core_names" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_core_names", "src" => "test/buildtest_core_names.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_core_object", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_core_object-bin-buildtest_core_object.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_core_object-bin-buildtest_core_object.o", "product" => "test/buildtest_c_core_object", "srcs" => [ "test/buildtest_core_object.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "core_object" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_core_object", "src" => "test/buildtest_core_object.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_crmf", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_crmf-bin-buildtest_crmf.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_crmf-bin-buildtest_crmf.o", "product" => "test/buildtest_c_crmf", "srcs" => [ "test/buildtest_crmf.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "crmf" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_crmf", "src" => "test/buildtest_crmf.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_crypto", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_crypto-bin-buildtest_crypto.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_crypto-bin-buildtest_crypto.o", "product" => "test/buildtest_c_crypto", "srcs" => [ "test/buildtest_crypto.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "crypto" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_crypto", "src" => "test/buildtest_crypto.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_cryptoerr_legacy", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_cryptoerr_legacy-bin-buildtest_cryptoerr_legacy.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_cryptoerr_legacy-bin-buildtest_cryptoerr_legacy.o", "product" => "test/buildtest_c_cryptoerr_legacy", "srcs" => [ "test/buildtest_cryptoerr_legacy.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "cryptoerr_legacy" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_cryptoerr_legacy", "src" => "test/buildtest_cryptoerr_legacy.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ct", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ct-bin-buildtest_ct.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_ct-bin-buildtest_ct.o", "product" => "test/buildtest_c_ct", "srcs" => [ "test/buildtest_ct.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "ct" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_ct", "src" => "test/buildtest_ct.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_decoder", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_decoder-bin-buildtest_decoder.o" ] ); 
 -}{-
@@ -7553,12 +7493,6 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "encoder" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_encoder", "src" => "test/buildtest_encoder.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ess", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ess-bin-buildtest_ess.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_ess-bin-buildtest_ess.o", "product" => "test/buildtest_c_ess", "srcs" => [ "test/buildtest_ess.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "ess" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_ess", "src" => "test/buildtest_ess.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_evp", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_evp-bin-buildtest_evp.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_evp-bin-buildtest_evp.o", "product" => "test/buildtest_c_evp", "srcs" => [ "test/buildtest_evp.c" ] ); 
@@ -7570,12 +7504,6 @@ EOF
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_fips_names-bin-buildtest_fips_names.o", "product" => "test/buildtest_c_fips_names", "srcs" => [ "test/buildtest_fips_names.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "fips_names" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_fips_names", "src" => "test/buildtest_fips_names.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_fipskey", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_fipskey-bin-buildtest_fipskey.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_fipskey-bin-buildtest_fipskey.o", "product" => "test/buildtest_c_fipskey", "srcs" => [ "test/buildtest_fipskey.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "fipskey" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_fipskey", "src" => "test/buildtest_fipskey.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_hmac", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_hmac-bin-buildtest_hmac.o" ] ); 
 -}{-
@@ -7606,12 +7534,6 @@ EOF
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_kdf-bin-buildtest_kdf.o", "product" => "test/buildtest_c_kdf", "srcs" => [ "test/buildtest_kdf.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "kdf" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_kdf", "src" => "test/buildtest_kdf.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_lhash", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_lhash-bin-buildtest_lhash.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_lhash-bin-buildtest_lhash.o", "product" => "test/buildtest_c_lhash", "srcs" => [ "test/buildtest_lhash.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "lhash" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_lhash", "src" => "test/buildtest_lhash.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_macros", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_macros-bin-buildtest_macros.o" ] ); 
 -}{-
@@ -7655,18 +7577,6 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "objects" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_objects", "src" => "test/buildtest_objects.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ocsp", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ocsp-bin-buildtest_ocsp.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_ocsp-bin-buildtest_ocsp.o", "product" => "test/buildtest_c_ocsp", "srcs" => [ "test/buildtest_ocsp.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "ocsp" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_ocsp", "src" => "test/buildtest_ocsp.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_opensslv", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_opensslv-bin-buildtest_opensslv.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_opensslv-bin-buildtest_opensslv.o", "product" => "test/buildtest_c_opensslv", "srcs" => [ "test/buildtest_opensslv.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "opensslv" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_opensslv", "src" => "test/buildtest_opensslv.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ossl_typ", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ossl_typ-bin-buildtest_ossl_typ.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_ossl_typ-bin-buildtest_ossl_typ.o", "product" => "test/buildtest_c_ossl_typ", "srcs" => [ "test/buildtest_ossl_typ.c" ] ); 
@@ -7696,18 +7606,6 @@ EOF
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_pem2-bin-buildtest_pem2.o", "product" => "test/buildtest_c_pem2", "srcs" => [ "test/buildtest_pem2.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "pem2" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_pem2", "src" => "test/buildtest_pem2.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_pkcs12", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_pkcs12-bin-buildtest_pkcs12.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_pkcs12-bin-buildtest_pkcs12.o", "product" => "test/buildtest_c_pkcs12", "srcs" => [ "test/buildtest_pkcs12.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "pkcs12" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_pkcs12", "src" => "test/buildtest_pkcs12.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_pkcs7", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_pkcs7-bin-buildtest_pkcs7.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_pkcs7-bin-buildtest_pkcs7.o", "product" => "test/buildtest_c_pkcs7", "srcs" => [ "test/buildtest_pkcs7.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "pkcs7" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_pkcs7", "src" => "test/buildtest_pkcs7.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_prov_ssl", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_prov_ssl-bin-buildtest_prov_ssl.o" ] ); 
 -}{-
@@ -7763,12 +7661,6 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "rsa" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_rsa", "src" => "test/buildtest_rsa.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_safestack", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_safestack-bin-buildtest_safestack.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_safestack-bin-buildtest_safestack.o", "product" => "test/buildtest_c_safestack", "srcs" => [ "test/buildtest_safestack.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "safestack" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_safestack", "src" => "test/buildtest_safestack.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_seed", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_seed-bin-buildtest_seed.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_seed-bin-buildtest_seed.o", "product" => "test/buildtest_c_seed", "srcs" => [ "test/buildtest_seed.c" ] ); 
@@ -7792,12 +7684,6 @@ EOF
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_srtp-bin-buildtest_srtp.o", "product" => "test/buildtest_c_srtp", "srcs" => [ "test/buildtest_srtp.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "srtp" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_srtp", "src" => "test/buildtest_srtp.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ssl", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ssl-bin-buildtest_ssl.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_ssl-bin-buildtest_ssl.o", "product" => "test/buildtest_c_ssl", "srcs" => [ "test/buildtest_ssl.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "ssl" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_ssl", "src" => "test/buildtest_ssl.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ssl2", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ssl2-bin-buildtest_ssl2.o" ] ); 
 -}{-
@@ -7853,35 +7739,11 @@ EOF
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "types" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_types", "src" => "test/buildtest_types.c" ); 
 -}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_ui", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_ui-bin-buildtest_ui.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_ui-bin-buildtest_ui.o", "product" => "test/buildtest_c_ui", "srcs" => [ "test/buildtest_ui.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "ui" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_ui", "src" => "test/buildtest_ui.c" ); 
--}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_whrlpool", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_whrlpool-bin-buildtest_whrlpool.o" ] ); 
 -}{-
  src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_whrlpool-bin-buildtest_whrlpool.o", "product" => "test/buildtest_c_whrlpool", "srcs" => [ "test/buildtest_whrlpool.c" ] ); 
 -}{-
  generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "whrlpool" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_whrlpool", "src" => "test/buildtest_whrlpool.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_x509", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_x509-bin-buildtest_x509.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_x509-bin-buildtest_x509.o", "product" => "test/buildtest_c_x509", "srcs" => [ "test/buildtest_x509.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "x509" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_x509", "src" => "test/buildtest_x509.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_x509_vfy", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_x509_vfy-bin-buildtest_x509_vfy.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_x509_vfy-bin-buildtest_x509_vfy.o", "product" => "test/buildtest_c_x509_vfy", "srcs" => [ "test/buildtest_x509_vfy.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "x509_vfy" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_x509_vfy", "src" => "test/buildtest_x509_vfy.c" ); 
--}{-
- obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/buildtest_c_x509v3", "deps" => [ "libssl", "libcrypto" ], "objs" => [ "test/buildtest_c_x509v3-bin-buildtest_x509v3.o" ] ); 
--}{-
- src2obj( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "incs" => [ "include" ], "intent" => "bin", "obj" => "test/buildtest_c_x509v3-bin-buildtest_x509v3.o", "product" => "test/buildtest_c_x509v3", "srcs" => [ "test/buildtest_x509v3.c" ] ); 
--}{-
- generatesrc( "attrs" => { "noinst" => "1" }, "defs" => [], "deps" => [], "generator" => [ "test/generate_buildtest.pl", "x509v3" ], "generator_deps" => [], "generator_incs" => [], "incs" => [ "include" ], "intent" => "bin", "product" => "test/buildtest_c_x509v3", "src" => "test/buildtest_x509v3.c" ); 
 -}{-
  obj2bin( "attrs" => { "noinst" => "1" }, "bin" => "test/ca_internals_test", "deps" => [ "libssl", "test/libtestutil.a", "libcrypto" ], "objs" => [ "apps/ca_internals_test-bin-ca.o", "apps/lib/ca_internals_test-bin-app_libctx.o", "apps/lib/ca_internals_test-bin-app_provider.o", "apps/lib/ca_internals_test-bin-app_rand.o", "apps/lib/ca_internals_test-bin-app_x509.o", "apps/lib/ca_internals_test-bin-apps.o", "apps/lib/ca_internals_test-bin-apps_ui.o", "apps/lib/ca_internals_test-bin-engine.o", "apps/lib/ca_internals_test-bin-fmt.o", "crypto/asn1/ca_internals_test-bin-a_time.o", "crypto/ca_internals_test-bin-ctype.o", "test/ca_internals_test-bin-ca_internals_test.o" ] ); 
 -}{-

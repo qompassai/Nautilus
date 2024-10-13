@@ -1,7 +1,6 @@
 #!/bin/bash
-export CFLAGS="$CFLAGS -DENGINE_AFALG"
-CC=gcc ./Configure shared \
---prefix=/usr/local/ssl \
+export CC=gcc \
+./config shared \
 	linux-x86_64 \
 	enable-engine \
 	enable-dynamic-engine \
@@ -11,16 +10,14 @@ CC=gcc ./Configure shared \
 	no-ssl3 \
 	enable-srp \
 	no-tls1 \
+  enable-sctp \
 	no-tls1_1 \
 	enable-ktls \
 	enable-ssl-trace \
 	enable-srp \
 	enable-crypto-mdebug \
 	enable-crypto-mdebug-backtrace \
-	enable-fips \
 	enable-tls1_3 \
-	enable-sctp \
-	enable-ssl-trace \
 	enable-zlib \
 	enable-zlib-dynamic \
 	enable-tls1_2 \
@@ -30,13 +27,11 @@ CC=gcc ./Configure shared \
 	enable-idea \
 	enable-mdc2 \
 	enable-rc5 \
-	enable-ssl-trace \
 	enable-fips \
   enable-legacy \
 	-DOPENSSL_NO_HEARTBEATS \
 	-DOPENSSL_TLS_SECURITY_LEVEL=2 \
 	-DOQS_DEFAULT_GROUPS="p256_kyber512:p384_kyber768:p521_kyber1024:kyber512:kyber768:kyber1024:p256_falcon512:p384_falcon512:p521_falcon1024:falcon512:falcon1024:p256_dilithium2:p384_dilithium3:p521_dilithium5:dilithium2:dilithium3:dilithium5:p384_mceliece348864:p521_mceliece460896:mceliece348864:mceliece460896:mceliece6688128:mceliece6960119:mceliece8192128:x25519_kyber512:x25519_kyber768:x25519_kyber1024:x25519_falcon512:x25519_falcon1024:x25519_dilithium2:x25519_dilithium3:x25519_dilithium5:x25519_mceliece348864:x25519_mceliece460896:x25519_mceliece6688128:x25519_mceliece6960119:x25519_mceliece8192128:frodo640aes:frodo976aes:frodo1344aes:bike1l1cpa:bike1l3cpa:bike1l5cpa:hqc128:hqc192:hqc256:sphincssha256128frobust:sphincssha256192frobust:sphincssha256256frobust:secp256k1_kyber512:secp256k1_kyber768:secp256k1_kyber1024:mayo1:mayo2:mayo3:mayo5:mceliece348864_kyber512:mceliece348864_kyber768:mceliece348864_kyber1024:mceliece460896_kyber512:mceliece460896_kyber768:mceliece460896_kyber1024:mceliece6688128_kyber512:mceliece6688128_kyber768:mceliece6688128_kyber1024:mceliece6960119_kyber512:mceliece6960119_kyber768:mceliece6960119_kyber1024:mceliece8192128_kyber512:mceliece8192128_kyber768:mceliece8192128_kyber1024:lightsaber:saber:firesaber:p384_falcon1024:secp256k1_falcon512:secp256k1_falcon1024:p384_kyber768:p521_kyber1024:secp256k1_dilithium2:secp256k1_dilithium3:secp256k1_dilithium5:falcon512:falcon1024:ntru-hps-2048-509:ntru-hps-2048-677:ntru-hps-4096-821:ntru-hrss-701" \
-	-lm \
 	enable-chacha \
 	enable-asm \
 	enable-quic \
@@ -100,7 +95,7 @@ tar -czf "$RELEASE_DIR/$TAR_FILE" -C "$RELEASE_DIR" libssl.so libcrypto.so "$TES
 echo "Release archive created: $RELEASE_DIR/$TAR_FILE"
 echo "Test report created: $RELEASE_DIR/$TEST_REPORT"
 
-RELEASE_NOTES="QompaSSL 2.0: Fork of OpenSSL 3.3.2 with Enhanced Post-Quantum and Artificial Intelligence-Ready Cryptography
+RELEASE_NOTES="QompaSSL 2.1: Fork of OpenSSL 3.3.2 with Enhanced Post-Quantum and Artificial Intelligence-Ready Cryptography
 
 Release Date: $DATE_TIME
 
@@ -141,49 +136,6 @@ References:
 [9] https://techblog.comsoc.org/2022/10/07/att-will-be-quantum-ready-by-the-year-2025-but-may-not-be-fully-quantum-secured/
 
 
-# Change Log
-This release includes libssl.so and libcrypto.so compiled with an extensive set of classical, quantum-resistant, and post-quantum algorithms, based on OpenSSL 3.3.2. QompaSSL 2.0 builds upon the foundation of QompaSSL 1.3, further enhancing its capabilities for securing Artificial Intelligence (AI) systems and preparing for the post-quantum era.
-
-Key Enhancements in QompaSSL 2.0:
-
-1. Expanded Algorithm Support:
-   - Added support for additional post-quantum algorithms, including NTRU and Classic McEliece variants.
-   - Introduced new hybrid combinations, such as secp256k1 with Kyber and Dilithium.
-
-2. Optimized Configurations:
-   - Refined SSL/TLS configurations to prioritize stronger algorithms and support a wider range of use cases.
-   - Introduced separate configurations for FIPS compliance and post-quantum focused setups.
-
-3. Performance Improvements:
-   - Implemented optimizations for faster execution of post-quantum algorithms.
-   - Enhanced support for hardware acceleration, including better utilization of AES-NI and AVX instructions.
-
-4. AI-Specific Enhancements:
-   - Improved support for homomorphic encryption primitives, enabling more efficient secure AI computations.
-   - Optimized random number generation for AI model initialization and cryptographic key generation.
-
-5. Enhanced Protocol Support:
-   - Added QUIC (Quick UDP Internet Connections) protocol support for low-latency, secure communication in AI data transfer
-   - Asynchronous operation support for non-blocking cryptographic operations in AI systems
-
-6. Hardware-Accelerated Cryptography:
-   - Added RDRAND instruction support for hardware-based random number generation, crucial for AI and cryptographic applications
-   - Optimized use of AES-NI (Advanced Encryption Standard New Instructions) and AVX (Advanced Vector Extensions) instructions for faster encryption in AI data processing
-
-7. Compliance and Standards:
-   - Maintained FIPS (Federal Information Processing Standards) mode for regulatory compliance in sensitive AI applications
-   - Explicit support for TLS (Transport Layer Security) 1.2 and 1.3 with post-quantum cipher suites
-
-
-Comparison with Previous Version:
-
-1. Algorithm Coverage: QompaSSL 2.0 supports a broader range of post-quantum and hybrid algorithms, providing more options for quantum-resistant security.
-
-2. Configuration Flexibility: The new version offers more granular control over algorithm selection and prioritization, allowing for better customization to specific use cases.
-
-3. AI Readiness: Enhanced optimizations and AI-specific features make QompaSSL 2.0 more suitable for securing AI workflows and data.
-
-4. Future-Proofing: With the inclusion of additional post-quantum algorithms, QompaSSL 2.0 is better prepared for potential future NIST standardization decisions.
 
 Enterprise and Consumer Use Cases for Post-Quantum Cryptography and AI:
 
@@ -201,8 +153,8 @@ We maintain our commitment to high security standards while expanding the featur
 
 # Commands to push release to GitHub repository
 git add .
-git commit -S -m "QompaSSL 2.0 Release $TAG_NAME"
+git commit -S -m "QompaSSL 2.1 Release $TAG_NAME"
 git tag "$TAG_NAME"
 git push origin main
 git push origin "$TAG_NAME"
-gh release create "$TAG_NAME" --repo qompassai/Nautilus --title "QompaSSL 2.0 Release $TAG_NAME" --notes "$RELEASE_NOTES" "$RELEASE_DIR/$TAR_FILE"
+gh release create "$TAG_NAME" --repo qompassai/Nautilus --title "QompaSSL 2.1 Release $TAG_NAME" --notes "$RELEASE_NOTES" "$RELEASE_DIR/$TAR_FILE"

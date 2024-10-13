@@ -25,7 +25,7 @@ else()
   set(OQS_ADDL_SOCKET_LIBS "")
 endif()
 
-option(OQS_KEM_ENCODERS "Provide encoders (and decoders) for KEM algorithms " OFF)
+option(OQS_KEM_ENCODERS "Provide encoders (and decoders) for KEM algorithms " ON)
 if(${OQS_KEM_ENCODERS})
     message(STATUS "Build provides support for encoding KEMs")
     add_compile_definitions( OQS_KEM_ENCODERS )

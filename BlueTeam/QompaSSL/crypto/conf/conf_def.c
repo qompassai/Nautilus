@@ -164,8 +164,7 @@ static int def_destroy_data(CONF *conf)
     return 1;
 }
 
-static int def_load(CONF *conf, const char *name, long *line)
-{
+static int def_load(CONF *conf, const char *name, long *line){
     int ret;
     BIO *in = NULL;
 
