@@ -5,4 +5,4 @@ conditional-errors = 1
 security-checks = 1
 tls1-prf-ems-check = 0
 drbg-no-trunc-md = 1
-module-mac = B9:12:C9:8F:AC:4E:51:E5:B1:C1:90:E1:08:EF:27:9B:60:49:C8:F3:51:48:C2:4E:AF:4D:2E:F1:FB:F1:DD:5A
+module-mac = CF:F4:E6:70:63:F4:8F:9C:9B:DA:23:C2:B5:2E:25:7C:75:89:18:3A:0F:92:F2:F1:71:25:11:56:54:F7:B5:AF
