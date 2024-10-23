@@ -27,7 +27,7 @@ msgstr ""
 msgid "We found an entry for <span class=\"email\">{{ query }}</span>:"
 msgstr ""
 
-msgid "<strong>Hint:</strong> It's more convenient to use <span class=\"brand\">forte.qompass.ai</span> from your OpenPGP software.<br /> Take a look at our <a href=\"/about/usage\">usage guide</a> for details."
+msgid "<strong>Hint:</strong> It's more convenient to use <span class=\"brand\">forte.qompass.ai</span> from your PGP/GPG software.<br /> Take a look at our <a href=\"/about/usage\">usage guide</a> for details."
 msgstr ""
 
 msgid "debug info"
@@ -177,7 +177,7 @@ msgstr ""
 msgid "If you didn't request this message, please ignore it."
 msgstr ""
 
-msgid "OpenPGP key: <tt>{{primary_fp}}</tt>"
+msgid "Forte key: <tt>{{primary_fp}}</tt>"
 msgstr ""
 
 msgid "To manage and delete listed addresses on this key, please follow the link below:"
@@ -186,13 +186,13 @@ msgstr ""
 msgid "You can find more info at <a href=\"{{base_uri}}/about\">{{domain}}/about</a>."
 msgstr ""
 
-msgid "Setting the standard for public key encryption since 2024"
+msgid "distributing OpenPGP keys since 2019"
 msgstr ""
 
 msgid "This is an automated message from {{domain}}."
 msgstr ""
 
-msgid "Qompass key: {{primary_fp}}"
+msgid "Forte key: {{primary_fp}}"
 msgstr ""
 
 msgid "You can find more info at {{base_uri}}/about"
@@ -220,14 +220,6 @@ msgid "Search by Short Key ID is not supported."
 msgstr ""
 
 msgid "Invalid search query."
-msgstr ""
-
-msgctxt "Subject for verification email, {0} = userid, {1} = keyserver domain"
-msgid "Verify {0} for your key on {1}"
-msgstr ""
-
-msgctxt "Subject for manage email, {} = keyserver domain"
-msgid "Manage your key on {}"
 msgstr ""
 
 msgid "This link is invalid or expired"
