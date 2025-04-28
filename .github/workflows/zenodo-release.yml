@@ -1,0 +1,23 @@
+name: Zenodo Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  zenodo:
+    name: Upload to Zenodo
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Trigger Zenodo GitHub Integration
+      run: |
+        echo "GitHub release created. Zenodo will automatically archive this repo based on webhook."
+
+    - name: Reminder
+      run: |
+        echo "✅ Zenodo archiving should happen automatically within a few minutes."
+

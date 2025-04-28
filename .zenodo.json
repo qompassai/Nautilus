@@ -1,0 +1,41 @@
+{
+  "title": "Nautilus",
+  "description": "A software project at the intersection of AI, Quantum, and Healthcare.",
+  "license": ["AGPL-3.0", "Q-CDA-1.0"],
+  "language": "eng",
+  "upload_type": "software",
+  "access_right": "open",
+  "version": "2025-04-27",
+  "publication_date": "2025-04-27",
+  "creators": [
+    {
+      "name": "Porter, Matthew A.",
+      "affiliation": "Qompass AI",
+      "orcid": "https://orcid.org/0000-0002-0302-4812"
+    }
+  ],
+  "keywords": [
+    "AI",
+    "Quantum",
+    "Post-Quantum Cryptography",
+    "Healthcare",
+    "Medical Education",
+    "Post-Quantum AI"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/qompassai/Nautilus",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ],
+  "communities": [
+    { "identifier": "qompassai" }
+  ],
+  "contributors": [
+    {
+      "name": "Qompass AI",
+      "type": "Sponsor"
+    }
+  ]
+}

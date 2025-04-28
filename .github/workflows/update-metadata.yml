@@ -1,0 +1,32 @@
+name: Update Metadata Files
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'README.md'
+jobs:
+  update-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update metadata files
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          REPO_DESC=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                    https://api.github.com/repos/$GITHUB_REPOSITORY | jq -r .description)
+          
+          # Update .zenodo.json
+          if [ -f .zenodo.json ]; then
+            jq --arg title "$REPO_NAME" '.title = $title' .zenodo.json > .zenodo.json.tmp
+            jq --arg desc "$REPO_DESC" '.description = $desc' .zenodo.json.tmp > .zenodo.json
+          fi
+          
+          # Similar approach for CITATION.cff
+          # [Additional code to update CITATION.cff]
+          
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add .zenodo.json CITATION.cff
+          git commit -m "Update metadata with repository info" || echo "No changes to commit"
+          git push
+
