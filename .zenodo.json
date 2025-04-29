@@ -1,12 +1,12 @@
 {
   "title": "Nautilus",
-  "description": "A software project at the intersection of AI, Quantum, and Healthcare.",
+  "description": "Quality NIST-compliant AI Security solutions",
   "license": ["AGPL-3.0", "Q-CDA-1.0"],
   "language": "eng",
   "upload_type": "software",
   "access_right": "open",
-  "version": "2025-04-27",
-  "publication_date": "2025-04-27",
+  "version": "2025-04-28",
+  "publication_date": "2025-04-28",
   "creators": [
     {
       "name": "Porter, Matthew A.",
@@ -15,12 +15,8 @@
     }
   ],
   "keywords": [
-    "AI",
-    "Quantum",
-    "Post-Quantum Cryptography",
-    "Healthcare",
-    "Medical Education",
-    "Post-Quantum AI"
+    "AI", "Quantum", "Post-Quantum Cryptography", "Healthcare",
+    "Medical Education", "Post-Quantum AI"
   ],
   "related_identifiers": [
     {
