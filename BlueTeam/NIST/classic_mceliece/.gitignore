@@ -1,9 +1,0 @@
-*.i
-*.o
-*.s
-*.req
-kat
-kat_kem.int
-kat_kem.req
-kat_kem.rsp
-*.swp

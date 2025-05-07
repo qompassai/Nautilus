@@ -1,9 +1,0 @@
-/Rocket.toml
-/target
-/state
-**/*.rs.bk
-**/.*.swp
-**/.*.swo
-target
-*.po~
-/dist/templates/localized

@@ -1,3 +1,0 @@
-```release-note:enhancement
-risk_score_integration: Add support for Risk Score Integrations
-```

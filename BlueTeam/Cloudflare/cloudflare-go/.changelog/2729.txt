@@ -1,3 +1,0 @@
-```release-notes:enhancement
-hyperdrive: Add support for Hyperdrive Over Access attributes
-```

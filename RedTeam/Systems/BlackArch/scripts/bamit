@@ -1,9 +1,0 @@
-#!/bin/bash
-
-file=$(realpath "$1")
-
-case "$file" in
-	*packages/*)
-		pre=
-		;;
-esac

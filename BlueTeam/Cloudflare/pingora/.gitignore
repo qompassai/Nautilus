@@ -1,8 +1,0 @@
-Cargo.lock
-/target
-**/*.rs.bk
-dhat-heap.json
-.vscode
-.idea
-.cover
-bleeper.user.toml

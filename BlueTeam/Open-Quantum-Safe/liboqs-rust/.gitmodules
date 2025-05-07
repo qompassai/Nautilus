@@ -1,3 +1,0 @@
-[submodule "oqs-sys/liboqs"]
-	path = oqs-sys/liboqs
-	url = https://github.com/Open-Quantum-Safe/liboqs.git

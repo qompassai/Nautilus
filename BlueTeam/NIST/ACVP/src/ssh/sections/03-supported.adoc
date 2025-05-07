@@ -1,7 +1,0 @@
-
-[#supported]
-== Supported KDFs
-
-The following key derivation functions *MAY* be advertised by the ACVP compliant cryptographic module:
-
-* kdf-components / ssh / 1.0

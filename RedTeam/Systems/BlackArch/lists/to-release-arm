@@ -1,5 +1,0 @@
-bind
-ltrace
-radare2
-shellcheck
-trivy

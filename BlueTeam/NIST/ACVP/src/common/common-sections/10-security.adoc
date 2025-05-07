@@ -1,5 +1,0 @@
-
-[#security]
-== Security Considerations
-
-There are no additional security considerations outside of those outlined in the ACVP document.
