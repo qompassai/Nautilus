@@ -1,0 +1,23 @@
+name: Publish to FlakeHub
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  flakehub-publish:
+    strategy:
+      matrix:
+        system: [x86_64-linux, aarch64-linux, aarch64-darwin]
+          runs-on: [self-hosted, linux, x64, ${{ matrix.system }}]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/flakehub-push@main
+        with:
+          name: qompassai/Nautilus  # Auto-generate org/repo-name format
+          rolling: true
+          visibility: public
