@@ -1,0 +1,16 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: [self-hosted, arch, Linux, X64]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print system info
+        run: |
+          uname -a
+          lscpu
