@@ -7,6 +7,7 @@
 <h3> Qompass AI on Nautilus </h3>
 
 ![Repository Views](https://komarev.com/ghpvc/?username=qompassai-nautilus)
+![GitHub all releases](https://img.shields.io/github/downloads/qompassai/nautilus/total?style=flat-square)
   <a href="https://csrc.nist.gov/">
   <img src="https://img.shields.io/badge/NIST-005A9C?style=for-the-badge" alt="NIST">
 </a>
