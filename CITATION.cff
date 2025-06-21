@@ -6,8 +6,8 @@ authors:
     given-names: "Matthew A."
     orcid: "https://orcid.org/0000-0002-0302-4812"
     affiliation: "Qompass AI"
-version: "v2025-06-20"
-date-released: "2025-06-20"
+version: "v2025-06-21"
+date-released: "2025-06-21"
 repository-code: "https://github.com/qompassai/Nautilus"
 license: "Q-CDA-1.0"
 keywords:
