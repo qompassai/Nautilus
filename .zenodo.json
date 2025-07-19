@@ -8,9 +8,9 @@
     }
   ],
   "description": "Quality NIST-compliant AI Security solutions",
-  "license": "Q-CDA-1.0",
+  "license": "Apache-2.0",
   "upload_type": "software",
-  "version": "2025-07-18",
-  "publication_date": "2025-07-18",
+  "version": "2025-07-19",
+  "publication_date": "2025-07-19",
   "access_right": "open"
 }
