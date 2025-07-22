@@ -8,9 +8,12 @@
     }
   ],
   "description": "Quality NIST-compliant AI Security solutions",
-  "license": "Apache-2.0",
+  "license": {
+  "id": "other",
+  "title": "Qompass AI Commercial Distribution License & AGPL 3.0",
+  "url": "https://github.com/qompassai/license"},
   "upload_type": "software",
-  "version": "2025-07-19",
-  "publication_date": "2025-07-19",
+  "version": "2025-07-21",
+  "publication_date": "2025-07-21",
   "access_right": "open"
 }
