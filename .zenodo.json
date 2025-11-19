@@ -5,8 +5,8 @@
   "language": "eng",
   "upload_type": "software",
   "access_right": "open",
-  "version": "v2025-09-15-2-gbf7f38508",
-  "publication_date": "2025-09-20",
+  "version": "v2025-09-15-3-gb05abe191",
+  "publication_date": "2025-11-19",
   "creators": [
     {
       "name": "Porter, Matthew A.",
@@ -18,7 +18,7 @@
   "keywords": ["AI","Education","Healthcare","Post-Quantum Cryptography","Quantum","opensource","software"],
   "related_identifiers": [
     { "identifier": "https://github.com/qompassai/Nautilus", "relation": "isSupplementTo", "resource_type": "software" },
-    { "identifier": "https://github.com/qompassai/Nautilus/releases/tag/v2025-09-20", "relation": "isIdenticalTo", "resource_type": "software" },
+    { "identifier": "https://github.com/qompassai/Nautilus/releases/tag/v2025-11-19", "relation": "isIdenticalTo", "resource_type": "software" },
     { "identifier": "https://orcid.org/0000-0002-0302-4812", "relation": "isAuthorOf", "resource_type": "person" },
     { "identifier": "https://github.com/qompassai/Nautilus/actions", "relation": "isCompiledBy", "resource_type": "workflow" },
     { "identifier": "https://loop.frontiersin.org/people/2230223", "relation": "isAuthorOf", "resource_type": "person" },
