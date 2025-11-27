@@ -1,0 +1,105 @@
+Qompass Commercial Distibution Agreement (Q-CDA) 1.0
+
+Copyright © [2024] Qompass AI. All Rights Reserved.
+
+## License Overview
+
+This software is dual-licensed under:
+
+1. **GNU Affero General Public License (AGPL) v3.0 for non-commercial use**.
+2. **Qompass CDA License 1.0 for commercial use**, including SaaS, product integration, and redistribution beyond AGPL permissions.
+
+### 1. Commercial Use License Terms
+
+#### 1.1 Commercial Rights
+You are granted a non-exclusive, worldwide, non-transferable, royalty-based license to use, modify, integrate, and distribute the software, subject to the terms outlined in this Agreement.
+
+#### 1.2 Attribution Requirement
+All products, services, AI models or tools utilizing Qompass technology must prominently display the attribution:
+
+- "Powered by Qompass" on relevant documentation, user interfaces, websites, or product pages.
+- If the software is used in an AI model, the model name must include "Qompass" as a prefix (e.g., Qompass AI Assistant).
+
+#### 1.3 Restrictions on Use
+- Commercial users are prohibited from using Qompass technology to improve or train other large language models without prior written permission.
+- This software cannot be used for military, espionage, or weaponization purposes, or in violation of international regulations and White House export controls, including but not limited to:
+
+  - International Traffic in Arms Regulations (ITAR) [https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120]
+  - BIS Entity List and OFAC restrictions [https://www.bis.doc.gov/index.php/policy-guidance/lists-of-parties-of-concern/entity-list]
+  - AI-specific frameworks under U.S.-EU Trade and Technology Council (TTC) [https://www.whitehouse.gov/briefing-room/statements-releases/2023/05/31/fact-sheet-u-s-eu-trade-and-technology-council-advances-concrete-actions-on-transatlantic-cooperation/]
+
+- Failure to comply with the restrictions on use, including inappropriate use, is grounds for an indictable offense under applicable regulations, including but not limited to:
+
+- Health Insurance Portability and Accountability Act (HIPAA) Criminal Violations [https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/data/enforcement-highlights/index.html]: Knowingly obtaining or disclosing individually identifiable health information in violation of HIPAA regulations, offenses committed under false pretenses, or offenses committed with intent to sell, transfer, or use such information for commercial advantage, personal gain, or malicious harm.
+- AI-Generated Explicit Images (Idaho) [https://legislature.idaho.gov/statutesrules/idstat/Title18/T18CH67/SECT18-6712/]: Sharing sexually explicit AI-generated images of real people without consent, where a second violation within a five-year period is considered a felony.
+- Federal Charges Threshold: Violations involving interstate commerce, large-scale impacts, or national security may lead to federal prosecution, particularly in cases involving but not limited to HIPAA violations and fraud as determined by the United States Federal Trade Commission (FTC) [https://www.ftc.gov/business-guidance/blog/2024/09/operation-ai-comply-continuing-crackdown-overpromises-ai-related-lies], child exploitation [https://www.justice.gov/criminal/criminal-ceos/report-violations], fraud, or threats to national security.
+
+#### 1.4 Compliance and Auditing
+Use of Qompass technology must adhere to all applicable local, national, and international laws, including data protection regulations (such as GDPR, CCPA). Qompass reserves the right to audit commercial use and distribution to ensure compliance with this Agreement and regulatory frameworks.
+
+#### 1.5 Termination Clause for Regulatory Non-Compliance
+If Qompass determines that your use of the software violates applicable regulations or security policies, Qompass may immediately terminate your license. Upon termination, you must cease use, delete all copies, and certify compliance. Non-compliance may also be subject to criminal prosecution as outlined under the applicable regulations.
+
+### 2. Safety, Ethical Use, and Governance
+
+#### 2.1 Acceptable Use Policy
+Commercial use must comply with the Qompass Acceptable Use Policy, which prohibits:
+
+- Activities that promote or enable violence, exploitation, or discrimination.
+- Use in any critical infrastructure systems without safety mechanisms.
+- Deployment of outputs that constitute fraud, disinformation, or cybersecurity threats.
+
+#### 2.2 AI Safety and Responsible Development
+- Developers must implement safeguards to prevent misuse or unsafe outputs in alignment with the latest AI safety frameworks issued by the White House, Organisation for Economic Co-operation and Development (OECD) AI Principles, and United Nations (UN) AI Ethics Recommendations.
+- Any known or potential risks must be disclosed to end users in accordance with international best practices for responsible AI.
+
+#### 2.3 Mitigation of Residual Risks
+- Developers are encouraged to integrate automated safety tools, such as the QompaSSL, to ensure secure deployment.
+- Developers using Qompass in public-facing services must adopt practices that address algorithmic bias and ensure fairness and transparency.
+
+#### 2.4 Incident Reporting and Recourse
+Any misuse or security vulnerabilities identified in commercial use must be reported to Qompass immediately through: map@qompass.ai.
+
+### 3. Disclaimer of Warranties
+THE SOFTWARE IS PROVIDED “AS IS,” WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. You assume FULL responsibility for determining the appropriateness of using or distributing the software and assume all risks associated with your use.
+
+### 4. Limitation of Liability
+IN NO EVENT WILL QOMPASS OR ITS AFFILIATES BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING FROM OR IN CONNECTION WITH THIS AGREEMENT, INCLUDING LOSS OF PROFITS, DATA, OR USE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+### 5. Intellectual Property and Ownership
+
+#### 5.1 Trademark Use
+Qompass grants a limited right to use the “Qompass” name and logo solely for attribution purposes as required under this Agreement. No other trademark rights are granted. All goodwill generated from the use of the Qompass trademark shall inure to Qompass.
+
+#### 5.2 Ownership of Derivative Works
+- Qompass retains ownership of all original software components and any derivative works or modifications submitted back to Qompass.
+- Derivative works created by the licensee remain under the licensee’s ownership, subject to the terms of this Agreement.
+
+#### 5.3 Termination for IP Litigation
+If you bring a claim or lawsuit against Qompass alleging that the software infringes your intellectual property, your license will be terminated immediately.
+
+### 6. Commercial and Regulatory Thresholds
+If your organization or its affiliates exceed 1,000 monthly active users in any month, or if your usage generates annual revenue exceeding $50,000, Qompass may require a separate Enterprise License Agreement.
+
+### 7. Term and Termination
+
+#### 7.1 Term
+This Agreement remains in effect until terminated by either party. Qompass may terminate this Agreement upon breach of any terms.
+
+#### 7.2 Effect of Termination
+Upon termination, you must cease all use and delete all copies of the software. Sections on warranty disclaimers, liability, intellectual property, and compliance will survive termination.
+
+### 8. Governing Law and Jurisdiction
+This Agreement will be governed by the laws of the State of Washington, USA, without regard to conflict of laws principles. All disputes arising under this Agreement shall be subject to the exclusive jurisdiction of the courts of Washington.
+
+## Summary
+
+- **Non-commercial users**: Use under AGPL 3.0.
+- **Commercial users**: Must comply with this CDA License and obtain additional licensing for large-scale use.
+
+### Contact Information
+For questions or to obtain a commercial license, please contact: map@qompass.ai
+
+---
+
+This license ensures that startups maintain control over commercial activities while supporting open-source development through AGPL 3.0 for non-commercial uses. Including references to modern AI governance frameworks provides legal safeguards, minimizing risks from misuse while fostering responsible innovation.
