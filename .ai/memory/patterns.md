@@ -16,4 +16,4 @@ nix run github:qompassai/nix?dir=repomap -- /path/to/repo --budget 15000 --out .
 ```
 
 `.repomap.txt` is a derived artifact — gitignore it, never commit it.
-Currently Rust-only; other languages pending tree-sitter grammars.
+Covers all text files: Rust gets full tree-sitter extraction with qualified-reference ranking; Markdown, Nix, Python, Lua, Ruby, TOML, YAML, JSON, shell and others get shallow structure extraction.
