@@ -1,7 +1,7 @@
 {
   "title": "Nautilus",
   "description": "Quality NIST-compliant AI Security solutions",
-  "license": "Q-CDA-1.0",
+  "license": "Apache-2.0",
   "language": "eng",
   "upload_type": "software",
   "access_right": "open",
