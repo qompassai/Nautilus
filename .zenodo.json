@@ -19,11 +19,11 @@
   "related_identifiers": [
     { "identifier": "https://github.com/qompassai/Nautilus", "relation": "isSupplementTo", "resource_type": "software" },
     { "identifier": "https://github.com/qompassai/Nautilus/releases/tag/v2026-09-29", "relation": "isIdenticalTo", "resource_type": "software" },
-    { "identifier": "https://orcid.org/0000-0002-0302-4812", "relation": "isAuthorOf", "resource_type": "person" },
+    { "identifier": "https://orcid.org/0000-0002-0302-4812", "relation": "isAuthorOf", "resource_type": "other" },
     { "identifier": "https://github.com/qompassai/Nautilus/actions", "relation": "isCompiledBy", "resource_type": "workflow" },
-    { "identifier": "https://loop.frontiersin.org/people/2230223", "relation": "isAuthorOf", "resource_type": "person" },
-    { "identifier": "https://www.webofscience.com/wos/author/HNQ-0292-2023", "relation": "isIdenticalTo", "resource_type": "person" },
-    { "identifier": "https://www.scopus.com/authid/detail.uri?authorId=57385910700", "relation": "isIdenticalTo", "resource_type": "person" }
+    { "identifier": "https://loop.frontiersin.org/people/2230223", "relation": "isAuthorOf", "resource_type": "other" },
+    { "identifier": "https://www.webofscience.com/wos/author/HNQ-0292-2023", "relation": "isIdenticalTo", "resource_type": "other" },
+    { "identifier": "https://www.scopus.com/authid/detail.uri?authorId=57385910700", "relation": "isIdenticalTo", "resource_type": "other" }
   ],
   "communities": [ { "identifier": "qompassai" } ],
   "contributors": [
