@@ -1,6 +1,6 @@
 # 2026-10-13 — License normalized: Apache-2.0
 
-- Matt ordered estate-wide license normalization to Apache-2.0
+- Owner ordered estate-wide license normalization to Apache-2.0
   (2026-10-13), following the qompassai/Python hygiene pattern and
   the qompassai/qxet settlement of the same day.
 - `LICENSE` is the canonical Apache-2.0 text, appendix

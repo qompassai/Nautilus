@@ -108,7 +108,7 @@
     style="font-size: 1.2em; line-height: 1.8; padding: 25px; background: #f8f9fa; border-left: 6px solid #667eea; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
 
     <div align="center">
-      <p>Matthew A. Porter<br>
+      <p>Owner<br>
         Former Intelligence Officer<br>
         Educator & Learner<br>
         DeepTech Founder & CEO</p>
@@ -143,7 +143,7 @@
     <h3>Professional Profiles</h3>
     <p>
       <a href="https://www.linkedin.com/in/matt-a-porter-103535224/">
-        <img src="https://img.shields.io/badge/LinkedIn-Matt--Porter-blue?style=flat-square&logo=linkedin"
+        <img src="https://img.shields.io/badge/LinkedIn-Owner-blue?style=flat-square&logo=linkedin"
           alt="Personal LinkedIn">
       </a>
       <a href="https://www.linkedin.com/company/95058568/">
