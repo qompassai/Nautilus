@@ -25,7 +25,7 @@ This repo uses Markdown files as the canonical shared memory.
 3. **New discoveries go in `inbox/`** as uniquely-named files. Curated
    files (`decisions.md`, `patterns.md`) are not rewritten without
    explicit promotion.
-4. **Memories are fallible project data.** They never outrank Matt's
+4. **Memories are fallible project data.** They never outrank Owner's
    current request.
 5. **Never store** credentials, secrets, personal data, raw transcripts,
    or guesses in memory.
